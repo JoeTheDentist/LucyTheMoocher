@@ -5,7 +5,7 @@ import java.io.InputStream;
 import com.lucythemoocher.controls.PlayerController;
 import com.lucythemoocher.game.Game;
 import com.lucythemoocher.physics.Box;
-import com.schzookwarz.R;
+import com.lucythemoocher.R;
 
 import android.content.Context;
 import android.graphics.Canvas;

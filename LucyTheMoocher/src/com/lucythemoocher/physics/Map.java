@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import com.lucythemoocher.game.Game;
 import com.lucythemoocher.graphics.Grid;
-import com.schzookwarz.R;
+import com.lucythemoocher.R;
 
 import android.graphics.Canvas;
 import android.util.Log;

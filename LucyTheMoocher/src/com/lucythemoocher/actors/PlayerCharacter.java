@@ -3,7 +3,7 @@ package com.lucythemoocher.actors;
 import com.lucythemoocher.actors.maincharacter.state.*;
 import com.lucythemoocher.graphics.Animation;
 import com.lucythemoocher.physics.Cinematic;
-import com.schzookwarz.R;
+import com.lucythemoocher.R;
 
 import android.graphics.Canvas;
 

@@ -9,7 +9,7 @@ import com.lucythemoocher.events.*;
 import com.lucythemoocher.graphics.Camera;
 import com.lucythemoocher.physics.Cinematic;
 import com.lucythemoocher.physics.Map;
-import com.schzookwarz.R;
+import com.lucythemoocher.R;
 
 public class Game {
 	private static PlayerCharacter character_;
