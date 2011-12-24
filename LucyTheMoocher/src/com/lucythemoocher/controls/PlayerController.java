@@ -72,15 +72,17 @@ public class PlayerController {
 				ver_ = UP;
 			}
 			
+			// # # #
+			// # # #
 			// # X #
-			// # # #
-			// # # #
 			// Attaque
 			if (event.getY(i) > 4*Game.getCam().h()/5 &&
 					event.getX(i) > Game.getCam().w()/5 &&
 					event.getX(i) < 4*Game.getCam().w()/5) {
 				ver_ = DOWN;
 			}
+			
+			
 		}
 
 		if ( event.getAction() == MotionEvent.ACTION_UP ) {
