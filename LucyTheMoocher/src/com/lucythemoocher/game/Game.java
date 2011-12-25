@@ -25,8 +25,8 @@ public class Game {
 		gameThread_ = new GameThread();
 		map_ = new Map(R.raw.lvl1);
 		event_ = new EventNormal();
-		gameThread_.start();
 		background_ = new Background();
+		gameThread_.start();
 	}
 	
 	
