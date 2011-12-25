@@ -6,9 +6,6 @@ import com.lucythemoocher.game.Game;
 import com.lucythemoocher.graphics.Grid;
 import com.lucythemoocher.R;
 
-import android.graphics.Canvas;
-import android.util.Log;
-
 public class Map {
 	
 	private int h_;

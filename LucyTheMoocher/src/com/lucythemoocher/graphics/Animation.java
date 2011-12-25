@@ -2,9 +2,6 @@ package com.lucythemoocher.graphics;
 
 import com.lucythemoocher.game.Game;
 
-import android.graphics.Canvas;
-import android.util.Log;
-
 public class Animation {
 	private Grid grid_;
 	private int tab_[];
