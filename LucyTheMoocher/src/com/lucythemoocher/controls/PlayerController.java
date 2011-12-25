@@ -22,13 +22,11 @@ public class PlayerController {
 		
 		//parcours de tous les points appuyés
 		for (int i=0; i<event.getPointerCount(); i++  ) {
-			// # X #
+			// X X X
 			// # # #
 			// # # #
 			// Saut
-			if (event.getY(i) < Game.getCam().h()/5 &&
-					event.getX(i) > Game.getCam().w()/5 &&
-					event.getX(i) < 4*Game.getCam().w()/5) {
+			if (event.getY(i) < Game.getCam().h()/5) {
 				ver_ = UP;
 			}
 
@@ -50,26 +48,6 @@ public class PlayerController {
 					event.getY(i) > Game.getCam().h()/5 &&
 					event.getY(i) < 4*Game.getCam().h()/5) {
 				hor_ = -1;
-			}
-			
-			// # # X
-			// # # #
-			// # # #
-			// Deplacement haut droite
-			if (event.getX(i) > 4*Game.getCam().w()/5 &&
-					event.getY(i) < Game.getCam().h()/5) {
-				hor_ = 1;
-				ver_ = 1;
-			}
-			
-			// X # #
-			// # # #
-			// # # #
-			// Deplacement haut gauche
-			if (event.getX(i) < Game.getCam().w()/5 &&
-					event.getY(i) < Game.getCam().h()/5) {
-				hor_ = LEFT;
-				ver_ = UP;
 			}
 			
 			// # # #
