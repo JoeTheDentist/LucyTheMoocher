@@ -15,7 +15,6 @@ public class StateFallingRight extends State {
 	@Override
 	public void update() {
 		super.update();
-		pos_.moveRight();
 		if ( pos_.hasDownCollision() ) {
 			pc_.changeState(new StateNoneRight(pc_, pos_, anim_));
 		}

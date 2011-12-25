@@ -3,6 +3,7 @@
  */
 package com.lucythemoocher.Globals;
 import com.lucythemoocher.graphics.Camera;
+import com.lucythemoocher.sounds.SoundManager;
 import com.lucythemoocher.util.Timer;
 
 /**
@@ -15,6 +16,7 @@ public class Globals {
 	
 	private Camera camera_;
 	private Timer timer_;
+	private SoundManager sounds_;
 	
 	/**
 	 * Instance getter
@@ -39,8 +41,13 @@ public class Globals {
     	return timer_;
     }
     
+    public SoundManager getSounds() {
+    	return sounds_;
+    }
+    
 	private Globals() {
 		camera_ = new Camera();
 		timer_ = new Timer(0f);
+		sounds_ = new SoundManager();
 	}
 }

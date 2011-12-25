@@ -60,7 +60,16 @@ public class SoundManager {
 		playing_.put(resource, sounds_.play(loaded_.get(resource), volume, volume, 1, 0, 1f));
 	}
 	
-	public void test() {
-		playSound(R.raw.firstbeat);
+	private void playLoopSound(int resource) {
+		AudioManager mgr = (AudioManager)Resources.getActivity().getSystemService(Context.AUDIO_SERVICE);
+		float streamVolumeCurrent = mgr.getStreamVolume(AudioManager.STREAM_MUSIC);
+		float streamVolumeMax = mgr.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+		float volume = streamVolumeCurrent / streamVolumeMax;
+		//TODO dernier arg => vitesse du jeu
+		playing_.put(resource, sounds_.play(loaded_.get(resource), volume, volume, 1, 0, 1f));
+	}
+	
+	public void start() {
+		playLoopSound(R.raw.firstbeat);
 	}
 }

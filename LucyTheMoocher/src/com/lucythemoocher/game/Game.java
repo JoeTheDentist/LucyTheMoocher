@@ -29,7 +29,7 @@ public class Game {
 		event_ = new EventNormal();
 		background_ = new Background();
 		gameThread_.start();
-		
+		Globals.getInstance().getSounds().start();
 	}
 	
 	
