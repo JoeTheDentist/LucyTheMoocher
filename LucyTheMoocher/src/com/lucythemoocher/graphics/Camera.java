@@ -28,10 +28,10 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 	private static float DT_ = 1;
 
 	private Box screen_;
-	private Image background_;
 	private Canvas canvas_;
 	private float currX_;
 	private float currY_;
+	private float scale_;
 
 	private int drawing_ = NORMAL;
 	private Paint bnwFilter_;
@@ -44,11 +44,6 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 		currY_ = 1;
 		screen_ = new Box(currX_,currY_,h,w);
 
-		//Background
-		InputStream is = getResources().openRawResource(R.drawable.background1);
-		BitmapDrawable bd = new BitmapDrawable(is);
-		background_ = new Image(bd);
-
 		//Black n white filter
 		bnwFilter_ = new Paint();
 		ColorMatrix cm = new ColorMatrix();
@@ -58,6 +53,7 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 
 		getHolder().addCallback(this);
 		setFocusable(true);
+		scale_ = screen_.getW() / 800f;
 	}
 
 	/**
@@ -65,24 +61,22 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 	 */
 	public void update() {
 		//Camera follows the player
-		currX_ += (Game.getCharacter().getX()-currX_)*camSpeed();
-		currY_ += (Game.getCharacter().getY()-currY_)*camSpeed();
-		screen_.setX(currX_-screen_.getW()/2);
-		screen_.setY(currY_-screen_.getH()/2);
+		currX_ += (Game.getCharacter().getX()-currX_)*camSpeed() / scale_;
+		currY_ += (Game.getCharacter().getY()-currY_)*camSpeed() / scale_;
+		screen_.setX((currX_ - screen_.getW() / scale_ / 2));
+		screen_.setY((currY_ - screen_.getH() / scale_ / 2));
 	}
 
-	public void refreshScreen() {
-	
-	}
-	
+
 	public void lockScreen() {
 		update();
 		canvas_ = getHolder().lockCanvas();
-		onDraw();
+		canvas_.scale(scale_, scale_);
 	}
 	
 	public void unlockScreen() {
 		if ( canvas_ != null ) {
+			canvas_.scale(1.0f, 1.0f);
 			getHolder().unlockCanvasAndPost(canvas_);
 		}
 	}
@@ -95,24 +89,7 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 		return CAMERASPEED*DT_;
 	}
 
-	public void onDraw() {
-		// background
-		float x = screen_.getW()/2-Game.getCharacter().getX()*BACKGROUNDSPEED;
-		float y = screen_.getH()/2-Game.getCharacter().getY()*BACKGROUNDSPEED;
-		float offsetX = screen_.getW()*BACKGROUNDSPEED;
-		float offsetY = screen_.getH()*BACKGROUNDSPEED;
 
-		canvas_.drawBitmap(background_.getBitmap().getBitmap(), 
-				x-offsetX, 
-				y-offsetY, 
-				null);
-
-		//decors
-		Game.getMap().draw();
-
-		// player
-		Game.getCharacter().draw();
-	}
 
 	public boolean onTouchEvent(MotionEvent event) {
 		PlayerController.process(event);
@@ -137,17 +114,32 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 
 
 	public void drawImage(float x, float y, Image image) {
+		float xx = x  - offsetx() ;
+		float yy = y  - offsety() ;
 		switch ( drawing_ ) {
 		case NORMAL:
-			canvas_.drawBitmap(image.getBitmap().getBitmap(), x-offsetx(), y-offsety(), null);
+			canvas_.drawBitmap(image.getBitmap().getBitmap(), xx, yy, null);
 			break;
 		case BnW:
-			canvas_.drawBitmap(image.getBitmap().getBitmap(), x-offsetx(), y-offsety(), bnwFilter_);
+			canvas_.drawBitmap(image.getBitmap().getBitmap(), xx, yy, bnwFilter_);
 			break;
 		default:
-			canvas_.drawBitmap(image.getBitmap().getBitmap(), x-offsetx(), y-offsety(), null);
+			canvas_.drawBitmap(image.getBitmap().getBitmap(), xx, yy, null);
 			break;	
 		}
+	}
+	
+	public void drawBackground(Background background)  {
+		// background
+		float x = -(currX_ - screen_.getW() / 2) * BACKGROUNDSPEED;
+		float y = -(currY_ - screen_.getH() / 2) * BACKGROUNDSPEED;
+		float offsetX = screen_.getW() / 2;
+		float offsetY = screen_.getH() / 2;
+
+		canvas_.drawBitmap(background.getImage().getBitmap().getBitmap(), 
+				x - offsetX, 
+				y - offsetY, 
+				null);
 	}
 
 	public void setNormalDrawing() {

@@ -1,5 +1,8 @@
 package com.lucythemoocher.loops;
 
+import com.lucythemoocher.controls.PlayerController;
+import com.lucythemoocher.game.Game;
+
 /**
  * Loop used for the Game, when player is playing (haha)
  */
@@ -17,7 +20,9 @@ public class LoopGame extends Loop {
 	 * Implement here every computation
 	 */	
 	public void update() {
-		
+		PlayerController.update();
+		Game.getCharacter().update();
+		Game.update();
 	}
 	
 	/**
@@ -25,7 +30,14 @@ public class LoopGame extends Loop {
 	 * Don't compute anything here, prefer update
 	 */	
 	public void render() {
+		// background
+		Game.getBackground().draw();
 		
+		//decors
+		Game.getMap().draw();
+
+		// player
+		Game.getCharacter().draw();		
 	}
 	
 

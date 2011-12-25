@@ -29,9 +29,8 @@ public class GameThread extends Thread {
 			beginTime_ = System.currentTimeMillis();
 			framesSkipped_ = 0;
 
-			Game.update();
+			
 			MasterLoop.getInstance().update();
-			Game.getCam().refreshScreen();
 			MasterLoop.getInstance().render();
 
 			timeDiff_ = System.currentTimeMillis() - beginTime_;

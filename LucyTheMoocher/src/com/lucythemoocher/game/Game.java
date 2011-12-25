@@ -7,6 +7,7 @@ import com.lucythemoocher.actors.maincharacter.state.State;
 import com.lucythemoocher.controls.PlayerController;
 import com.lucythemoocher.events.*;
 import com.lucythemoocher.graphics.Camera;
+import com.lucythemoocher.graphics.Background;
 import com.lucythemoocher.physics.Cinematic;
 import com.lucythemoocher.physics.Map;
 import com.lucythemoocher.R;
@@ -20,6 +21,7 @@ public class Game {
 	private static Event event_;
 	private static float time_;
 	private static float dt_ = 1;
+	private static Background background_;
 	
 	public static void launchGame(Camera cam) {
 		Log.d("Game", "launchGame");
@@ -29,6 +31,7 @@ public class Game {
 		map_ = new Map(R.raw.lvl1);
 		event_ = new EventNormal();
 		gameThread_.start();
+		background_ = new Background();
 	}
 	
 	public static Camera getCam() {
@@ -54,9 +57,11 @@ public class Game {
 		return character_;
 	}
 	
+	public static Background getBackground() {
+		return background_;
+	}
+	
 	public static void update() {
-		PlayerController.update();
-		character_.update();
 		time_ += dt_;
 		nbUpdates++;
 		if ( nbUpdates % 300  == 0 ) {
