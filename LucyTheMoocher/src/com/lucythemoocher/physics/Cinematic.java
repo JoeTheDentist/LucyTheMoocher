@@ -6,18 +6,16 @@ import com.lucythemoocher.game.Game;
 import com.lucythemoocher.util.MathUtil;
 
 public class Cinematic {
-	private static final float GRAVITY = 6;
-	private static final float MOVESPEED = 25;
-	private static final float JUMPSPEED = 54;
-	private static final float ATTACKSPEED = 130;
+	private static final float GRAVITY = 0.007f;
+	private static final float MOVESPEED = 0.8f;
+	private static final float JUMPSPEED = 2f;
+	private static final float ATTACKSPEED = 3f;
 	
-	private static float DT_ = 1;
 	
 	private float posx_;
 	private float posy_;
 	private float speedx_;
 	private float speedy_;
-	private float dt_ = 1;
 	
 	private ArrayList<Box> boundingBoxes_;
 	
@@ -45,31 +43,22 @@ public class Cinematic {
 		updatePos();
 	}
 	
-	public static void setGeneralSpeed(float dt) {
-		DT_ = dt;
-	}
-	
-	public void setLocalSpeed(float dt) {
-		dt_ = dt;
-	}
-	
-	private void updateNormalSpeed() {
-		speedy_ += GRAVITY*dt_*DT_;
-	}
-	
+
 	private void updatePos() {
-		for ( int i=0; i<Math.abs(speedx()) && !Game.getMap().hasCollision(boundingBoxes_) ; i++ ) {
-			posx_ += MathUtil.sign(speedx());
+		float movex = speedx() * Game.getDt();
+		float movey = speedy() * Game.getDt();
+		for ( int i=0; i<Math.abs(movex) && !Game.getMap().hasCollision(boundingBoxes_) ; i++ ) {
+			posx_ += MathUtil.sign(movex);
 		}
 		if ( Game.getMap().hasCollision(boundingBoxes_) ) {
-			posx_ -= MathUtil.sign(speedx());
+			posx_ -= MathUtil.sign(movex);
 			speedx_ *= 0;
 		}
-		for ( int i=0; i<Math.abs(speedy()) && !Game.getMap().hasCollision(boundingBoxes_) ; i++ ) {
-			posy_ += MathUtil.sign(speedy());
+		for ( int i=0; i<Math.abs(movey) && !Game.getMap().hasCollision(boundingBoxes_) ; i++ ) {
+			posy_ += MathUtil.sign(movey);
 		}
 		if ( Game.getMap().hasCollision(boundingBoxes_) ) {
-			posy_ -= MathUtil.sign(speedy());
+			posy_ -= MathUtil.sign(movey);
 			speedy_ = 0;
 		}
 	}
@@ -83,11 +72,11 @@ public class Cinematic {
 	}
 	
 	public float speedx() {
-		return speedx_*dt_*DT_;
+		return speedx_;
 	}
 	
 	public float speedy() {
-		return speedy_*dt_*DT_;
+		return speedy_;
 	}
 	
 	public ArrayList<Box> boundingBoxes() {
@@ -121,6 +110,10 @@ public class Cinematic {
 	
 	public void moveDown() {
 		speedy_ = ATTACKSPEED;
+	}
+
+	private void updateNormalSpeed() {
+		speedy_ += GRAVITY * Game.getDt();
 	}
 	
 	public boolean hasDownCollision() {

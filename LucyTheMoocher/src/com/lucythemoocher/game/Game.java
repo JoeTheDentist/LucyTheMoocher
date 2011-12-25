@@ -2,11 +2,13 @@ package com.lucythemoocher.game;
 
 import android.util.Log;
 
+import com.lucythemoocher.Globals.Globals;
 import com.lucythemoocher.actors.PlayerCharacter;
 import com.lucythemoocher.events.*;
 import com.lucythemoocher.graphics.Background;
 import com.lucythemoocher.physics.Cinematic;
 import com.lucythemoocher.physics.Map;
+import com.lucythemoocher.util.Timer;
 import com.lucythemoocher.R;
 
 public class Game {
@@ -15,24 +17,24 @@ public class Game {
 	private static GameThread gameThread_;
 	private static int nbUpdates = 0;
 	private static Event event_;
-	private static float time_;
-	private static float gameSpeed_ = 1; // factor controlling game's speed
 	private static Background background_;
+	private static Timer timer_;
 	
 	public static void launchGame() {
 		Log.d("Game", "launchGame");
+		timer_ = new Timer(0);
 		character_ = new PlayerCharacter();
 		gameThread_ = new GameThread();
 		map_ = new Map(R.raw.lvl1);
 		event_ = new EventNormal();
 		background_ = new Background();
 		gameThread_.start();
+		
 	}
 	
 	
 	public static void setSpeed(float dt) {
-		Cinematic.setGeneralSpeed(dt);
-		gameSpeed_ = dt;
+		timer_.setFactor(dt);
 	}
 	
 	public static Map getMap() {
@@ -52,8 +54,8 @@ public class Game {
 	}
 	
 	public static void update() {
-		time_ += gameSpeed_;
 		nbUpdates++;
+		timer_.addDt(Globals.getInstance().getTimer().getDt());
 		if ( nbUpdates % 300  == 0 ) {
 			if ( event_ instanceof EventSlow ) {
 				event_ = new EventNormal(); 
@@ -68,7 +70,11 @@ public class Game {
 	}
 	
 	public static float getTime() {
-		return time_;
+		return timer_.getTime();
+	}
+	
+	public static float getDt() {
+		return timer_.getDt();
 	}
 	
 	public static void stop() {

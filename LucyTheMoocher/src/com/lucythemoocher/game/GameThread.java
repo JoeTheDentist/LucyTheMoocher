@@ -36,15 +36,11 @@ public class GameThread extends Thread {
 			framesSkipped_ = 0;
 
 			
-			MasterLoop.getInstance().update();
-			MasterLoop.getInstance().render();
+			update();
+			render();
 
 			timeDiff_ = System.currentTimeMillis() - beginTime_;
-			previousTime_ = currentTime_;
-			currentTime_ = System.currentTimeMillis();
-			Globals.getInstance().getTimer().addDt(currentTime_ - previousTime_);
-			Log.d(TAG, "dt: " + (currentTime_ - previousTime_));
-			Log.d(TAG, "time: " + Globals.getInstance().getTimer().getTime());
+			
 			sleepTime = (int)(FRAME_PERIOD - timeDiff_);
 
 			if (sleepTime > 0) {
@@ -55,10 +51,21 @@ public class GameThread extends Thread {
 			}
 
 			while (sleepTime < 0 && framesSkipped_ < MAX_FRAME_SKIPS) {
-				MasterLoop.getInstance().update();
+				update();
 				sleepTime += FRAME_PERIOD;
 				framesSkipped_++;
 			}
 		}
+	}
+	
+	public void update() {
+		MasterLoop.getInstance().update();
+		previousTime_ = currentTime_;
+		currentTime_ = System.currentTimeMillis();
+		Globals.getInstance().getTimer().addDt(currentTime_ - previousTime_);
+	}
+	
+	public void render() {
+		MasterLoop.getInstance().render();
 	}
 }
