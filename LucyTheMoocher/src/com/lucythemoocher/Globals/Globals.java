@@ -3,6 +3,7 @@
  */
 package com.lucythemoocher.Globals;
 import com.lucythemoocher.graphics.Camera;
+import com.lucythemoocher.util.Timer;
 
 /**
  * Global variables
@@ -13,6 +14,7 @@ public class Globals {
 	private static volatile Globals instance_ = null;
 	
 	private Camera camera_;
+	private Timer timer_;
 	
 	/**
 	 * Instance getter
@@ -33,7 +35,12 @@ public class Globals {
     	return camera_;
     }
     
+    public Timer getTimer() {
+    	return timer_;
+    }
+    
 	private Globals() {
 		camera_ = new Camera();
+		timer_ = new Timer(0f);
 	}
 }
