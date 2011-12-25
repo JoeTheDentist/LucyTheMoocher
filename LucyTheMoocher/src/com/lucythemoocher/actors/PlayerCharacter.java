@@ -5,8 +5,6 @@ import com.lucythemoocher.graphics.Animation;
 import com.lucythemoocher.physics.Cinematic;
 import com.lucythemoocher.R;
 
-import android.graphics.Canvas;
-
 public class PlayerCharacter extends Actor {
 	private State state_;
 	

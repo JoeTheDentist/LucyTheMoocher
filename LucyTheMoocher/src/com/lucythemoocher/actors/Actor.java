@@ -2,12 +2,8 @@ package com.lucythemoocher.actors;
 
 import java.util.ArrayList;
 
-import android.graphics.Canvas;
-
-import com.lucythemoocher.game.Game;
 import com.lucythemoocher.graphics.Animation;
 import com.lucythemoocher.graphics.Drawable;
-import com.lucythemoocher.graphics.Image;
 import com.lucythemoocher.physics.Box;
 import com.lucythemoocher.physics.Cinematic;
 

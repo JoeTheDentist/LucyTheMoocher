@@ -1,6 +1,7 @@
 package com.lucythemoocher.graphics;
 
 
+import com.lucythemoocher.controls.GlobalController;
 import com.lucythemoocher.controls.PlayerController;
 import com.lucythemoocher.game.Game;
 import com.lucythemoocher.physics.Box;
@@ -120,6 +121,7 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 
 	public boolean onTouchEvent(MotionEvent event) {
 		PlayerController.process(event);
+		GlobalController.getInstance().process(event);
 		return true;
 	}
 
