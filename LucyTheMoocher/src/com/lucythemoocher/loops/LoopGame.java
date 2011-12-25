@@ -30,15 +30,9 @@ public class LoopGame extends Loop {
 	 * Don't compute anything here, prefer update
 	 */	
 	public void render() {
-		// background
 		Game.getBackground().draw();
-		
-		//decors
 		Game.getMap().draw();
-
-		// player
 		Game.getCharacter().draw();		
 	}
-	
 
 }

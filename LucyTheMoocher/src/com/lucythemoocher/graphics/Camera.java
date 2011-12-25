@@ -18,6 +18,13 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
+/**
+ * Render Drawables and Background
+ * Handle scrolling
+ * Can also support effects (black and white for now)
+ * Camera's system is used in MasterLoop
+ * @see MasterLoop
+ */
 public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 	private static final int NORMAL = 0;
 	private static final int BnW = 1;
@@ -38,6 +45,12 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 
 	private boolean canDraw_ = false;
 
+	/**
+	 * Constructor
+	 * @param context
+	 * @param h Height in pixels
+	 * @param w Width in pixels
+	 */
 	public Camera(Context context, float h, float w) {
 		super(context);
 		currX_ = 1;
@@ -68,12 +81,22 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 	}
 
 
+	/**
+	 * Must be called before renderings
+	 * This locking is currently handled in the MasterLoop
+	 * @see #unlockScreen()
+	 * @see MasterLoop
+	 */
 	public void lockScreen() {
 		update();
 		canvas_ = getHolder().lockCanvas();
 		canvas_.scale(scale_, scale_);
 	}
 	
+	/**
+	 * Must be called after renderings, to unlock canvas
+	 * @see #lockScreen()
+	 */
 	public void unlockScreen() {
 		if ( canvas_ != null ) {
 			canvas_.scale(1.0f, 1.0f);
@@ -81,10 +104,18 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 		}
 	}
 	
+	/**
+	 * Getter
+	 * @return True when Camera is ready for rendering
+	 */
 	public boolean canDraw() {
 		return canDraw_;
 	}
 
+	/**
+	 * Getter
+	 * @return Camera's speed
+	 */
 	private float camSpeed() {
 		return CAMERASPEED*DT_;
 	}
@@ -104,15 +135,31 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 		return screen_.getY();
 	}
 
+	/**
+	 * Getter
+	 * @return Screen's height
+	 */
 	public float h() {
 		return screen_.getH();
 	}
-
+	
+	/**
+	 * Getter
+	 * @return Screen's width
+	 */
 	public float w() {
 		return screen_.getW();
 	}
 
-
+	/**
+	 * Draw the image at the position x y
+	 * Screen must be locked
+	 * 
+	 * @param x x position in pixels
+	 * @param y y position in pixels
+	 * @param image
+	 * @see #lockScreen()
+	 */
 	public void drawImage(float x, float y, Image image) {
 		float xx = x  - offsetx() ;
 		float yy = y  - offsety() ;
@@ -129,6 +176,12 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 		}
 	}
 	
+	/**
+	 * Draw the background according to the camera position
+	 * Screen must be locked
+	 * @param background
+	 * @see #lockScreen()
+	 */
 	public void drawBackground(Background background)  {
 		// background
 		float x = -(currX_ - screen_.getW() / 2) * BACKGROUNDSPEED;
@@ -142,14 +195,24 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 				null);
 	}
 
+	/**
+	 * Nal's shit
+	 */
 	public void setNormalDrawing() {
 		drawing_ = NORMAL;
 	}
 
+	/**
+	 * Nal's shit
+	 */
 	public void setBnWDrawing() {
 		drawing_ = BnW;
 	}
 
+	/**
+	 * Mutator 
+	 * @param dt New dt speed
+	 */
 	public static void setSpeed(float dt) {
 		DT_ = dt;
 	}

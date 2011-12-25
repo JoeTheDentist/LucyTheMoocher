@@ -13,7 +13,7 @@ import com.lucythemoocher.graphics.Camera;
  */
 public class MasterLoop {
 	
-	/*
+	/**
 	 * Get the instance of the singleton
 	 * @return Instance
 	 */
@@ -28,7 +28,7 @@ public class MasterLoop {
         return MasterLoop.instance_;
 	}
 	
-	/*
+	/**
 	 * Change the loop (state pattern)
 	 * 
 	 * @param loop The new state
@@ -37,14 +37,14 @@ public class MasterLoop {
 		loop_ = loop;
 	}
 	
-	/*
+	/**
 	 * Called each frame
 	 */
 	public void update() {
 		loop_.update();
 	}
 	
-	/*
+	/**
 	 * Update rendering
 	 */
 	public void render() {

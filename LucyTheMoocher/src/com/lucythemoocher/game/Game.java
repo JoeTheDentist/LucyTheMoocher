@@ -70,7 +70,6 @@ public class Game {
 				event_ = new EventSlow();
 			}
 		}
-//		Log.d("Game", ""+nbUpdates);
 	}
 	
 	public static int getTick() {
