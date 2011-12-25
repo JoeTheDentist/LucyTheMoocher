@@ -1,7 +1,6 @@
 package com.lucythemoocher.actors.maincharacter.state;
 
 import com.lucythemoocher.actors.PlayerCharacter;
-import com.lucythemoocher.game.Game;
 import com.lucythemoocher.graphics.Animation;
 import com.lucythemoocher.physics.Cinematic;
 
@@ -28,17 +27,21 @@ public abstract class State {
 		pos_.update();
 	}
 	
-	abstract public void moveUp();
+	public void moveUp() {}
 	
-	abstract public void moveDown();
+	public void moveDown() {}
 	
-	abstract public void moveLeft();
+	public void moveLeft() {}
 	
-	abstract public void moveRight();
+	public void moveRight() {}
 	
-	abstract public void moveStop();
+	public void moveStop() {}
 
-	abstract public void moveFastLeft();
+	public void moveFastLeft() {
+		moveLeft();
+	}
 	
-	abstract public void moveFastRight();
+	public void moveFastRight() {
+		moveRight();
+	}
 }
