@@ -3,8 +3,6 @@ package com.lucythemoocher.game;
 import android.util.Log;
 
 import com.lucythemoocher.actors.PlayerCharacter;
-import com.lucythemoocher.actors.maincharacter.state.State;
-import com.lucythemoocher.controls.PlayerController;
 import com.lucythemoocher.events.*;
 import com.lucythemoocher.graphics.Camera;
 import com.lucythemoocher.graphics.Background;

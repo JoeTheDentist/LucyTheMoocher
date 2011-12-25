@@ -1,19 +1,15 @@
 package com.lucythemoocher.graphics;
 
-import java.io.InputStream;
 
 import com.lucythemoocher.controls.PlayerController;
 import com.lucythemoocher.game.Game;
 import com.lucythemoocher.physics.Box;
-import com.lucythemoocher.R;
 
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Paint;
-import android.graphics.drawable.BitmapDrawable;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
