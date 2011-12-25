@@ -1,9 +1,8 @@
 package com.lucythemoocher;
 
 import com.lucythemoocher.game.Game;
-import com.lucythemoocher.graphics.Camera;
-import com.lucythemoocher.util.Ressources;
-
+import com.lucythemoocher.util.Resources;
+import com.lucythemoocher.Globals.Globals;
 import android.app.Activity;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -23,11 +22,10 @@ public class LucyTheMoocherActivity extends Activity {
         getWindow().setFlags(	WindowManager.LayoutParams.FLAG_FULLSCREEN,
         						WindowManager.LayoutParams.FLAG_FULLSCREEN);
         
-        Ressources.setActivity(this);
-        Camera cam = new Camera(this, getWindowManager().getDefaultDisplay().getHeight(), 
-        		getWindowManager().getDefaultDisplay().getWidth());
-        setContentView(cam);
-        Game.launchGame(cam);
+        Resources.setActivity(this);
+        Globals.getInstance(); // call it once here to be sure the instance is created
+        setContentView(Globals.getInstance().getCamera());
+        Game.launchGame();
     }
     
     public void onConfigurationChanged(Configuration newConfig) {

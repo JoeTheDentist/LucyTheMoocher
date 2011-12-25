@@ -1,5 +1,6 @@
 package com.lucythemoocher.loops;
 
+import com.lucythemoocher.Globals.Globals;
 import com.lucythemoocher.game.Game;
 import com.lucythemoocher.graphics.Camera;
 
@@ -48,7 +49,7 @@ public class MasterLoop {
 	 * Update rendering
 	 */
 	public void render() {
-		Camera cam = Game.getCam();
+		Camera cam = Globals.getInstance().getCamera();
 		if (cam.canDraw()) {
 			cam.lockScreen();
 			loop_.render();

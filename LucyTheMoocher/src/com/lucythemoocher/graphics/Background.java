@@ -5,8 +5,9 @@ import java.io.InputStream;
 import android.graphics.drawable.BitmapDrawable;
 
 import com.lucythemoocher.R;
+import com.lucythemoocher.Globals.Globals;
 import com.lucythemoocher.game.Game;
-import com.lucythemoocher.util.Ressources;
+import com.lucythemoocher.util.Resources;
 
 /**
  * Background of the level
@@ -22,7 +23,7 @@ public class Background implements Drawable {
 	 * @todo 
 	 */
 	public Background() {
-		InputStream is = Ressources.openRawRessources(R.drawable.background1);
+		InputStream is = Resources.openRawRessources(R.drawable.background1);
 		BitmapDrawable bd = new BitmapDrawable(is);
 		background_ = new Image(bd);		
 	}
@@ -33,7 +34,7 @@ public class Background implements Drawable {
 	 * @see Camera
 	 */
 	public void draw() {
-		Game.getCam().drawBackground(this);
+		Globals.getInstance().getCamera().drawBackground(this);
 	}
 	
 	/**

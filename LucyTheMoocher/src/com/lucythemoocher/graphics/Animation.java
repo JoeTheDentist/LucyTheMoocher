@@ -1,5 +1,6 @@
 package com.lucythemoocher.graphics;
 
+import com.lucythemoocher.Globals.Globals;
 import com.lucythemoocher.game.Game;
 
 public class Animation {
@@ -36,6 +37,6 @@ public class Animation {
 			curr_++;
 			curr_ %= tab_.length;
 		}
-		Game.getCam().drawImage(x, y, grid_.getImage(tab_[curr_]));
+		Globals.getInstance().getCamera().drawImage(x, y, grid_.getImage(tab_[curr_]));
 	}
 }

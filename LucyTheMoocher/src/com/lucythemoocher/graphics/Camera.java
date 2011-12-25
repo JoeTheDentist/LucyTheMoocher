@@ -5,6 +5,7 @@ import com.lucythemoocher.controls.GlobalController;
 import com.lucythemoocher.controls.PlayerController;
 import com.lucythemoocher.game.Game;
 import com.lucythemoocher.physics.Box;
+import com.lucythemoocher.util.Resources;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -23,24 +24,6 @@ import android.view.SurfaceView;
  * @see MasterLoop
  */
 public class Camera extends SurfaceView implements SurfaceHolder.Callback {
-	private static final int NORMAL = 0;
-	private static final int BnW = 1;
-
-	private static final float CAMERASPEED = (float) 0.3;
-	private static final float BACKGROUNDSPEED = (float) 0.5;
-
-	private static float DT_ = 1;
-
-	private Box screen_;
-	private Canvas canvas_;
-	private float currX_;
-	private float currY_;
-	private float scale_;
-
-	private int drawing_ = NORMAL;
-	private Paint bnwFilter_;
-
-	private boolean canDraw_ = false;
 
 	/**
 	 * Constructor
@@ -48,8 +31,10 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 	 * @param h Height in pixels
 	 * @param w Width in pixels
 	 */
-	public Camera(Context context, float h, float w) {
-		super(context);
+	public Camera() {
+		super(Resources.getActivity());
+		float h = Resources.getActivity().getWindowManager().getDefaultDisplay().getHeight();
+		float w = Resources.getActivity().getWindowManager().getDefaultDisplay().getWidth();
 		currX_ = 1;
 		currY_ = 1;
 		screen_ = new Box(currX_,currY_,h,w);
@@ -64,6 +49,7 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 		getHolder().addCallback(this);
 		setFocusable(true);
 		scale_ = screen_.getW() / 800f;
+		setSpeed(1);
 	}
 
 	/**
@@ -118,20 +104,6 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 	}
 
 
-
-	public boolean onTouchEvent(MotionEvent event) {
-		PlayerController.process(event);
-		GlobalController.getInstance().process(event);
-		return true;
-	}
-
-	public float offsetx() {
-		return screen_.getX();
-	}
-
-	public float offsety() {
-		return screen_.getY();
-	}
 
 	/**
 	 * Getter
@@ -206,6 +178,7 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 	public void setBnWDrawing() {
 		drawing_ = BnW;
 	}
+	
 
 	/**
 	 * Mutator 
@@ -216,6 +189,13 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 	}
 
 
+	public boolean onTouchEvent(MotionEvent event) {
+		PlayerController.process(event);
+		GlobalController.getInstance().process(event);
+		return true;
+	}
+
+	
 	public void surfaceChanged(SurfaceHolder arg0, int arg1, int arg2, int arg3) {}
 
 	public void surfaceCreated(SurfaceHolder arg0) {
@@ -226,4 +206,31 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 		canDraw_ = false;
 	}
 	
+	public float offsetx() {
+		return screen_.getX();
+	}
+
+	public float offsety() {
+		return screen_.getY();
+	}
+	
+	private static final int NORMAL = 0;
+	private static final int BnW = 1;
+
+	private static final float CAMERASPEED = (float) 0.3;
+	private static final float BACKGROUNDSPEED = (float) 0.5;
+
+	private static float DT_ = 1;
+
+	private Box screen_;
+	private Canvas canvas_;
+	private float currX_;
+	private float currY_;
+	private float scale_;
+
+	private int drawing_ = NORMAL;
+	private Paint bnwFilter_;
+
+	private boolean canDraw_ = false;
+
 }

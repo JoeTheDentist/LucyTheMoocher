@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 import android.util.Log;
 
-import com.lucythemoocher.util.Ressources;
+import com.lucythemoocher.util.Resources;
 
 public class LevelLoader {
 	/**
@@ -15,7 +15,7 @@ public class LevelLoader {
 	 * @param mapName
 	 */
 	public LevelLoader(int mapName) {
-		InputStream inputStream = Ressources.openRawRessources(mapName);
+		InputStream inputStream = Resources.openRawRessources(mapName);
 		Scanner s = new Scanner(inputStream);
 		
 		//dimensions

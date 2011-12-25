@@ -4,7 +4,6 @@ import android.util.Log;
 
 import com.lucythemoocher.actors.PlayerCharacter;
 import com.lucythemoocher.events.*;
-import com.lucythemoocher.graphics.Camera;
 import com.lucythemoocher.graphics.Background;
 import com.lucythemoocher.physics.Cinematic;
 import com.lucythemoocher.physics.Map;
@@ -12,18 +11,16 @@ import com.lucythemoocher.R;
 
 public class Game {
 	private static PlayerCharacter character_;
-	private static Camera cam_;
 	private static Map map_;
 	private static GameThread gameThread_;
 	private static int nbUpdates = 0;
 	private static Event event_;
 	private static float time_;
-	private static float dt_ = 1;
+	private static float gameSpeed_ = 1; // factor controlling game's speed
 	private static Background background_;
 	
-	public static void launchGame(Camera cam) {
+	public static void launchGame() {
 		Log.d("Game", "launchGame");
-		cam_ = cam;
 		character_ = new PlayerCharacter();
 		gameThread_ = new GameThread();
 		map_ = new Map(R.raw.lvl1);
@@ -32,14 +29,10 @@ public class Game {
 		background_ = new Background();
 	}
 	
-	public static Camera getCam() {
-		return cam_;
-	}
 	
 	public static void setSpeed(float dt) {
 		Cinematic.setGeneralSpeed(dt);
-		Camera.setSpeed(dt);
-		dt_ = dt;
+		gameSpeed_ = dt;
 	}
 	
 	public static Map getMap() {
@@ -59,7 +52,7 @@ public class Game {
 	}
 	
 	public static void update() {
-		time_ += dt_;
+		time_ += gameSpeed_;
 		nbUpdates++;
 		if ( nbUpdates % 300  == 0 ) {
 			if ( event_ instanceof EventSlow ) {

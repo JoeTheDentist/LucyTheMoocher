@@ -1,6 +1,8 @@
 package com.lucythemoocher.controls;
 
+import com.lucythemoocher.Globals.Globals;
 import com.lucythemoocher.game.Game;
+import com.lucythemoocher.graphics.Camera;
 
 import android.util.Log;
 import android.view.MotionEvent;
@@ -19,14 +21,14 @@ public class PlayerController {
 
 
 	public static void process(MotionEvent event) {
-		
+		Camera cam = Globals.getInstance().getCamera();
 		//parcours de tous les points appuyés
 		for (int i=0; i<event.getPointerCount(); i++  ) {
 			// X X X
 			// # # #
 			// # # #
 			// Saut
-			if (event.getY(i) < Game.getCam().h()/5) {
+			if (event.getY(i) < cam.h()/5) {
 				ver_ = UP;
 			}
 
@@ -34,9 +36,9 @@ public class PlayerController {
 			// # # X
 			// # # #
 			// Deplacement droit
-			if (event.getX(i) > 4*Game.getCam().w()/5 &&
-					event.getY(i) > Game.getCam().h()/5 &&
-					event.getY(i) < 4*Game.getCam().h()/5) {
+			if (event.getX(i) > 4*cam.w()/5 &&
+					event.getY(i) > cam.h()/5 &&
+					event.getY(i) < 4*cam.h()/5) {
 				hor_ = RIGHT;
 			}
 
@@ -44,9 +46,9 @@ public class PlayerController {
 			// X # #
 			// # # #
 			// Deplacement gauche
-			if (event.getX(i) < Game.getCam().w()/5 &&
-					event.getY(i) > Game.getCam().h()/5 &&
-					event.getY(i) < 4*Game.getCam().h()/5) {
+			if (event.getX(i) < cam.w()/5 &&
+					event.getY(i) > cam.h()/5 &&
+					event.getY(i) < 4*cam.h()/5) {
 				hor_ = -1;
 			}
 			
@@ -54,9 +56,9 @@ public class PlayerController {
 			// # # #
 			// # X #
 			// Attaque
-			if (event.getY(i) > 4*Game.getCam().h()/5 &&
-					event.getX(i) > Game.getCam().w()/5 &&
-					event.getX(i) < 4*Game.getCam().w()/5) {
+			if (event.getY(i) > 4*cam.h()/5 &&
+					event.getX(i) > cam.w()/5 &&
+					event.getX(i) < 4*cam.w()/5) {
 				ver_ = DOWN;
 			}
 			

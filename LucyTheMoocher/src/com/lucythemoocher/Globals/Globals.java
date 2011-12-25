@@ -33,5 +33,7 @@ public class Globals {
     	return camera_;
     }
     
-	private Globals() {}
+	private Globals() {
+		camera_ = new Camera();
+	}
 }
