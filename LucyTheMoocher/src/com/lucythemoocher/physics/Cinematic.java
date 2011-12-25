@@ -5,19 +5,11 @@ import java.util.ArrayList;
 import com.lucythemoocher.game.Game;
 import com.lucythemoocher.util.MathUtil;
 
-import android.util.Log;
-
-
 public class Cinematic {
 	private static final float GRAVITY = 6;
 	private static final float MOVESPEED = 25;
 	private static final float JUMPSPEED = 54;
 	private static final float ATTACKSPEED = 130;
-	
-	private static final int LEFT = -1;
-	private static final int RIGHT = 1;
-	private static final int UP = 1;
-	private static final int DOWN = -1;
 	
 	private static float DT_ = 1;
 	
@@ -139,5 +131,17 @@ public class Cinematic {
 	
 	public void moveDown() {
 		speedy_ = ATTACKSPEED;
+	}
+	
+	public boolean hasDownCollision() {
+		return Game.getMap().hasDownCollision(boundingBoxes_);
+	}
+	
+	public boolean hasLeftCollision() {
+		return Game.getMap().hasLeftCollision(boundingBoxes_);
+	}
+	
+	public boolean hasRightCollision() {
+		return Game.getMap().hasRightCollision(boundingBoxes_);
 	}
 }

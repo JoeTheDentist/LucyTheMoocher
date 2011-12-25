@@ -1,7 +1,6 @@
 package com.lucythemoocher.actors.maincharacter.state;
 
 import com.lucythemoocher.actors.PlayerCharacter;
-import com.lucythemoocher.game.Game;
 import com.lucythemoocher.graphics.Animation;
 import com.lucythemoocher.physics.Cinematic;
 
@@ -19,7 +18,7 @@ public class StateRunningRight extends State {
 	}
 	
 	public void moveUp() {
-		if ( Game.getMap().hasDownCollision(pos_.boundingBoxes()) ) {
+		if ( pos_.hasDownCollision() ) {
 			pc_.changeState(new StateJumpingRight(pc_, pos_, anim_));
 		}
 	}

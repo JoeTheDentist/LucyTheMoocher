@@ -1,7 +1,6 @@
 package com.lucythemoocher.actors.maincharacter.state;
 
 import com.lucythemoocher.actors.PlayerCharacter;
-import com.lucythemoocher.game.Game;
 import com.lucythemoocher.graphics.Animation;
 import com.lucythemoocher.physics.Cinematic;
 
@@ -19,7 +18,7 @@ public class StateNoneRight extends State {
 	}
 	
 	public void moveUp() {
-		if ( Game.getMap().hasDownCollision(pos_.boundingBoxes()) ) {
+		if ( pos_.hasDownCollision() ) {
 			pc_.changeState(new StateJumpingRight(pc_, pos_, anim_));
 		}
 	}
@@ -33,7 +32,7 @@ public class StateNoneRight extends State {
 	}
 
 	public void moveFastRight() {
-		if ( Game.getMap().hasRightCollision(pos_.boundingBoxes()) ) {
+		if ( pos_.hasRightCollision() ) {
 			pc_.changeState(new StateWallWalkingRight(pc_, pos_, anim_));
 		} else {
 			moveRight();

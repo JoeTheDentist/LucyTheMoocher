@@ -5,26 +5,27 @@ import com.lucythemoocher.game.Game;
 import com.lucythemoocher.graphics.Animation;
 import com.lucythemoocher.physics.Cinematic;
 
-public class StateWallWalkingLeft extends State {
+public class StateWallSlidingLeft extends State {
 
 	private float begin_;
 	
-	public StateWallWalkingLeft(PlayerCharacter pc, Cinematic pos, Animation anim) {
+	public StateWallSlidingLeft(PlayerCharacter pc, Cinematic pos,
+			Animation anim) {
 		super(pc, pos, anim);
 		int tab[] = {16,17,18,19};
 		anim_.setAnimation(tab, ANIMATION_SPEED);
 		begin_ = Game.getTime();
 	}
-
+	
 	public void update() {
 		super.update();
-		if ( Game.getTime()-begin_ < WALL_WALKING_TIME ) {
-			pos_.moveUp();
-		} else {
-			pc_.changeState(new StateWallSlidingLeft(pc_, pos_, anim_));
+		if ( Game.getTime() - begin_ > WALL_WALKING_PAUSE ) {
+			pc_.changeState(new StateFallingLeft(pc_, pos_, anim_));
 		}
 		
-		if ( !pos_.hasLeftCollision() ) {
+		if ( pos_.hasLeftCollision() ) {
+			pos_.stay();
+		} else {
 			pc_.changeState(new StateFallingLeft(pc_, pos_, anim_));
 		}
 	}

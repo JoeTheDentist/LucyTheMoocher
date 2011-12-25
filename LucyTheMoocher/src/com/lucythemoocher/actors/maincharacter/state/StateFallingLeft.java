@@ -1,7 +1,6 @@
 package com.lucythemoocher.actors.maincharacter.state;
 
 import com.lucythemoocher.actors.PlayerCharacter;
-import com.lucythemoocher.game.Game;
 import com.lucythemoocher.graphics.Animation;
 import com.lucythemoocher.physics.Cinematic;
 
@@ -14,7 +13,7 @@ public class StateFallingLeft extends State {
 	
 	public void update() {
 		super.update();
-		if ( Game.getMap().hasDownCollision(pos_.boundingBoxes()) ) {
+		if ( pos_.hasDownCollision() ) {
 			pc_.changeState(new StateNoneLeft(pc_, pos_, anim_));
 		}
 	}

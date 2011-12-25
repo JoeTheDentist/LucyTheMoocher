@@ -1,7 +1,6 @@
 package com.lucythemoocher.actors.maincharacter.state;
 
 import com.lucythemoocher.actors.PlayerCharacter;
-import com.lucythemoocher.game.Game;
 import com.lucythemoocher.graphics.Animation;
 import com.lucythemoocher.physics.Cinematic;
 
@@ -11,15 +10,15 @@ public class StateJumpingRight extends State {
 		super(pc, pos, anim);
 		int tab[] = {20,21,22,23};
 		anim_.setAnimation(tab, ANIMATION_SPEED);
-		if ( Game.getMap().hasDownCollision(pos_.boundingBoxes()) ||
-				Game.getMap().hasLeftCollision(pos_.boundingBoxes()) ) {
+		if ( pos_.hasDownCollision() ||
+				pos_.hasLeftCollision() ) {
 			pos_.moveFastUp();
 		}
 	}
 
 	public void update() {
 		super.update();
-		if ( Game.getMap().hasDownCollision(pos_.boundingBoxes()) ) {
+		if ( pos_.hasDownCollision() ) {
 			pc_.changeState(new StateNoneRight(pc_, pos_, anim_));
 		} else if ( pos_.speedy() > 0 ) {
 			pc_.changeState(new StateFallingRight(pc_, pos_, anim_));
