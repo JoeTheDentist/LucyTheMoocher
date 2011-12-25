@@ -17,6 +17,7 @@ public class StateWallSlidingLeft extends State {
 		begin_ = Game.getTime();
 	}
 	
+	@Override
 	public void update() {
 		super.update();
 		if ( Game.getTime() - begin_ > WALL_WALKING_PAUSE ) {
@@ -30,13 +31,17 @@ public class StateWallSlidingLeft extends State {
 		}
 	}
 	
+	@Override
 	public void moveUp() {
 		if ( pos_.hasLeftCollision() ) {
 			pc_.changeState(new StateJumpingRight(pc_, pos_, anim_));
 		}
 	}
 	
+	@Override
 	public void moveRight() {
-		pc_.changeState(new StateJumpingRight(pc_, pos_, anim_));
+		if ( pos_.hasLeftCollision() ) {
+			pc_.changeState(new StateJumpingRight(pc_, pos_, anim_));
+		}
 	}
 }

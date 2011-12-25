@@ -11,6 +11,7 @@ public class StateFallingLeft extends State {
 		anim_.setAnimation(tab, ANIMATION_SPEED);
 	}
 	
+	@Override
 	public void update() {
 		super.update();
 		if ( pos_.hasDownCollision() ) {
@@ -18,11 +19,20 @@ public class StateFallingLeft extends State {
 		}
 	}
 	
+	@Override
 	public void moveLeft() {
 		pos_.moveLeft();
 	}
 	
+	@Override
 	public void moveRight() {
 		pc_.changeState(new StateFallingRight(pc_, pos_, anim_));
+	}
+	
+	@Override
+	public void moveFastLeft() {
+		if ( pos_.hasLeftCollision() ) {
+			pc_.changeState(new StateWallSlidingLeft(pc_, pos_, anim_));
+		}
 	}
 }

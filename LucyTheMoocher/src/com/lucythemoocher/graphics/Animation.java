@@ -35,7 +35,7 @@ public class Animation {
 	}
 	
 	public void draw(float x, float y) {
-		if ( Game.getTick()%nbCycles_ == 0) {
+		if ( Game.getTime()%nbCycles_ == 0) {
 			curr_++;
 			curr_ %= tab_.length;
 		}

@@ -16,6 +16,7 @@ public class StateJumpingRight extends State {
 		}
 	}
 
+	@Override
 	public void update() {
 		super.update();
 		if ( pos_.hasDownCollision() ) {
@@ -25,15 +26,25 @@ public class StateJumpingRight extends State {
 		}
 	}
 	
+	@Override
 	public void moveLeft() {
 		pc_.changeState(new StateJumpingLeft(pc_, pos_, anim_));
 	}
 	
+	@Override
 	public void moveRight() {
 		pos_.moveRight();
 	}
 
+	@Override
 	public void moveStop() {
 		pos_.moveStop();
+	}
+	
+	@Override
+	public void moveFastRight() {
+		if ( pos_.hasRightCollision() ) {
+			pc_.changeState(new StateWallSlidingRight(pc_, pos_, anim_));
+		}
 	}
 }

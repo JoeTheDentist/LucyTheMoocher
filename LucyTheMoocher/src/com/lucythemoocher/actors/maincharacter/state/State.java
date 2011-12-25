@@ -9,8 +9,8 @@ public abstract class State {
 	protected Animation anim_;
 	protected PlayerCharacter pc_;
 	protected final static int ANIMATION_SPEED = 3;
-	protected final static int WALL_WALKING_TIME = 30;
-	protected final static int WALL_WALKING_PAUSE = 7;
+	protected final static int WALL_WALKING_TIME = 20;
+	protected final static int WALL_WALKING_PAUSE = 10;
 
 	
 	public State(PlayerCharacter pc, Cinematic pos, Animation anim) {

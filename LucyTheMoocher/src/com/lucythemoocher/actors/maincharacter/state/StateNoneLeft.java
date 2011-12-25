@@ -13,24 +13,29 @@ public class StateNoneLeft extends State {
 		pos_.moveStop();
 	}
 
+	@Override
 	public void update() {
 		super.update();
 	}
 	
+	@Override
 	public void moveUp() {
 		if ( pos_.hasDownCollision() ) {
 			pc_.changeState(new StateJumpingLeft(pc_, pos_, anim_));
 		}
 	}
 	
+	@Override
 	public void moveLeft() {
 		pc_.changeState(new StateRunningLeft(pc_, pos_, anim_));
 	}
 	
+	@Override
 	public void moveRight() {
 		pc_.changeState(new StateRunningRight(pc_, pos_, anim_));
 	}
 
+	@Override
 	public void moveFastLeft() {
 		if ( pos_.hasLeftCollision() ) {
 			pc_.changeState(new StateWallWalkingLeft(pc_, pos_, anim_));

@@ -12,21 +12,25 @@ public class StateRunningRight extends State {
 		anim_.setAnimation(tab, ANIMATION_SPEED);
 	}
 
+	@Override
 	public void update() {
 		super.update();
 		pos_.moveRight();
 	}
 	
+	@Override
 	public void moveUp() {
 		if ( pos_.hasDownCollision() ) {
 			pc_.changeState(new StateJumpingRight(pc_, pos_, anim_));
 		}
 	}
 	
+	@Override
 	public void moveLeft() {
 		pc_.changeState(new StateRunningLeft(pc_, pos_, anim_));
 	}
 
+	@Override
 	public void moveStop() {
 		pc_.changeState(new StateNoneRight(pc_, pos_, anim_));
 	}
