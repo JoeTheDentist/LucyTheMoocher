@@ -1,7 +1,6 @@
 package com.lucythemoocher.actors.maincharacter.state;
 
 import com.lucythemoocher.actors.PlayerCharacter;
-import com.lucythemoocher.game.Game;
 import com.lucythemoocher.graphics.Animation;
 import com.lucythemoocher.physics.Cinematic;
 
@@ -12,18 +11,28 @@ public class StateFallingLeft extends State {
 		anim_.setAnimation(tab, ANIMATION_SPEED);
 	}
 	
+	@Override
 	public void update() {
 		super.update();
-		if ( Game.getMap().hasDownCollision(pos_.boundingBoxes()) ) {
+		if ( pos_.hasDownCollision() ) {
 			pc_.changeState(new StateNoneLeft(pc_, pos_, anim_));
 		}
 	}
 	
+	@Override
 	public void moveLeft() {
 		pos_.moveLeft();
 	}
 	
+	@Override
 	public void moveRight() {
 		pc_.changeState(new StateFallingRight(pc_, pos_, anim_));
+	}
+	
+	@Override
+	public void moveFastLeft() {
+		if ( pos_.hasLeftCollision() ) {
+			pc_.changeState(new StateWallSlidingLeft(pc_, pos_, anim_));
+		}
 	}
 }

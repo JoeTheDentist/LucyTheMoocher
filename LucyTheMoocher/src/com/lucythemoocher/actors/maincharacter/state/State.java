@@ -8,14 +8,10 @@ public abstract class State {
 	protected Cinematic pos_;
 	protected Animation anim_;
 	protected PlayerCharacter pc_;
-	protected final static int ANIMATION_NORMAL_SPEED = 3;
-	protected static int ANIMATION_SPEED = ANIMATION_NORMAL_SPEED;
-	protected final static int WALL_WALKING_DISTANCE = 300;
-	protected final static int WALL_WALKING_PAUSE = 7;
-	
-	public static void changeAnimationSpeed(float speed) {
-		ANIMATION_SPEED = (int)((float) ANIMATION_NORMAL_SPEED/speed);
-	}
+	protected final static int ANIMATION_SPEED = 3;
+	protected final static int WALL_WALKING_TIME = 20;
+	protected final static int WALL_WALKING_PAUSE = 10;
+
 	
 	public State(PlayerCharacter pc, Cinematic pos, Animation anim) {
 		pos_ = pos;

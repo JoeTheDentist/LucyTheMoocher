@@ -39,7 +39,6 @@ public class Game {
 	}
 	
 	public static void setSpeed(float dt) {
-		State.changeAnimationSpeed(dt);
 		Cinematic.setGeneralSpeed(dt);
 		Camera.setSpeed(dt);
 		dt_ = dt;
