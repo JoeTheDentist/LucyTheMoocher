@@ -1,7 +1,5 @@
 package com.lucythemoocher.actors.maincharacter.state;
 
-import android.util.Log;
-
 import com.lucythemoocher.actors.PlayerCharacter;
 import com.lucythemoocher.game.Game;
 import com.lucythemoocher.graphics.Animation;
@@ -28,30 +26,15 @@ public class StateJumpingLeft extends State {
 		}
 	}
 	
-	public void moveUp() {}
-
-	public void moveDown() {
-		pos_.moveDown();
-	}
-	
 	public void moveLeft() {
 		pos_.moveLeft();
 	}
+	
 	public void moveRight() {
-		pos_.moveRight();
 		pc_.changeState(new StateJumpingRight(pc_, pos_, anim_));
 	}
 
 	public void moveStop() {
 		pos_.moveStop();
 	}
-
-	public void moveFastLeft() {
-		moveLeft();
-	}
-
-	public void moveFastRight() {
-		moveRight();
-	}
-
 }

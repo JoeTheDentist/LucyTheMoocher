@@ -1,7 +1,5 @@
 package com.lucythemoocher.actors.maincharacter.state;
 
-import android.util.Log;
-
 import com.lucythemoocher.actors.PlayerCharacter;
 import com.lucythemoocher.game.Game;
 import com.lucythemoocher.graphics.Animation;
@@ -44,24 +42,8 @@ public class StateWallWalkingRight extends State {
 			pc_.changeState(new StateJumpingLeft(pc_, pos_, anim_));
 		}
 	}
-
-	public void moveDown() {
-		pos_.moveDown();
-	}
 	
 	public void moveLeft() {
-		pos_.moveLeft();
 		pc_.changeState(new StateJumpingLeft(pc_, pos_, anim_));
 	}
-	
-	public void moveRight() {}
-
-	public void moveStop() {}
-	
-	public void moveFastLeft() {
-		moveLeft();
-	}
-
-	public void moveFastRight() {}
-	
 }
