@@ -58,12 +58,6 @@ public class Cinematic {
 	}
 	
 	private void updatePos() {
-		int collision = 0;
-		if ( speedy_ > 0 ) { //collision down
-			collision = 1;
-		} else { //collision up
-			collision = 2;
-		}
 		for ( int i=0; i<Math.abs(speedx()) && !Game.getMap().hasCollision(boundingBoxes_) ; i++ ) {
 			posx_ += MathUtil.sign(speedx());
 		}
@@ -76,11 +70,7 @@ public class Cinematic {
 		}
 		if ( Game.getMap().hasCollision(boundingBoxes_) ) {
 			posy_ -= MathUtil.sign(speedy());
-			if ( collision == 1 ) { //down
-				speedy_ = 0;
-			} else { //up
-				speedy_ *= -0.5;
-			}
+			speedy_ = 0;
 		}
 	}
 	
