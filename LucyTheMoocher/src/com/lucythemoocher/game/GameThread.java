@@ -5,7 +5,15 @@ import android.util.Log;
 public class GameThread extends Thread {
 	private static final String TAG = GameThread.class.getSimpleName();
 	private boolean running = true;
-	
+
+	private long beginTime_;
+	private long timeDiff_;
+	private int framesSkipped_;
+
+	private static final int MAX_FPS = 30;
+	private static final int MAX_FRAME_SKIPS = 5;
+	private static final int FRAME_PERIOD = 1000 / MAX_FPS; 
+
 
 	public void setRunning(boolean running) {
 		this.running = running;
@@ -13,30 +21,31 @@ public class GameThread extends Thread {
 
 	public void run() {
 		Log.d(TAG, "Starting game loop");
-		
-		final int FRAMES_PER_SECOND = 25;
-	    final int SKIP_TICKS = 1000 / FRAMES_PER_SECOND;
 
-	    long nextGameTick = System.currentTimeMillis();
+		long sleepTime = 0;
 
-	    long sleepTime = 0;
+		while( running ) {
+			beginTime_ = System.currentTimeMillis();
+			framesSkipped_ = 0;
 
-	    while( running ) {
-	        Game.update();
-	        Game.getCam().refreshScreen();
+			Game.update();
+			Game.getCam().refreshScreen();
 
-	        nextGameTick += SKIP_TICKS;
-	        sleepTime = nextGameTick - System.currentTimeMillis();
-	        if( sleepTime >= 0 ) {
-	            try {
-					sleep( sleepTime );
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-	        }
-	        else {
-	        	//Log.d(TAG, "###SKIP");
-	        }
-	    }
+			timeDiff_ = System.currentTimeMillis() - beginTime_;
+			sleepTime = (int)(FRAME_PERIOD - timeDiff_);
+
+			if (sleepTime > 0) {
+				// if sleepTime > 0 we're OK
+				try {
+					Thread.sleep(sleepTime);
+				} catch (InterruptedException e) {}
+			}
+
+			while (sleepTime < 0 && framesSkipped_ < MAX_FRAME_SKIPS) {
+				Game.update();
+				sleepTime += FRAME_PERIOD;
+				framesSkipped_++;
+			}
+		}
 	}
 }
