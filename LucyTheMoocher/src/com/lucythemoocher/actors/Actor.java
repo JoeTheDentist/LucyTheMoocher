@@ -44,7 +44,7 @@ public abstract class Actor implements Drawable {
 		return id_;
 	}
 
-	abstract public void draw(Canvas canvas);
+	abstract public void draw();
 	
 	public void moveStop() {
 		pos_.moveStop();

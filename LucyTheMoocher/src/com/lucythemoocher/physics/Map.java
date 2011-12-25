@@ -139,58 +139,58 @@ public class Map {
 		return false;
 	}
 
-	public void draw(Canvas canvas) {
-		drawContour(canvas);
+	public void draw() {
+		drawContour();
 		for (int i=0; i<h_; i++) {
 			for (int j=0; j<w_; j++) {
 				if ( map_[i][j] != 0 ) {
-					Game.getCam().drawImage(j*grid_.boxW(),i*grid_.boxH(), grid_.getImage(map_[i][j]-1), canvas);
+					Game.getCam().drawImage(j*grid_.boxW(),i*grid_.boxH(), grid_.getImage(map_[i][j]-1));
 				}
 			}
 		}
 	}
 	
-	private void drawContour(Canvas canvas) {
+	private void drawContour() {
 		//Horizontal
 		for (int j=2; j<w_+2; j++) {
-			Game.getCam().drawImage((j-2)*grid_.boxW(),-2*grid_.boxH(), grid_.getImage(16), canvas);
-			Game.getCam().drawImage((j-2)*grid_.boxW(),-grid_.boxH(), grid_.getImage(10), canvas);
+			Game.getCam().drawImage((j-2)*grid_.boxW(),-2*grid_.boxH(), grid_.getImage(16));
+			Game.getCam().drawImage((j-2)*grid_.boxW(),-grid_.boxH(), grid_.getImage(10));
 			
-			Game.getCam().drawImage((j-2)*grid_.boxW(),(h_)*grid_.boxH(), grid_.getImage(16), canvas);
-			Game.getCam().drawImage((j-2)*grid_.boxW(),(h_+1)*grid_.boxH(), grid_.getImage(10), canvas);
+			Game.getCam().drawImage((j-2)*grid_.boxW(),(h_)*grid_.boxH(), grid_.getImage(16));
+			Game.getCam().drawImage((j-2)*grid_.boxW(),(h_+1)*grid_.boxH(), grid_.getImage(10));
 		}
 		
 		//Vertical
 		for (int i=2; i<h_+2; i++) {
-			Game.getCam().drawImage(-2*grid_.boxW(),(i-2)*grid_.boxH(), grid_.getImage(14), canvas);
-			Game.getCam().drawImage(-grid_.boxW(),(i-2)*grid_.boxH(), grid_.getImage(12), canvas);
+			Game.getCam().drawImage(-2*grid_.boxW(),(i-2)*grid_.boxH(), grid_.getImage(14));
+			Game.getCam().drawImage(-grid_.boxW(),(i-2)*grid_.boxH(), grid_.getImage(12));
 			
-			Game.getCam().drawImage((w_)*grid_.boxW(),(i-2)*grid_.boxH(), grid_.getImage(14), canvas);
-			Game.getCam().drawImage((w_+1)*grid_.boxW(),(i-2)*grid_.boxH(), grid_.getImage(12), canvas);
+			Game.getCam().drawImage((w_)*grid_.boxW(),(i-2)*grid_.boxH(), grid_.getImage(14));
+			Game.getCam().drawImage((w_+1)*grid_.boxW(),(i-2)*grid_.boxH(), grid_.getImage(12));
 		}
 		
 		//Top left
-		Game.getCam().drawImage(-2*grid_.boxW(),-2*grid_.boxH(), grid_.getImage(0), canvas);
-		Game.getCam().drawImage(-2*grid_.boxW(),-1*grid_.boxH(), grid_.getImage(14), canvas);
-		Game.getCam().drawImage(-1*grid_.boxW(),-2*grid_.boxH(), grid_.getImage(16), canvas);
-		Game.getCam().drawImage(-1*grid_.boxW(),-1*grid_.boxH(), grid_.getImage(9), canvas);
+		Game.getCam().drawImage(-2*grid_.boxW(),-2*grid_.boxH(), grid_.getImage(0));
+		Game.getCam().drawImage(-2*grid_.boxW(),-1*grid_.boxH(), grid_.getImage(14));
+		Game.getCam().drawImage(-1*grid_.boxW(),-2*grid_.boxH(), grid_.getImage(16));
+		Game.getCam().drawImage(-1*grid_.boxW(),-1*grid_.boxH(), grid_.getImage(9));
 		
 		//Top right
-		Game.getCam().drawImage((w_+1)*grid_.boxW(),-2*grid_.boxH(), grid_.getImage(2), canvas);
-		Game.getCam().drawImage((w_+1)*grid_.boxW(),-1*grid_.boxH(), grid_.getImage(12), canvas);
-		Game.getCam().drawImage((w_)*grid_.boxW(),-2*grid_.boxH(), grid_.getImage(16), canvas);
-		Game.getCam().drawImage((w_)*grid_.boxW(),-1*grid_.boxH(), grid_.getImage(11), canvas);
+		Game.getCam().drawImage((w_+1)*grid_.boxW(),-2*grid_.boxH(), grid_.getImage(2));
+		Game.getCam().drawImage((w_+1)*grid_.boxW(),-1*grid_.boxH(), grid_.getImage(12));
+		Game.getCam().drawImage((w_)*grid_.boxW(),-2*grid_.boxH(), grid_.getImage(16));
+		Game.getCam().drawImage((w_)*grid_.boxW(),-1*grid_.boxH(), grid_.getImage(11));
 		
 		//Bottom left
-		Game.getCam().drawImage(-2*grid_.boxW(),(h_+1)*grid_.boxH(), grid_.getImage(6), canvas);
-		Game.getCam().drawImage(-1*grid_.boxW(),(h_+1)*grid_.boxH(), grid_.getImage(10), canvas);
-		Game.getCam().drawImage(-2*grid_.boxW(),(h_)*grid_.boxH(), grid_.getImage(14), canvas);
-		Game.getCam().drawImage(-1*grid_.boxW(),(h_)*grid_.boxH(), grid_.getImage(15), canvas);
+		Game.getCam().drawImage(-2*grid_.boxW(),(h_+1)*grid_.boxH(), grid_.getImage(6));
+		Game.getCam().drawImage(-1*grid_.boxW(),(h_+1)*grid_.boxH(), grid_.getImage(10));
+		Game.getCam().drawImage(-2*grid_.boxW(),(h_)*grid_.boxH(), grid_.getImage(14));
+		Game.getCam().drawImage(-1*grid_.boxW(),(h_)*grid_.boxH(), grid_.getImage(15));
 		
 		//Top right
-		Game.getCam().drawImage((w_+1)*grid_.boxW(),(h_+1)*grid_.boxH(), grid_.getImage(8), canvas);
-		Game.getCam().drawImage((w_)*grid_.boxW(),(h_+1)*grid_.boxH(), grid_.getImage(10), canvas);
-		Game.getCam().drawImage((w_+1)*grid_.boxW(),(h_)*grid_.boxH(), grid_.getImage(12), canvas);
-		Game.getCam().drawImage((w_)*grid_.boxW(),(h_)*grid_.boxH(), grid_.getImage(17), canvas);
+		Game.getCam().drawImage((w_+1)*grid_.boxW(),(h_+1)*grid_.boxH(), grid_.getImage(8));
+		Game.getCam().drawImage((w_)*grid_.boxW(),(h_+1)*grid_.boxH(), grid_.getImage(10));
+		Game.getCam().drawImage((w_+1)*grid_.boxW(),(h_)*grid_.boxH(), grid_.getImage(12));
+		Game.getCam().drawImage((w_)*grid_.boxW(),(h_)*grid_.boxH(), grid_.getImage(17));
 	}
 }

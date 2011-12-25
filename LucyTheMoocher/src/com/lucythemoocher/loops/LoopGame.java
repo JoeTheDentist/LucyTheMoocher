@@ -27,4 +27,6 @@ public class LoopGame extends Loop {
 	public void render() {
 		
 	}
+	
+
 }

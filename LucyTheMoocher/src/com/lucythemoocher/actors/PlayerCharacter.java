@@ -16,8 +16,8 @@ public class PlayerCharacter extends Actor {
 		state_ = new StateNoneLeft(this, pos_, anim_);
 	}
 	
-	public void draw(Canvas canvas) {
-		anim_.draw(canvas, pos_.x(), pos_.y());
+	public void draw() {
+		anim_.draw( pos_.x(), pos_.y());
 	}
 	
 	public void update() {

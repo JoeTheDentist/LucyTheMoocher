@@ -1,6 +1,7 @@
 package com.lucythemoocher.game;
 
 import android.util.Log;
+import com.lucythemoocher.loops.MasterLoop;
 
 public class GameThread extends Thread {
 	private static final String TAG = GameThread.class.getSimpleName();
@@ -29,7 +30,9 @@ public class GameThread extends Thread {
 			framesSkipped_ = 0;
 
 			Game.update();
+			MasterLoop.getInstance().update();
 			Game.getCam().refreshScreen();
+			MasterLoop.getInstance().render();
 
 			timeDiff_ = System.currentTimeMillis() - beginTime_;
 			sleepTime = (int)(FRAME_PERIOD - timeDiff_);

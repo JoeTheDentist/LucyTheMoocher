@@ -29,6 +29,7 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 
 	private Box screen_;
 	private Image background_;
+	private Canvas canvas_;
 	private float currX_;
 	private float currY_;
 
@@ -71,53 +72,46 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 	}
 
 	public void refreshScreen() {
-		if ( canDraw_ ) {
-			update();
-			Canvas canvas = null;
-			try {
-				canvas = getHolder().lockCanvas();
-				onDraw(canvas);
-			} finally {
-				if ( canvas != null ) {
-					getHolder().unlockCanvasAndPost(canvas);
-				}
-			}
+	
+	}
+	
+	public void lockScreen() {
+		update();
+		canvas_ = getHolder().lockCanvas();
+		onDraw();
+	}
+	
+	public void unlockScreen() {
+		if ( canvas_ != null ) {
+			getHolder().unlockCanvasAndPost(canvas_);
 		}
+	}
+	
+	public boolean canDraw() {
+		return canDraw_;
 	}
 
 	private float camSpeed() {
 		return CAMERASPEED*DT_;
 	}
 
-	public void onDraw(Canvas canvas) {
+	public void onDraw() {
 		// background
 		float x = screen_.getW()/2-Game.getCharacter().getX()*BACKGROUNDSPEED;
 		float y = screen_.getH()/2-Game.getCharacter().getY()*BACKGROUNDSPEED;
 		float offsetX = screen_.getW()*BACKGROUNDSPEED;
 		float offsetY = screen_.getH()*BACKGROUNDSPEED;
 
-		canvas.drawBitmap(background_.getBitmap().getBitmap(), 
+		canvas_.drawBitmap(background_.getBitmap().getBitmap(), 
 				x-offsetX, 
 				y-offsetY, 
 				null);
 
 		//decors
-		Game.getMap().draw(canvas);
+		Game.getMap().draw();
 
 		// player
-		Game.getCharacter().draw(canvas);
-	}
-
-	public void drawBox(Box box, Canvas canvas, Paint color) {
-		canvas.drawRect(box.getX()-offsetx(), box.getY()-offsety(),
-				box.getX()+box.getW()-offsetx(), box.getY()+box.getH()-offsety(),
-				color);
-	}
-
-	public void drawRectangle(float x, float y, float h, float w, int color) {
-		//Paint col = new Paint();
-		//col.setColor(color);
-		//canvas.drawRect(x, y, x+w, y+h, col);
+		Game.getCharacter().draw();
 	}
 
 	public boolean onTouchEvent(MotionEvent event) {
@@ -141,31 +135,17 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 		return screen_.getW();
 	}
 
-	public void drawImage(Box box, Image image, Canvas canvas) {
+
+	public void drawImage(float x, float y, Image image) {
 		switch ( drawing_ ) {
 		case NORMAL:
-			canvas.drawBitmap(image.getBitmap().getBitmap(), box.getX()-offsetx(), box.getY()-offsety(), null);
+			canvas_.drawBitmap(image.getBitmap().getBitmap(), x-offsetx(), y-offsety(), null);
 			break;
 		case BnW:
-			canvas.drawBitmap(image.getBitmap().getBitmap(), box.getX()-offsetx(), box.getY()-offsety(), bnwFilter_);
+			canvas_.drawBitmap(image.getBitmap().getBitmap(), x-offsetx(), y-offsety(), bnwFilter_);
 			break;
 		default:
-			canvas.drawBitmap(image.getBitmap().getBitmap(), box.getX()-offsetx(), box.getY()-offsety(), null);
-			break;	
-		}
-
-	}
-
-	public void drawImage(float x, float y, Image image, Canvas canvas) {
-		switch ( drawing_ ) {
-		case NORMAL:
-			canvas.drawBitmap(image.getBitmap().getBitmap(), x-offsetx(), y-offsety(), null);
-			break;
-		case BnW:
-			canvas.drawBitmap(image.getBitmap().getBitmap(), x-offsetx(), y-offsety(), bnwFilter_);
-			break;
-		default:
-			canvas.drawBitmap(image.getBitmap().getBitmap(), x-offsetx(), y-offsety(), null);
+			canvas_.drawBitmap(image.getBitmap().getBitmap(), x-offsetx(), y-offsety(), null);
 			break;	
 		}
 	}
@@ -192,4 +172,5 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 	public void surfaceDestroyed(SurfaceHolder arg0) {
 		canDraw_ = false;
 	}
+	
 }

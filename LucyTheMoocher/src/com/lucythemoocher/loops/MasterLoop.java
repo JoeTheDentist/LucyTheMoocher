@@ -1,5 +1,8 @@
 package com.lucythemoocher.loops;
 
+import com.lucythemoocher.game.Game;
+import com.lucythemoocher.graphics.Camera;
+
 /**
  * This class handles the main loop. It uses a state pattern
  * with the class Loop. For example, LoopGame inherits Loop and
@@ -45,7 +48,13 @@ public class MasterLoop {
 	 * Update rendering
 	 */
 	public void render() {
-		loop_.render();
+		Camera cam = Game.getCam();
+		if (cam.canDraw()) {
+			cam.lockScreen();
+			loop_.render();
+			cam.unlockScreen();
+		}
+		
 	}
 	
 	/**

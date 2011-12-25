@@ -34,11 +34,11 @@ public class Animation {
 		return grid_.getImage(0).w();
 	}
 	
-	public void draw(Canvas canvas, float x, float y) {
+	public void draw(float x, float y) {
 		if ( Game.getTick()%nbCycles_ == 0) {
 			curr_++;
 			curr_ %= tab_.length;
 		}
-		Game.getCam().drawImage(x, y, grid_.getImage(tab_[curr_]), canvas);
+		Game.getCam().drawImage(x, y, grid_.getImage(tab_[curr_]));
 	}
 }
