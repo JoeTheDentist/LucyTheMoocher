@@ -41,6 +41,7 @@ public class Globals {
     public void update() {
     	camera_.update();
     	timer_.update();
+    	sounds_.update();
     }
 
     public Camera getCamera() {

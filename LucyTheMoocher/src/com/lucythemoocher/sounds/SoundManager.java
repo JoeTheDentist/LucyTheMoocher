@@ -23,6 +23,13 @@ public class SoundManager {
 	private HashMap<Integer, Integer> playing_ = null;
 	private Vector<ArrayList<Integer>> soundsBackground_;
 	
+	/**
+	 * Class aimed to play sounds\n
+	 * Warning : I use SoundPool to play the music, this is bad because SoundPool
+	 * uses audio stream uncompressed in memory, but this is the only way to have the power
+	 * to choice the speed of the sounds.\n
+	 * N.B. the music samples must have the exact same duration
+	 */
 	public SoundManager() {
 		sounds_ = new SoundPool(10, AudioManager.STREAM_MUSIC, 100);
 		loaded_ = new HashMap<Integer, Integer>();
@@ -36,7 +43,7 @@ public class SoundManager {
 		}
 		
 		//Chemins des fichiers de son
-		soundsBackground_.get(BACKGROUND_THEME).add(R.raw.theme);
+		soundsBackground_.get(BACKGROUND_THEME).add(R.raw.theme1);
 		
 		//Ici on charge les sons
 		for ( ArrayList<Integer> l : soundsBackground_ ) {
@@ -46,8 +53,23 @@ public class SoundManager {
 		}
 	}
 	
+	public void update() {
+		
+	}
+	
+	private int getChannel(int resource) {
+		int i = 0;
+		for ( ArrayList<Integer> l : soundsBackground_ ) {
+			if ( l.contains(resource) ) {
+				break;
+			}
+			i++;
+		}
+		return i;
+	}
+	
 	private void addSound(int resource) {
-		loaded_.put(resource, sounds_.load(Resources.getActivity(), resource, 1));
+		loaded_.put(getChannel(resource), sounds_.load(Resources.getActivity(), resource, 1));
 	}
 	
 	private void playSound(int resource) {
@@ -56,7 +78,7 @@ public class SoundManager {
 		float streamVolumeMax = mgr.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
 		float volume = streamVolumeCurrent / streamVolumeMax;
 		//TODO dernier arg => vitesse du jeu
-		playing_.put(resource, sounds_.play(loaded_.get(resource), volume, volume, 1, 0, 1f));
+		playing_.put(getChannel(resource), sounds_.play(loaded_.get(resource), volume, volume, 1, 0, 1f));
 	}
 	
 	private void playLoopSound(int resource) {
@@ -65,10 +87,10 @@ public class SoundManager {
 		float streamVolumeMax = mgr.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
 		float volume = streamVolumeCurrent / streamVolumeMax;
 		//TODO dernier arg => vitesse du jeu
-		playing_.put(resource, sounds_.play(loaded_.get(resource), volume, volume, 1, -1, 1f));
+		playing_.put(getChannel(resource), sounds_.play(loaded_.get(getChannel(resource)), volume, volume, 1, -1, 0.75f));
 	}
 	
 	public void start() {
-		playLoopSound(R.raw.theme);
+		playLoopSound(R.raw.theme1);
 	}
 }
