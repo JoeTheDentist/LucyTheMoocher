@@ -2,7 +2,6 @@ package com.lucythemoocher.game;
 
 import android.util.Log;
 
-import com.lucythemoocher.Globals.Globals;
 import com.lucythemoocher.loops.MasterLoop;
 
 public class GameThread extends Thread {
@@ -11,8 +10,6 @@ public class GameThread extends Thread {
 
 	private long beginTime_;
 	private long timeDiff_;
-	private long currentTime_;
-	private long previousTime_; // used to update Globals::Timer
 	private int framesSkipped_;
 
 	private static final int MAX_FPS = 30;
@@ -28,8 +25,6 @@ public class GameThread extends Thread {
 		Log.d(TAG, "Starting game loop");
 
 		long sleepTime = 0;
-		previousTime_ = System.currentTimeMillis();
-		currentTime_ =  System.currentTimeMillis();
 		
 		while( running ) {
 			beginTime_ = System.currentTimeMillis();
@@ -60,9 +55,6 @@ public class GameThread extends Thread {
 	
 	public void update() {
 		MasterLoop.getInstance().update();
-		previousTime_ = currentTime_;
-		currentTime_ = System.currentTimeMillis();
-		Globals.getInstance().getTimer().addDt(currentTime_ - previousTime_);
 	}
 	
 	public void render() {

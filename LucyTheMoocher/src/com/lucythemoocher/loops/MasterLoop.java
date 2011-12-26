@@ -41,6 +41,7 @@ public class MasterLoop {
 	 * Called each frame
 	 */
 	public void update() {
+		Globals.getInstance().update();
 		loop_.update();
 	}
 	

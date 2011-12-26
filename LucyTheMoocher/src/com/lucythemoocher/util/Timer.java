@@ -1,14 +1,21 @@
 package com.lucythemoocher.util;
 
+
 /**
  * Time and time elapsed between two last updates
  * Can be slowed or accelerated by a factor with setFactor
  * Unity is millisecond
+ * You have two ways to update a timer:
+ * - call addDt(float) to update Dt with a parameter you choose
+ * - call update() and addDt will be called with Dt = current system time - system time in last update
+ * Don't use both functions since update calls addDt
  */
 public class Timer {
 	float currentTime_;
 	float dt_;
 	float factor_;
+	long previousSystemTime_;
+	
 	
 	/**
 	 * Constructor
@@ -18,14 +25,26 @@ public class Timer {
 		dt_ = 0.0000001f; // avoid null divisions
 		currentTime_ = time;
 		factor_ = 1.0f; // no factor by default
+		previousSystemTime_ = System.currentTimeMillis();
 	}
 	
+	/**
+	 * Update dt and the current time with the system clock.
+	 * Don't call it if you also use addDt().
+	 */
+	public void update() {
+		long current = System.currentTimeMillis();
+		addDt(current - previousSystemTime_);
+		previousSystemTime_ = current;
+	}
 	
 	/**
-	 * Update time
+	 * Update time. 
+	 * Don't call it if you use update().
 	 * @param dt Time elapsed in ms
 	 */
 	public void addDt(float dt) {
+		
 		dt_ = dt * factor_;
 		currentTime_ += dt_;
 	}

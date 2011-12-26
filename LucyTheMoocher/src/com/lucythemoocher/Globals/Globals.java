@@ -2,6 +2,8 @@
  * 
  */
 package com.lucythemoocher.Globals;
+
+
 import com.lucythemoocher.graphics.Camera;
 import com.lucythemoocher.sounds.SoundManager;
 import com.lucythemoocher.util.Timer;
@@ -31,6 +33,14 @@ public class Globals {
 			}
 		}
 		return Globals.instance_;
+    }
+    
+    /**
+     * Called by MasterLoop, update the globals
+     */
+    public void update() {
+    	camera_.update();
+    	timer_.update();
     }
 
     public Camera getCamera() {

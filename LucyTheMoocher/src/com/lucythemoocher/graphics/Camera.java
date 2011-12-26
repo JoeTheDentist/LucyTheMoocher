@@ -69,7 +69,6 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 	 * @see MasterLoop
 	 */
 	public void lockScreen() {
-		update();
 		canvas_ = getHolder().lockCanvas();
 		canvas_.scale(scale_, scale_);
 	}
