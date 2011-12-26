@@ -3,7 +3,6 @@ package com.lucythemoocher.physics;
 import java.io.InputStream;
 import java.util.Scanner;
 
-import android.util.Log;
 
 import com.lucythemoocher.util.Resources;
 

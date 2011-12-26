@@ -4,10 +4,8 @@ import java.io.InputStream;
 import java.util.HashMap;
 
 import com.lucythemoocher.Globals.Globals;
-import com.lucythemoocher.game.Game;
 
 import android.graphics.drawable.BitmapDrawable;
-import android.util.Log;
 
 public class PictureContainer {
 	private HashMap<Integer, BitmapDrawable> images_;

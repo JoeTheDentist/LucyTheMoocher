@@ -2,7 +2,6 @@ package com.lucythemoocher.graphics;
 
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
-import android.util.Log;
 
 public class Grid {
 	private Image fullImage_;
