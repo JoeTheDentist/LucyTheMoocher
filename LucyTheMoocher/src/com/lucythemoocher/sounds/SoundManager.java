@@ -57,6 +57,7 @@ public class SoundManager {
 		//Chemins des fichiers de son
 		soundsBackground_.get(BACKGROUND_THEME).add(R.raw.theme1);
 		soundsBackground_.get(BACKGROUND_THEME).add(R.raw.theme2);
+		soundsBackground_.get(BACKGROUND_LVL3).add(R.raw.lvl3_1);
 
 		//Ici on charge les sons
 		for ( ArrayList<Integer> l : soundsBackground_ ) {
@@ -68,14 +69,14 @@ public class SoundManager {
 
 	public void update() {
 		if ( started_ ) {
-			if ( Globals.getInstance().getTimer().getTime()-lastPlay_ >= sampleDuration_ ) {
+			if ( Globals.getInstance().getTimer().getTime()-lastPlay_ > sampleDuration_- 50 ) {
+				
 				if ( slots_%2 == 0 ) {
-					Log.d("SoundsManager", "plop"+slots_);
 					playSound(R.raw.theme1);
 				} else {
-					Log.d("SoundsManager", "plip"+slots_);
 					playSound(R.raw.theme2);
 				}
+				playSound(R.raw.lvl3_1);
 				lastPlay_ = Globals.getInstance().getTimer().getTime();
 				slots_++;
 			}

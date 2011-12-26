@@ -18,7 +18,7 @@ public class PlayerController extends ButtonListener {
 	private static final int RIGHT = 1;
 	private static final int DOWN = -1;
 	private static final int UP = 1;
-	private static final float DOUBLE_TOUCH_SENSIBILITY = 50.0f; // ms
+	private static final float DOUBLE_TOUCH_SENSIBILITY = 200;
 	
 	private int hor_;
 	private int ver_;
