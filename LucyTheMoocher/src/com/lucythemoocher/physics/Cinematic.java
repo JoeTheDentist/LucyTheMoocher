@@ -1,7 +1,6 @@
 package com.lucythemoocher.physics;
 
 import java.util.ArrayList;
-
 import com.lucythemoocher.game.Game;
 import com.lucythemoocher.util.MathUtil;
 
@@ -16,24 +15,28 @@ public class Cinematic {
 	private float posy_;
 	private float speedx_;
 	private float speedy_;
+	private float offsetx_;
+	private float offsety_;
 	
 	private ArrayList<Box> boundingBoxes_;
 	
 	public Cinematic() {
 		boundingBoxes_ = new ArrayList<Box>();
+		offsetx_ = 0.0f;
+		offsety_ = 0.0f;
 	}
 	
 	public Cinematic(Box box) {
-		boundingBoxes_ = new ArrayList<Box>();
+		this();
 		box.setCin(this);
 		boundingBoxes_.add(box);
 	}
 	
 	public Cinematic(float x, float y, float h, float w) {
+		this();
 		posx_ = x;
 		posy_ = y;
 		Box box = new Box(x,y,h,w);
-		boundingBoxes_ = new ArrayList<Box>();
 		box.setCin(this);
 		boundingBoxes_.add(box);
 	}
@@ -45,16 +48,23 @@ public class Cinematic {
 	
 
 	private void updatePos() {
-		float movex = speedx() * Game.getDt();
-		float movey = speedy() * Game.getDt();
-		for ( int i=0; i<Math.abs(movex) && !Game.getMap().hasCollision(boundingBoxes_) ; i++ ) {
+		float tempx = speedx() * Game.getDt() + offsetx_;
+		float tempy = speedy() * Game.getDt() + offsety_;
+		int movex = (int)tempx;
+		int movey = (int)tempy;
+		if (tempx > 0)
+			offsetx_ = tempx - (float)Math.floor((double)tempx);
+		else 
+			offsetx_ = tempx - (float)Math.ceil((double)tempx); 
+
+		for ( int i=0; i< Math.abs(movex) && !Game.getMap().hasCollision(boundingBoxes_) ; i++ ) {
 			posx_ += MathUtil.sign(movex);
 		}
 		if ( Game.getMap().hasCollision(boundingBoxes_) ) {
 			posx_ -= MathUtil.sign(movex);
 			speedx_ *= 0;
 		}
-		for ( int i=0; i<Math.abs(movey) && !Game.getMap().hasCollision(boundingBoxes_) ; i++ ) {
+		for ( int i=0; i< (int)Math.abs(movey) && !Game.getMap().hasCollision(boundingBoxes_) ; i++ ) {
 			posy_ += MathUtil.sign(movey);
 		}
 		if ( Game.getMap().hasCollision(boundingBoxes_) ) {
@@ -64,11 +74,11 @@ public class Cinematic {
 	}
 	
 	public float x() {
-		return posx_;
+		return posx_ + offsetx_;
 	}
 	
 	public float y() {
-		return posy_;
+		return posy_ + offsety_;
 	}
 	
 	public float speedx() {

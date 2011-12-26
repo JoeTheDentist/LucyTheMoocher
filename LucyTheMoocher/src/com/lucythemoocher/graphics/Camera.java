@@ -47,7 +47,7 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 		getHolder().addCallback(this);
 		setFocusable(true);
 		scale_ = screen_.getW() / 800f;
-		setSpeed(1);
+		setSpeed(1.0f / 30.0f);
 	}
 
 	/**
@@ -55,8 +55,8 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 	 */
 	public void update() {
 		//Camera follows the player
-		currX_ += (Game.getCharacter().getX()-currX_)*camSpeed() / scale_;
-		currY_ += (Game.getCharacter().getY()-currY_)*camSpeed() / scale_;
+		currX_ += (Game.getCharacter().getX()-currX_)*camSpeed() / scale_ * Game.getDt();
+		currY_ += (Game.getCharacter().getY()-currY_)*camSpeed() / scale_ * Game.getDt();
 		screen_.setX((currX_ - screen_.getW() / scale_ / 2));
 		screen_.setY((currY_ - screen_.getH() / scale_ / 2));
 	}

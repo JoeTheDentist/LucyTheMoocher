@@ -50,6 +50,7 @@ public class GameThread extends Thread {
 				sleepTime += FRAME_PERIOD;
 				framesSkipped_++;
 			}
+			
 		}
 	}
 	

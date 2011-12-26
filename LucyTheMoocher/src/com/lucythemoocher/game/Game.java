@@ -83,13 +83,14 @@ public class Game {
 	public static void update() {
 		nbUpdates++;
 		timer_.addDt(Globals.getInstance().getTimer().getDt());
+		/*
 		if ( nbUpdates % 300  == 0 ) {
 			if ( event_ instanceof EventSlow ) {
 				event_ = new EventNormal(); 
 			} else {
 				event_ = new EventSlow();
 			}
-		}
+		}*/
 	}
 	
 	/**
