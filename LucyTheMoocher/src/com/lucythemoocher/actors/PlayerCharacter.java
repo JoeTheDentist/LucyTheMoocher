@@ -25,43 +25,74 @@ public class PlayerCharacter extends Actor {
 		controller_.setPlayer(this);
 	}
 	
+	/**
+	 * Draw the character on the screen
+	 */
 	public void draw() {
 		anim_.draw( pos_.x(), pos_.y());
 	}
 	
+	/**
+	 * Update the character
+	 */
 	public void update() {
 		controller_.update();
 		state_.update();
 	}
 	
+	/**
+	 * State pattern
+	 * @param newState
+	 */
 	public void changeState(State newState) {
 		state_ = newState;
 	}
 	
+	/**
+	 * Called when the character stops moving
+	 */
 	public void moveStop() {
 		state_.moveStop();
 	}
 
+	/**
+	 * Try to go to the left
+	 */
 	public void moveLeft() {
 		state_.moveLeft();
 	}
 
+	/**
+	 * Try to go to the right
+	 */
 	public void moveRight() {
 		state_.moveRight();
 	}
 
+	/**
+	 * Try to go up
+	 */
 	public void moveUp() {
 		state_.moveUp();
 	}
-	
+
+	/**
+	 * Try to go down
+	 */
 	public void moveDown() {
 		state_.moveDown();
 	}
 
+	/**
+	 * Try to move fast to the right
+	 */
 	public void moveFastRight() {
 		state_.moveFastRight();
 	}
 	
+	/**
+	 * Try to move fast to the left
+	 */
 	public void moveFastLeft() {
 		state_.moveFastLeft();
 	}

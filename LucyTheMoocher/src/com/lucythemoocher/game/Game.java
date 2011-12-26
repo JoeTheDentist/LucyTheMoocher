@@ -20,6 +20,9 @@ public class Game {
 	private static Background background_;
 	private static Timer timer_;
 	
+	/**
+	 * Launch a game
+	 */
 	public static void launchGame() {
 		Log.d("Game", "launchGame");
 		timer_ = new Timer(0);
@@ -32,27 +35,51 @@ public class Game {
 		Globals.getInstance().getSounds().start();
 	}
 	
-	
-	public static void setSpeed(float dt) {
-		timer_.setFactor(dt);
+	/**
+	 * Change the game's speed. It affects the symbolic time
+	 * in the game. If factorDt is 0.5f, getTime() will increase 
+	 * twice slower. Default value is 1.0f
+	 * @param factorDt
+	 */
+	public static void setSpeed(float factorDt) {
+		timer_.setFactor(factorDt);
 	}
 	
+	/**
+	 * Getter
+	 * @return The current map
+	 */
 	public static Map getMap() {
 		return map_;
 	}
 	
+	/**
+	 * Getter
+	 * @return Current event
+	 */
 	public static Event getEvent() {
 		return event_;
 	}
 	
+	/**
+	 * Getter
+	 * @return The main character
+	 */
 	public static PlayerCharacter getCharacter() {
 		return character_;
 	}
 	
+	/**
+	 * Getter
+	 * @return Level's background
+	 */
 	public static Background getBackground() {
 		return background_;
 	}
 	
+	/**
+	 * Update the game (timer and events)
+	 */
 	public static void update() {
 		nbUpdates++;
 		timer_.addDt(Globals.getInstance().getTimer().getDt());
@@ -65,18 +92,37 @@ public class Game {
 		}
 	}
 	
+	/**
+	 * Getter
+	 * @return Number of frames since the begining
+	 */
 	public static int getTick() {
 		return nbUpdates;
 	}
 	
+	/**
+	 * Getter
+	 * @return Time elpased since the begining of the game in ms 
+	 * 
+	 * (care, the time is relative to game speed: game can be slowed
+	 * or accelerated by events. However, it doesn't depend on the
+	 * hardware speed)
+	 */
 	public static float getTime() {
 		return timer_.getTime();
 	}
 	
+	/**
+	 * Getter
+	 * @return Time elapsed between the two last frames in ms
+	 */
 	public static float getDt() {
 		return timer_.getDt();
 	}
 	
+	/**
+	 * Stop the game
+	 */
 	public static void stop() {
 		gameThread_.setRunning(false);
 	}
