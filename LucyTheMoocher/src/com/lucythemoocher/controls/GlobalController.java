@@ -4,12 +4,22 @@ import java.util.ArrayList;
 
 import android.view.MotionEvent;
 
+
+/**
+ * Singleton class.
+ * Recieve hardware events and notifies
+ * its listeners (observer pattern) 
+ *
+ */
 public class GlobalController {
 
 	private ArrayList<TouchListener> touchListenners_;
 	private ArrayList<ButtonListener> buttonListenners_;
 	private static GlobalController instance_ = null;
 	
+	/**
+	 * Private constructor
+	 */
 	private GlobalController() {
 		touchListenners_ = new ArrayList<TouchListener>();
 		buttonListenners_ = new ArrayList<ButtonListener>();

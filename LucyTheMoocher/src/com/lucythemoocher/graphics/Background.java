@@ -6,7 +6,6 @@ import android.graphics.drawable.BitmapDrawable;
 
 import com.lucythemoocher.R;
 import com.lucythemoocher.Globals.Globals;
-import com.lucythemoocher.game.Game;
 import com.lucythemoocher.util.Resources;
 
 /**

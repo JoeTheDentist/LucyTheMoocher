@@ -2,12 +2,10 @@ package com.lucythemoocher.graphics;
 
 
 import com.lucythemoocher.controls.GlobalController;
-import com.lucythemoocher.controls.PlayerController;
 import com.lucythemoocher.game.Game;
 import com.lucythemoocher.physics.Box;
 import com.lucythemoocher.util.Resources;
 
-import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
@@ -190,7 +188,6 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 
 
 	public boolean onTouchEvent(MotionEvent event) {
-		PlayerController.process(event);
 		GlobalController.getInstance().process(event);
 		return true;
 	}

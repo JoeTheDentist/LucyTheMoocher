@@ -1,7 +1,6 @@
 package com.lucythemoocher.graphics;
 
 import android.graphics.drawable.BitmapDrawable;
-import android.util.Log;
 
 public class Image {
 	private BitmapDrawable image_;

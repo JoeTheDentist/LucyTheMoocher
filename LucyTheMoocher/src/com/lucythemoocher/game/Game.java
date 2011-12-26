@@ -4,9 +4,9 @@ import android.util.Log;
 
 import com.lucythemoocher.Globals.Globals;
 import com.lucythemoocher.actors.PlayerCharacter;
+import com.lucythemoocher.controls.PlayerController;
 import com.lucythemoocher.events.*;
 import com.lucythemoocher.graphics.Background;
-import com.lucythemoocher.physics.Cinematic;
 import com.lucythemoocher.physics.Map;
 import com.lucythemoocher.util.Timer;
 import com.lucythemoocher.R;
@@ -23,7 +23,7 @@ public class Game {
 	public static void launchGame() {
 		Log.d("Game", "launchGame");
 		timer_ = new Timer(0);
-		character_ = new PlayerCharacter();
+		character_ = new PlayerCharacter(new PlayerController());
 		gameThread_ = new GameThread();
 		map_ = new Map(R.raw.lvl1);
 		event_ = new EventNormal();
@@ -80,32 +80,6 @@ public class Game {
 	public static void stop() {
 		gameThread_.setRunning(false);
 	}
-
-	public static void moveStop() {
-		character_.moveStop();
-	}
-
-	public static void moveLeft() {
-		character_.moveLeft();
-	}
-
-	public static void moveRight() {
-		character_.moveRight();
-	}
-
-	public static void moveUp() {
-		character_.moveUp();
-	}
 	
-	public static void attack() {
-		character_.attack();
-	}
 
-	public static void moveFastRight() {
-		character_.moveFastRight();
-	}
-	
-	public static void moveFastLeft() {
-		character_.moveFastLeft();
-	}
 }

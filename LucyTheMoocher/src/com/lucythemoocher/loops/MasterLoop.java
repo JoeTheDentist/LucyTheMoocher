@@ -1,7 +1,6 @@
 package com.lucythemoocher.loops;
 
 import com.lucythemoocher.Globals.Globals;
-import com.lucythemoocher.game.Game;
 import com.lucythemoocher.graphics.Camera;
 
 /**
