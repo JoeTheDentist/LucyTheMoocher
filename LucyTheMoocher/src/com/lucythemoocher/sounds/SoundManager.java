@@ -36,8 +36,7 @@ public class SoundManager {
 		}
 		
 		//Chemins des fichiers de son
-		soundsBackground_.get(BACKGROUND_THEME).add(R.raw.firstbeat);
-		soundsBackground_.get(BACKGROUND_THEME).add(R.raw.firstbeat2);
+		soundsBackground_.get(BACKGROUND_THEME).add(R.raw.theme);
 		
 		//Ici on charge les sons
 		for ( ArrayList<Integer> l : soundsBackground_ ) {
@@ -66,10 +65,10 @@ public class SoundManager {
 		float streamVolumeMax = mgr.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
 		float volume = streamVolumeCurrent / streamVolumeMax;
 		//TODO dernier arg => vitesse du jeu
-		playing_.put(resource, sounds_.play(loaded_.get(resource), volume, volume, 1, 0, 1f));
+		playing_.put(resource, sounds_.play(loaded_.get(resource), volume, volume, 1, -1, 1f));
 	}
 	
 	public void start() {
-		playLoopSound(R.raw.firstbeat);
+		playLoopSound(R.raw.theme);
 	}
 }
