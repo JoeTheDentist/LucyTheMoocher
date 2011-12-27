@@ -26,6 +26,11 @@ public class StateRunningLeft extends State {
 	}
 	
 	@Override
+	public void moveLeft() {
+		//Nothing, it's already done in update
+	}
+	
+	@Override
 	public void moveRight() {
 		pc_.changeState(new StateRunningRight(pc_, pos_, anim_));
 	}

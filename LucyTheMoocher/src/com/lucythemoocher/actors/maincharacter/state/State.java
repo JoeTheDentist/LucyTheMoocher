@@ -27,9 +27,13 @@ public abstract class State {
 	
 	public void moveDown() {}
 	
-	public void moveLeft() {}
+	public void moveLeft() {
+		pos_.moveLeft();
+	}
 	
-	public void moveRight() {}
+	public void moveRight() {
+		pos_.moveRight();
+	}
 	
 	public void moveStop() {}
 
