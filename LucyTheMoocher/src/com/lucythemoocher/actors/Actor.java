@@ -4,21 +4,27 @@ import java.util.ArrayList;
 
 import com.lucythemoocher.graphics.Animation;
 import com.lucythemoocher.graphics.Drawable;
+import com.lucythemoocher.graphics.ActorDrawer;
+
 import com.lucythemoocher.physics.Box;
 import com.lucythemoocher.physics.Cinematic;
 
 /**
  * 
- * @author Guillaume
  *
  */
 public abstract class Actor implements Drawable {
-	protected Animation anim_;
 	protected Cinematic pos_;
 	private boolean isToRemove_ = false;
 	private int id_ = -1;
+	private ActorDrawer drawer_;
+	
+	public Actor() {
+		drawer_ = new ActorDrawer();
+	}
 	
 	public void update() {
+		
 		pos_.update();
 	}
 
@@ -40,7 +46,9 @@ public abstract class Actor implements Drawable {
 		return id_;
 	}
 
-	abstract public void draw();
+	public void draw() {
+		getDrawer().draw((int)getX(), (int)getY());
+	}
 	
 	public void moveStop() {
 		pos_.moveStop();
@@ -72,5 +80,27 @@ public abstract class Actor implements Drawable {
 
 	public float getY() {
 		return pos_.y();
+	}
+	
+	/**
+	 * Getter (valid only once animation has been initialized)
+	 * @return Actor's width
+	 */
+	public float getW() {
+		return getDrawer().getAnim().getW();
+	}
+	
+	/**
+	 * Getter (valid only once animation has been initialized)
+	 * @return Actor's height
+	 */	
+	public float getH() {
+		return getDrawer().getAnim().getH();
+	}
+	
+	
+	
+	public ActorDrawer getDrawer() {
+		return drawer_;
 	}
 }

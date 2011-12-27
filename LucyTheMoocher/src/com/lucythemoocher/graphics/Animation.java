@@ -11,6 +11,11 @@ public class Animation {
 	private float timeOnLastDraw_; 
 	private float offsetCurrentFrame_; // will be added to currentFrame_ when >= 1
 	
+	public Animation() {
+		grid_ = null;
+		offsetCurrentFrame_ = 0.0f;
+	}
+	
 	/**
 	 * Constructor 
 	 * @param resource Resource index
@@ -18,11 +23,21 @@ public class Animation {
 	 * @param picW Pictures's width
 	 */
 	public Animation(int resource, int picH, int picW) {
+		this();
+		initialize(resource, picH, picW);
+	}
+	
+	/**
+	 * Initialize the animation 
+	 * @param resource Resource index
+	 * @param picH Pictures's height
+	 * @param picW Pictures's width
+	 */	
+	public void initialize(int resource, int picH, int picW) {
 		grid_ = new Grid(resource, picH, picW);
 		int t[] = {0};
 		setAnimation(t, 1);
 		timeOnLastDraw_ = Game.getTime();
-		offsetCurrentFrame_ = 0.0f;
 	}
 	
 	/**
@@ -65,15 +80,17 @@ public class Animation {
 	}
 	
 	/**
-	 * Update the animation and return the current image
+	 * Getter
 	 * @return The current image
 	 */
 	public Image getCurrentImage() {
-		update();
 		return grid_.getImage(tab_[currentFrame_]);
 	}
 	
-	private void update() {
+	/**
+	 * Update the animation, must be called at least once a frame
+	 */
+	public void update() {
 		offsetCurrentFrame_ += (Game.getTime() - timeOnLastDraw_) / period_;
 		currentFrame_ += (int) (offsetCurrentFrame_);
 		currentFrame_ %= tab_.length;

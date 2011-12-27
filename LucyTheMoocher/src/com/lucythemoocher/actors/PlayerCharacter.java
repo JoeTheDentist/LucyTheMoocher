@@ -12,7 +12,6 @@ import com.lucythemoocher.R;
 public class PlayerCharacter extends Actor {
 	private State state_;
 	private PlayerController controller_;
-	private PersistentEffect persistentEffect_;
 	
 	/**
 	 * Constructor. The controller will be attached with 
@@ -21,27 +20,20 @@ public class PlayerCharacter extends Actor {
 	 * @param controller Player's controller
 	 */
 	public PlayerCharacter(PlayerController controller) {
-		anim_ = new Animation(R.drawable.lucy_states, 80, 76);
-		pos_ = new Cinematic(50,50,	anim_.getH(),anim_.getW());
-		state_ = new StateNoneLeft(this, pos_, anim_);
+		super();
+		getDrawer().initializeAnimation(R.drawable.lucy_states, 80, 76);
+		pos_ = new Cinematic(50,50,	getH(), getW());
+		state_ = new StateNoneLeft(this, pos_, getDrawer().getAnim());
 		controller_ = controller;
 		controller_.setPlayer(this);
-		persistentEffect_ = new PersistentEffect();
 	}
-	
-	/**
-	 * Draw the character on the screen
-	 */
-	public void draw() {
-		persistentEffect_.add(anim_.getCurrentImage(), (int)pos_.x(), (int)pos_.y());
-		persistentEffect_.draw();
-		//anim_.draw( pos_.x(), pos_.y());
-	}
+
 	
 	/**
 	 * Update the character
 	 */
 	public void update() {
+		getDrawer().update();
 		controller_.update();
 		state_.update();
 	}
