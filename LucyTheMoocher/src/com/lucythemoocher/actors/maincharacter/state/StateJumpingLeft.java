@@ -47,4 +47,9 @@ public class StateJumpingLeft extends State {
 			pc_.changeState(new StateWallSlidingLeft(pc_, pos_, anim_));
 		}
 	}
+	
+	@Override
+	public void moveDown() {
+		pc_.changeState(new StateAttackLeft(pc_, pos_, anim_));
+	}
 }

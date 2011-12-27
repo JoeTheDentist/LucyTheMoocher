@@ -72,11 +72,9 @@ public class PlayerController extends ButtonListener {
 			
 			// # # #
 			// # # #
-			// # X #
+			// X X X
 			// Attaque
-			if (event.getY(i) > 4*cam.h()/5 &&
-					event.getX(i) > cam.w()/5 &&
-					event.getX(i) < 4*cam.w()/5) {
+			if (event.getY(i) > 4*cam.h()/5) {
 				ver_ = DOWN;
 			}
 			
@@ -110,7 +108,7 @@ public class PlayerController extends ButtonListener {
 		if ( ver_ == 1 ) {
 			player_.moveUp();
 		} else if ( ver_ == -1 ) {
-			player_.attack();
+			player_.moveDown();
 		}
 		ver_ = 0;
 	}

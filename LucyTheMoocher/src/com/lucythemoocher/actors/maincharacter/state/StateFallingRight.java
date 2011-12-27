@@ -36,4 +36,9 @@ public class StateFallingRight extends State {
 			pc_.changeState(new StateWallSlidingRight(pc_, pos_, anim_));
 		}
 	}
+	
+	@Override
+	public void moveDown() {
+		pc_.changeState(new StateAttackRight(pc_, pos_, anim_));
+	}
 }
