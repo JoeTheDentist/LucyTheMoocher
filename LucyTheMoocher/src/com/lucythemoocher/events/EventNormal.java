@@ -8,6 +8,5 @@ public class EventNormal extends Event{
 	public EventNormal() {
 		speed_ = (float) 0.75;
 		Game.setSpeed(speed_);
-		Globals.getInstance().getCamera().setNormalDrawing();
 	}
 }

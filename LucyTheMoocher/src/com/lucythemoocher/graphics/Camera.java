@@ -23,6 +23,19 @@ import android.view.SurfaceView;
  */
 public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 
+	private static final float CAMERASPEED = (float) 0.3;
+	private static final float BACKGROUNDSPEED = (float) 0.5;
+
+	private static float DT_ = 1;
+
+	private Box screen_;
+	private Canvas canvas_;
+	private float currX_;
+	private float currY_;
+	private float scale_;
+
+
+	private boolean canDraw_ = false;
 	/**
 	 * Constructor
 	 * @param context
@@ -36,13 +49,6 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 		currX_ = 1;
 		currY_ = 1;
 		screen_ = new Box(currX_,currY_,h,w);
-
-		//Black n white filter
-		bnwFilter_ = new Paint();
-		ColorMatrix cm = new ColorMatrix();
-		cm.setSaturation(0);
-		ColorMatrixColorFilter f = new ColorMatrixColorFilter(cm);
-		bnwFilter_.setColorFilter(f);
 
 		getHolder().addCallback(this);
 		setFocusable(true);
@@ -130,17 +136,7 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 	public void drawImage(float x, float y, Image image) {
 		float xx = x  - offsetx() ;
 		float yy = y  - offsety() ;
-		switch ( drawing_ ) {
-		case NORMAL:
-			canvas_.drawBitmap(image.getBitmap().getBitmap(), xx, yy, null);
-			break;
-		case BnW:
-			canvas_.drawBitmap(image.getBitmap().getBitmap(), xx, yy, bnwFilter_);
-			break;
-		default:
-			canvas_.drawBitmap(image.getBitmap().getBitmap(), xx, yy, null);
-			break;	
-		}
+		canvas_.drawBitmap(image.getBitmap().getBitmap(), xx, yy, image.getBitmap().getPaint());
 	}
 	
 	/**
@@ -162,20 +158,6 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 				null);
 	}
 
-	/**
-	 * Nal's shit
-	 */
-	public void setNormalDrawing() {
-		drawing_ = NORMAL;
-	}
-
-	/**
-	 * Nal's shit
-	 */
-	public void setBnWDrawing() {
-		drawing_ = BnW;
-	}
-	
 
 	/**
 	 * Mutator 
@@ -210,23 +192,6 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 		return screen_.getY();
 	}
 	
-	private static final int NORMAL = 0;
-	private static final int BnW = 1;
 
-	private static final float CAMERASPEED = (float) 0.3;
-	private static final float BACKGROUNDSPEED = (float) 0.5;
-
-	private static float DT_ = 1;
-
-	private Box screen_;
-	private Canvas canvas_;
-	private float currX_;
-	private float currY_;
-	private float scale_;
-
-	private int drawing_ = NORMAL;
-	private Paint bnwFilter_;
-
-	private boolean canDraw_ = false;
 
 }

@@ -25,4 +25,5 @@ public class Image {
 	public float w() {
 		return (float)image_.getBitmap().getWidth();
 	}
+
 }

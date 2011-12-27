@@ -3,6 +3,8 @@ package com.lucythemoocher.actors;
 import com.lucythemoocher.actors.maincharacter.state.*;
 
 import com.lucythemoocher.graphics.Animation;
+import com.lucythemoocher.graphics.PersistentEffect;
+
 import com.lucythemoocher.physics.Cinematic;
 import com.lucythemoocher.controls.PlayerController;
 import com.lucythemoocher.R;
@@ -10,6 +12,7 @@ import com.lucythemoocher.R;
 public class PlayerCharacter extends Actor {
 	private State state_;
 	private PlayerController controller_;
+	private PersistentEffect persistentEffect_;
 	
 	/**
 	 * Constructor. The controller will be attached with 
@@ -23,13 +26,16 @@ public class PlayerCharacter extends Actor {
 		state_ = new StateNoneLeft(this, pos_, anim_);
 		controller_ = controller;
 		controller_.setPlayer(this);
+		persistentEffect_ = new PersistentEffect();
 	}
 	
 	/**
 	 * Draw the character on the screen
 	 */
 	public void draw() {
-		anim_.draw( pos_.x(), pos_.y());
+		persistentEffect_.add(anim_.getCurrentImage(), (int)pos_.x(), (int)pos_.y());
+		persistentEffect_.draw();
+		//anim_.draw( pos_.x(), pos_.y());
 	}
 	
 	/**

@@ -61,12 +61,24 @@ public class Animation {
 	 * @param y 
 	 */
 	public void draw(float x, float y) {
+		Globals.getInstance().getCamera().drawImage(x, y, getCurrentImage());
+	}
+	
+	/**
+	 * Update the animation and return the current image
+	 * @return The current image
+	 */
+	public Image getCurrentImage() {
+		update();
+		return grid_.getImage(tab_[currentFrame_]);
+	}
+	
+	private void update() {
 		offsetCurrentFrame_ += (Game.getTime() - timeOnLastDraw_) / period_;
 		currentFrame_ += (int) (offsetCurrentFrame_);
 		currentFrame_ %= tab_.length;
 		offsetCurrentFrame_ -= Math.floor((double)(offsetCurrentFrame_));
 		timeOnLastDraw_ = Game.getTime();
-		Globals.getInstance().getCamera().drawImage(x, y, grid_.getImage(tab_[currentFrame_]));
 	}
 	
 }
