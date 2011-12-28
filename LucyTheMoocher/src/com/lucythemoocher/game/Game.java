@@ -3,6 +3,7 @@ package com.lucythemoocher.game;
 import android.util.Log;
 
 import com.lucythemoocher.Globals.Globals;
+import com.lucythemoocher.actors.Monster;
 import com.lucythemoocher.actors.PlayerCharacter;
 import com.lucythemoocher.controls.PlayerController;
 import com.lucythemoocher.events.*;
@@ -19,6 +20,7 @@ public class Game {
 	private static Event event_;
 	private static Background background_;
 	private static Timer timer_;
+	private static Monster monster_; // temporary
 	
 	/**
 	 * Launch a game
@@ -29,6 +31,8 @@ public class Game {
 		character_ = new PlayerCharacter(new PlayerController());
 		gameThread_ = new GameThread();
 		map_ = new Map(R.raw.lvl1);
+		monster_ = new Monster();
+
 		event_ = new EventNormal();
 		background_ = new Background();
 		gameThread_.start();
@@ -78,19 +82,20 @@ public class Game {
 	}
 	
 	/**
-	 * Update the game (timer and events)
+	 * Update the game 
 	 */
 	public static void update() {
 		nbUpdates++;
 		timer_.addDt(Globals.getInstance().getTimer().getDt());
-		/*
-		if ( nbUpdates % 300  == 0 ) {
-			if ( event_ instanceof EventSlow ) {
-				event_ = new EventNormal(); 
-			} else {
-				event_ = new EventSlow();
-			}
-		}*/
+		getCharacter().update();
+		monster_.update();
+	}
+	
+	public static void render() {
+		getBackground().draw();
+		getMap().draw();
+		getCharacter().draw();	
+		monster_.draw();
 	}
 	
 	/**

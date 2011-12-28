@@ -34,9 +34,13 @@ public class Cinematic {
 	
 	public Cinematic(float x, float y, float h, float w) {
 		this();
+		addBox(x, y, h, w);
+	}
+	
+	public void addBox(float x, float y, float h, float w) {
 		posx_ = x;
 		posy_ = y;
-		Box box = new Box(x,y,h,w);
+		Box box = new Box(x, y, h, w);
 		box.setCin(this);
 		boundingBoxes_.add(box);
 	}

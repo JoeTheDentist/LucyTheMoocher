@@ -19,7 +19,7 @@ public class PlayerCharacter extends Actor {
 	public PlayerCharacter(PlayerController controller) {
 		super();
 		getDrawer().initializeAnimation(R.drawable.lucy_states, 80, 76);
-		pos_ = new Cinematic(50,50,	getH(), getW());
+		getCinematic().addBox(50, 50, getH(), getW());
 		state_ = new StateNoneLeft(this, pos_, getDrawer().getAnim());
 		controller_ = controller;
 		controller_.setPlayer(this);

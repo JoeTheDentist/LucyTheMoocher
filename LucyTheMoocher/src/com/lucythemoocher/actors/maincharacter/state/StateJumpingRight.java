@@ -5,11 +5,13 @@ import com.lucythemoocher.graphics.Animation;
 import com.lucythemoocher.physics.Cinematic;
 
 public class StateJumpingRight extends State {
-	
+	private boolean neverBeenUpdated_;
+
 	public StateJumpingRight(PlayerCharacter pc, Cinematic pos, Animation anim) {
 		super(pc, pos, anim);
 		int tab[] = {20,21,22,23};
 		anim_.setAnimation(tab, ANIMATION_SPEED);
+		neverBeenUpdated_ = true;
 		if ( pos_.hasDownCollision() ||
 				pos_.hasLeftCollision() ) {
 			pos_.moveFastUp();
@@ -19,10 +21,18 @@ public class StateJumpingRight extends State {
 	@Override
 	public void update() {
 		super.update();
-		if ( pos_.hasDownCollision() ) {
-			pc_.changeState(new StateNoneRight(pc_, pos_, anim_));
-		} else if ( pos_.speedy() > 0 ) {
-			pc_.changeState(new StateFallingRight(pc_, pos_, anim_));
+		if (neverBeenUpdated_) { // first update, let's do the jump
+			neverBeenUpdated_ = false;
+			if ( pos_.hasDownCollision() ||
+					pos_.hasRightCollision() ) {
+				pos_.moveFastUp();
+			}
+		} else { // jump has been done, should we leave the state?
+			if ( pos_.hasDownCollision() ) {
+				pc_.changeState(new StateNoneRight(pc_, pos_, anim_));
+			} else if ( pos_.speedy() > 0 ) {
+				pc_.changeState(new StateFallingRight(pc_, pos_, anim_));
+			}
 		}
 	}
 	
