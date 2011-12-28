@@ -20,11 +20,6 @@ public class StateFallingLeft extends State {
 	}
 	
 	@Override
-	public void moveLeft() {
-		pos_.moveLeft();
-	}
-	
-	@Override
 	public void moveRight() {
 		pc_.changeState(new StateFallingRight(pc_, pos_, anim_));
 	}

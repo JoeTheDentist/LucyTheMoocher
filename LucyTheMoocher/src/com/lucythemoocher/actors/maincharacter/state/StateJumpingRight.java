@@ -30,11 +30,6 @@ public class StateJumpingRight extends State {
 	public void moveLeft() {
 		pc_.changeState(new StateJumpingLeft(pc_, pos_, anim_));
 	}
-	
-	@Override
-	public void moveRight() {
-		pos_.moveRight();
-	}
 
 	@Override
 	public void moveStop() {
