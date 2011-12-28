@@ -2,9 +2,6 @@ package com.lucythemoocher.actors;
 
 import com.lucythemoocher.actors.maincharacter.state.*;
 
-import com.lucythemoocher.graphics.Animation;
-import com.lucythemoocher.graphics.PersistentEffect;
-
 import com.lucythemoocher.physics.Cinematic;
 import com.lucythemoocher.controls.PlayerController;
 import com.lucythemoocher.R;
@@ -22,7 +19,7 @@ public class PlayerCharacter extends Actor {
 	public PlayerCharacter(PlayerController controller) {
 		super();
 		getDrawer().initializeAnimation(R.drawable.lucy_states, 80, 76);
-		pos_ = new Cinematic(50,50,	getH(), getW());
+		getCinematic().addBox(50, 50, getH(), getW());
 		state_ = new StateNoneLeft(this, pos_, getDrawer().getAnim());
 		controller_ = controller;
 		controller_.setPlayer(this);
@@ -33,7 +30,7 @@ public class PlayerCharacter extends Actor {
 	 * Update the character
 	 */
 	public void update() {
-		getDrawer().update();
+		super.update();
 		controller_.update();
 		state_.update();
 	}

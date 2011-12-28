@@ -20,7 +20,6 @@ public abstract class State {
 	}
 	
 	public void update() {
-		pos_.update();
 	}
 	
 	public void moveUp() {}

@@ -19,7 +19,6 @@ public class LoopGame extends Loop {
 	 * Implement here every computation
 	 */	
 	public void update() {
-		Game.getCharacter().update();
 		Game.update();
 	}
 	
@@ -28,9 +27,7 @@ public class LoopGame extends Loop {
 	 * Don't compute anything here, prefer update
 	 */	
 	public void render() {
-		Game.getBackground().draw();
-		Game.getMap().draw();
-		Game.getCharacter().draw();		
+		Game.render();
 	}
 
 }
