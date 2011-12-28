@@ -24,8 +24,8 @@ public abstract class Actor implements Drawable {
 	}
 	
 	public void update() {
-		
 		pos_.update();
+		getDrawer().update();
 	}
 
 	public boolean isToRemove() {

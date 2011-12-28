@@ -2,9 +2,6 @@ package com.lucythemoocher.actors;
 
 import com.lucythemoocher.actors.maincharacter.state.*;
 
-import com.lucythemoocher.graphics.Animation;
-import com.lucythemoocher.graphics.PersistentEffect;
-
 import com.lucythemoocher.physics.Cinematic;
 import com.lucythemoocher.controls.PlayerController;
 import com.lucythemoocher.R;
@@ -33,7 +30,7 @@ public class PlayerCharacter extends Actor {
 	 * Update the character
 	 */
 	public void update() {
-		getDrawer().update();
+		super.update();
 		controller_.update();
 		state_.update();
 	}
