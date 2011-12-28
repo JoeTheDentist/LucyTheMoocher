@@ -2,6 +2,7 @@ package com.lucythemoocher.controls;
 
 import java.util.ArrayList;
 
+import android.util.Log;
 import android.view.MotionEvent;
 
 
@@ -57,12 +58,8 @@ public class GlobalController {
 	 * @param event
 	 */
 	public void process(MotionEvent event) {
-		if ( event.getAction() == MotionEvent.ACTION_POINTER_UP ||
-				event.getAction() == MotionEvent.ACTION_POINTER_DOWN ) {
-			alertTouch(event);
-		} else {
-			alertButton(event);
-		}
+		Log.d("GblCtr", "###ACTION:"+event);
+		alertTouch(event);
 	}
 	
 	private void alertTouch(MotionEvent event) {
