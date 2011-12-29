@@ -58,7 +58,6 @@ public class GlobalController {
 	 * @param event
 	 */
 	public void process(MotionEvent event) {
-		Log.d("GblCtr", "###ACTION:"+event);
 		alertTouch(event);
 	}
 	

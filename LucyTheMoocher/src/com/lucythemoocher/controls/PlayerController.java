@@ -1,5 +1,6 @@
 package com.lucythemoocher.controls;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 
 import com.lucythemoocher.Globals.Globals;
@@ -40,11 +41,20 @@ public class PlayerController extends TouchListener {
 	}
 
 	public void motion(MotionEvent event) {
-		updatePushed(event);
+		//dumpEvent(event);
+		if ( event.getActionMasked() == MotionEvent.ACTION_DOWN || 
+				event.getActionMasked() == MotionEvent.ACTION_POINTER_DOWN ||
+				event.getActionMasked() == MotionEvent.ACTION_MOVE ) {
+			down(event);
+		} else if ( event.getActionMasked() == MotionEvent.ACTION_UP || 
+				event.getActionMasked() == MotionEvent.ACTION_POINTER_UP ) {
+			up(event);
+		}
 	}
 
 	public void update() {
-		
+		refreshPushed();
+
 		//Check whether no button is pushed
 		boolean allDown = true;
 		for ( int i=0; i<4; i++) {
@@ -54,6 +64,7 @@ public class PlayerController extends TouchListener {
 		}
 		if ( allDown ) {
 			player_.moveStop();
+			return;
 		}
 
 		boolean moveLeft = false;
@@ -65,8 +76,8 @@ public class PlayerController extends TouchListener {
 		for ( int i=0; i<3; i++) {
 			moveRight |= pushed_[RIGHT][i];
 		}
-		
-		
+
+
 		if ( moveLeft ) {
 			if ( Game.getTime()-lastTouch_[LEFT] < DOUBLE_TOUCH_SENSIBILITY ) {
 				player_.moveFastLeft();
@@ -78,7 +89,7 @@ public class PlayerController extends TouchListener {
 				}
 			}
 		}
-		
+
 		if ( moveRight && !moveLeft ) {
 			if ( Game.getTime()-lastTouch_[RIGHT] < DOUBLE_TOUCH_SENSIBILITY ) {
 				player_.moveFastRight();
@@ -103,31 +114,38 @@ public class PlayerController extends TouchListener {
 			player_.moveDown();
 		}
 	}
-	
-	private void updatePushed(MotionEvent event) {
-		Camera cam = Globals.getInstance().getCamera();
-		for ( int i=0; i<4; i++) {
-			for ( int j=0; j<3; j++) {
-				pushed_[i][j] = false;
-			}
-		}
-		
+
+	private void down(MotionEvent event) {		
 		pos_.clear();
 		for (int i=0; i<event.getPointerCount(); i++  ) {
 			if ( i>=3 ) {
 				break;
 			}
-			if ( event.getActionMasked() == MotionEvent.ACTION_POINTER_UP ||
-					event.getActionMasked() == MotionEvent.ACTION_UP &&
-					i == event.getActionIndex()) {
-				//Nothing
-			} else {
-				pos_.add(new Point(event.getX(i), event.getY(i)));
+			pos_.add(new Point(event.getX(i), event.getY(i), event.getPointerId(i)));
+		}
+	}
+
+	private void up(MotionEvent event) {
+		if ( pos_.size() == 1 ) {
+			pos_.clear();
+		} else {
+			Iterator<Point> it = pos_.iterator();
+			while ( it.hasNext() ) {
+				Point p = it.next();
+				if ( p.pid ==  event.getAction() >> MotionEvent.ACTION_POINTER_ID_SHIFT) {
+					it.remove();
+				}
 			}
 		}
-		if ( event.getActionMasked() == MotionEvent.ACTION_POINTER_UP ||
-				event.getActionMasked() == MotionEvent.ACTION_UP ) {
-			pos_.remove(new Point(event.getX(), event.getY()));
+	}
+
+	private void refreshPushed() {
+		Camera cam = Globals.getInstance().getCamera();
+		
+		for ( int i=0; i<4; i++) {
+			for ( int j=0; j<3; j++) {
+				pushed_[i][j] = false;
+			}
 		}
 		
 		int i = 0;
@@ -145,12 +163,38 @@ public class PlayerController extends TouchListener {
 					p.y < 4*cam.h()/5) {
 				pushed_[LEFT][i] = true;
 			}
-			
+
 			if ( p.y > 4*cam.h()/5) {
 				pushed_[DOWN][i] = true;
 			}
 			i++;
 		}
+	}
+
+	private void dumpEvent(MotionEvent event) {
+		String names[] = { "DOWN" , "UP" , "MOVE" , "CANCEL" , "OUTSIDE" ,
+				"POINTER_DOWN" , "POINTER_UP" , "7?" , "8?" , "9?" };
+		StringBuilder sb = new StringBuilder();
+		int action = event.getAction();
+		int actionCode = action & MotionEvent.ACTION_MASK;
+		sb.append("event ACTION_" ).append(names[actionCode]);
+		if (actionCode == MotionEvent.ACTION_POINTER_DOWN
+				|| actionCode == MotionEvent.ACTION_POINTER_UP) {
+			sb.append("(pid " ).append(
+					action >> MotionEvent.ACTION_POINTER_ID_SHIFT);
+			sb.append(")" );
+		}
+		sb.append("[" );
+		for (int i = 0; i < event.getPointerCount(); i++) {
+			sb.append("#" ).append(i);
+			sb.append("(pid " ).append(event.getPointerId(i));
+			sb.append(")=" ).append((int) event.getX(i));
+			sb.append("," ).append((int) event.getY(i));
+			if (i + 1 < event.getPointerCount())
+				sb.append(";" );
+		}
+		sb.append("]" );
+		Log.d("Ctr", "###"+sb.toString());
 	}
 }
 
@@ -158,12 +202,29 @@ public class PlayerController extends TouchListener {
 class Point {
 	public float x;
 	public float y;
-	
-	public Point(float x, float y) {
+	public int pid;
+
+	public Point() {
+		x = -1;
+		y = -1;
+	}
+
+	public Point(float x, float y, int pid) {
+		this.x = x;
+		this.y = y;
+		this.pid = pid;
+	}
+
+	public void init() {
+		x = -1;
+		y = -1;
+	}
+
+	public void move(float x, float y) {
 		this.x = x;
 		this.y = y;
 	}
-	
+
 	public boolean equals(Point p) {
 		return x == p.x && y == p.y;
 	}
