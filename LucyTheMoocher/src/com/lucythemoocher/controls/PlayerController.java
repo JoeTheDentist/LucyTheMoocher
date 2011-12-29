@@ -40,7 +40,7 @@ public class PlayerController extends TouchListener {
 		player_ = player;
 	}
 
-	public void motion(MotionEvent event) {
+	synchronized public void motion(MotionEvent event) {
 		//dumpEvent(event);
 		if ( event.getActionMasked() == MotionEvent.ACTION_DOWN || 
 				event.getActionMasked() == MotionEvent.ACTION_POINTER_DOWN ||
@@ -52,7 +52,7 @@ public class PlayerController extends TouchListener {
 		}
 	}
 
-	public void update() {
+	synchronized public void update() {
 		refreshPushed();
 
 		//Check whether no button is pushed
@@ -77,9 +77,8 @@ public class PlayerController extends TouchListener {
 			moveRight |= pushed_[RIGHT][i];
 		}
 
-
 		if ( moveLeft ) {
-			if ( Game.getTime()-lastTouch_[LEFT] < DOUBLE_TOUCH_SENSIBILITY ) {
+			if ( Game.getTime()-lastTouch_[LEFT] < DOUBLE_TOUCH_SENSIBILITY) {
 				player_.moveFastLeft();
 			} else {
 				if ( moveRight && lastTouch_[LEFT] < lastTouch_[RIGHT] ) {
@@ -88,10 +87,8 @@ public class PlayerController extends TouchListener {
 					player_.moveLeft();
 				}
 			}
-		}
-
-		if ( moveRight && !moveLeft ) {
-			if ( Game.getTime()-lastTouch_[RIGHT] < DOUBLE_TOUCH_SENSIBILITY ) {
+		} else if ( moveRight ) {
+			if ( Game.getTime()-lastTouch_[RIGHT] < DOUBLE_TOUCH_SENSIBILITY) {
 				player_.moveFastRight();
 			} else {
 				player_.moveRight();
@@ -127,12 +124,14 @@ public class PlayerController extends TouchListener {
 
 	private void up(MotionEvent event) {
 		if ( pos_.size() == 1 ) {
+			lastTouch_[getPos(pos_.get(0))] = Game.getTime();
 			pos_.clear();
 		} else {
 			Iterator<Point> it = pos_.iterator();
 			while ( it.hasNext() ) {
 				Point p = it.next();
 				if ( p.pid ==  event.getAction() >> MotionEvent.ACTION_POINTER_ID_SHIFT) {
+					lastTouch_[getPos(p)] = Game.getTime();
 					it.remove();
 				}
 			}
@@ -141,13 +140,13 @@ public class PlayerController extends TouchListener {
 
 	private void refreshPushed() {
 		Camera cam = Globals.getInstance().getCamera();
-		
+
 		for ( int i=0; i<4; i++) {
 			for ( int j=0; j<3; j++) {
 				pushed_[i][j] = false;
 			}
 		}
-		
+
 		int i = 0;
 		for ( Point p : pos_ ) {
 			if ( p.y < cam.h()/5) {
@@ -169,6 +168,29 @@ public class PlayerController extends TouchListener {
 			}
 			i++;
 		}
+	}
+
+	private int getPos(Point p) {
+		Camera cam = Globals.getInstance().getCamera();
+		int ret = 4;
+		if ( p.y < cam.h()/5) {
+			ret = UP;
+		}
+		if ( p.x > 4*cam.w()/5 &&
+				p.y > cam.h()/5 &&
+				p.y < 4*cam.h()/5) {
+			ret = RIGHT;
+		}
+		if (p.x < cam.w()/5 &&
+				p.y > cam.h()/5 &&
+				p.y < 4*cam.h()/5) {
+			ret = LEFT;
+		}
+
+		if ( p.y > 4*cam.h()/5) {
+			ret = DOWN;
+		}
+		return ret;
 	}
 
 	private void dumpEvent(MotionEvent event) {
