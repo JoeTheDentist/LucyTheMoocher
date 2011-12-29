@@ -8,16 +8,18 @@ public class Monster extends Actor {
 	public Monster() {
 		super();
 		getDrawer().initializeAnimation(R.drawable.lucy_states, 80, 76);
-		getCinematic().addBox(60, 50, getH(), getW());
+		getCinematic().addBox(60, 1199, getH(), getW());
 	}
 	
 	public void update() {
 		super.update();
+		/*
 		if (Game.getTime() % 1000 < 500) {
 			moveLeft();
 		} else {
 			moveRight();
 		}
+		*/
 	}
 	
 	public void moveLeft() {

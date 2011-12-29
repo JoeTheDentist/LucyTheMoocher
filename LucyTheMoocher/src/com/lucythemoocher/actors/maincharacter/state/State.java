@@ -43,4 +43,8 @@ public abstract class State {
 	public void moveFastRight() {
 		moveRight();
 	}
+	
+	public boolean isAttacking() {
+		return false;
+	}
 }

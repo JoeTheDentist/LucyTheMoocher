@@ -177,4 +177,16 @@ public abstract class Actor implements Drawable {
 	public void setCinematic(Cinematic cinematic) {
 		pos_ = cinematic;
 	}
+	
+	/**
+	 * Checks interaction between actors (if one is dead, returns false)
+	 * @param actor
+	 * @return True if actors are alive and if their bounding boxes collide
+	 */
+	public boolean collidesWith(Actor actor) {
+		return !isToRemove() && !actor.isToRemove() && getCinematic().collidesWith(actor.getCinematic());
+	}
+	
+	// temporary
+	public void checkCollision() {}
 }

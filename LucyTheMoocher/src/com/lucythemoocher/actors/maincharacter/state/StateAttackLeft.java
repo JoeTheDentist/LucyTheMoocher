@@ -28,5 +28,9 @@ public class StateAttackLeft extends State {
 	public void onLeave() {
 		pc_.getDrawer().disablePersistence();
 	}
+	
+	public boolean isAttacking() {
+		return true;
+	}
 
 }

@@ -4,17 +4,25 @@ import java.util.ArrayList;
 import java.util.ListIterator;
 
 
+/**
+ * 
+ * @author gloups
+ *
+ */
 public class MonstersManager {
 	private ArrayList<Monster> monsters_;
 
 
 	public MonstersManager() {
 		monsters_ = new ArrayList<Monster>();
-		addMonster(new Monster());
+		Monster m = new Monster();
+		m.update();
+		addMonster(m);
+		
 	}
 
 	public void update() {
-		ListIterator<Monster> it = monsters_.listIterator();
+		ListIterator<Monster> it = getIterator();
 		while(it.hasNext()) {
 			Monster monster = it.next();
 			if (monster.isToRemove()) {
@@ -33,6 +41,10 @@ public class MonstersManager {
 	
 	public void addMonster(Monster monster) {
 		monsters_.add(monster);
+	}
+	
+	public ListIterator<Monster> getIterator() {
+		return monsters_.listIterator();
 	}
 	
 }

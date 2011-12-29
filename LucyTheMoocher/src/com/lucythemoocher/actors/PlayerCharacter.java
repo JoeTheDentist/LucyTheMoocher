@@ -1,9 +1,14 @@
 package com.lucythemoocher.actors;
 
+import java.util.ListIterator;
+
+import android.util.Log;
+
 import com.lucythemoocher.actors.maincharacter.state.*;
 
 import com.lucythemoocher.physics.Cinematic;
 import com.lucythemoocher.controls.PlayerController;
+import com.lucythemoocher.game.Game;
 import com.lucythemoocher.R;
 
 public class PlayerCharacter extends Actor {
@@ -33,6 +38,7 @@ public class PlayerCharacter extends Actor {
 		super.update();
 		controller_.update();
 		state_.update();
+		checkMonstersCollisions();
 	}
 	
 	/**
@@ -91,4 +97,22 @@ public class PlayerCharacter extends Actor {
 	public void moveFastLeft() {
 		state_.moveFastLeft();
 	}
+	
+	// temporary
+	private void checkMonstersCollisions() {
+		ListIterator<Monster> it = Game.getMonstersManager().getIterator();
+		while (it.hasNext()) {
+			Monster monster = it.next();
+			if (collidesWith(monster)) {
+				if (state_.isAttacking())
+					monster.setToRemove();
+			}
+		}
+	}
+	
+	// temporary
+	public void checkCollisions() {
+		checkMonstersCollisions();
+	}
+	
 }

@@ -3,7 +3,6 @@ package com.lucythemoocher.game;
 import android.util.Log;
 
 import com.lucythemoocher.Globals.Globals;
-import com.lucythemoocher.actors.Monster;
 import com.lucythemoocher.actors.MonstersManager;
 import com.lucythemoocher.actors.PlayerCharacter;
 import com.lucythemoocher.controls.PlayerController;
@@ -72,6 +71,14 @@ public class Game {
 	 */
 	public static PlayerCharacter getCharacter() {
 		return character_;
+	}
+	
+	/**
+	 * Getter
+	 * @return Monsters Manager
+	 */
+	public static MonstersManager getMonstersManager() {
+		return monsters_;
 	}
 	
 	/**

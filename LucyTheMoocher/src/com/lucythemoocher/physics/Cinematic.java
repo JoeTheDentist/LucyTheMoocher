@@ -141,4 +141,20 @@ public class Cinematic {
 	public boolean hasRightCollision() {
 		return Game.getMap().hasRightCollision(boundingBoxes_);
 	}
+	
+	/**
+	 * Getter
+	 * @param c 
+	 * @return True if and only if the cinematic collides with c
+	 */
+	public boolean collidesWith(Cinematic c) {
+		for (Box b1: this.boundingBoxes()) {
+			for (Box b2: c.boundingBoxes()) {
+				if (b1.collideWith(b2)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 }

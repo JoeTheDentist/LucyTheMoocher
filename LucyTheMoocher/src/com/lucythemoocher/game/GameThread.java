@@ -33,7 +33,7 @@ public class GameThread extends Thread {
 			
 			update();
 			render();
-
+			/*
 			timeDiff_ = System.currentTimeMillis() - beginTime_;
 			
 			sleepTime = (int)(FRAME_PERIOD - timeDiff_);
@@ -50,8 +50,10 @@ public class GameThread extends Thread {
 				sleepTime += FRAME_PERIOD;
 				framesSkipped_++;
 			}
+			*/
 			
 		}
+		
 	}
 	
 	public void update() {
