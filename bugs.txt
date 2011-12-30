@@ -1,0 +1,3 @@
+
+Guillaume
+Controller : si on appuie sur bas puis un côté, puis qu'on lache ce côté alors le perso se déplace sur ce côté (et ne va pas sur le côté comme il devrait)
