@@ -25,10 +25,18 @@ public class Map {
 		grid_ = new Grid(R.drawable.sets,32,32);
 	}
 	
+	/**
+	 * Level dimension in pixels
+	 * @return height
+	 */
 	public float pxH() {
 		return (h_*grid_.boxH());
 	}
 	
+	/**
+	 * Level dimension in pixels
+	 * @return width
+	 */
 	public float pxW() {
 		return (w_*grid_.boxW());
 	}

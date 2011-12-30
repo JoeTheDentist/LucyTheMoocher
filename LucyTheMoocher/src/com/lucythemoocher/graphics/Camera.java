@@ -21,7 +21,7 @@ import android.view.SurfaceView;
 public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 
 	private static final float CAMERASPEED = (float) 0.3;
-	private static final float BACKGROUNDSPEED = (float) 0.5;
+	static final float BACKGROUNDSPEED = (float) 0.5;
 
 	private static float DT_ = 1;
 

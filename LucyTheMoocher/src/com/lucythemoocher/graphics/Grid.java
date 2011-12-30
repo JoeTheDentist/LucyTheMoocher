@@ -6,7 +6,7 @@ import android.graphics.drawable.BitmapDrawable;
 public class Grid {
 	private Image fullImage_;
 	private Image grid_[];
-	private int nbImg;
+	private int nbImg_;
 	private float height_;
 	private float width_;
 	
@@ -17,8 +17,8 @@ public class Grid {
 		int ver = (int)fullImage_.h()/(height+2) ;
 		int hor = (int)fullImage_.w()/(width+2);
 		
-		nbImg = ver*hor;
-		grid_ = new Image[nbImg];
+		nbImg_ = ver*hor;
+		grid_ = new Image[nbImg_];
 		for (int i=0; i<ver; i++) {
 			for (int j=0; j<hor; j++) {
 				BitmapDrawable currBitmap = new BitmapDrawable(
@@ -43,5 +43,9 @@ public class Grid {
 	
 	public Image getFullImage() {
 		return fullImage_;
+	}
+	
+	public int getSize() {
+		return nbImg_;
 	}
 }

@@ -8,4 +8,8 @@ public class MathUtil {
 			return -1;
 		}
 	}
+	
+	public static int uniform(int begin, int end) {
+		return (int)((end-begin+1)*Math.random()+begin);
+	}
 }
