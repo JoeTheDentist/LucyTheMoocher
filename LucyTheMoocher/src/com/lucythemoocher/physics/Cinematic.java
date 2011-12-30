@@ -8,7 +8,7 @@ public class Cinematic {
 	private static final float GRAVITY = 0.004f;
 	private static final float MOVESPEED = 0.8f;
 	private static final float JUMPSPEED = 1.5f;
-	private static final float ATTACKSPEED = 1.2f;
+	private static final float ATTACKSPEED = 2f;
 	
 	
 	private float posx_;
