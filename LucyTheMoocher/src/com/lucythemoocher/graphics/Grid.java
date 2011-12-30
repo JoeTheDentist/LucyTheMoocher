@@ -2,6 +2,7 @@ package com.lucythemoocher.graphics;
 
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.util.Log;
 
 public class Grid {
 	private Image fullImage_;
@@ -30,7 +31,10 @@ public class Grid {
 	}
 	
 	public Image getImage(int id) {
-		return grid_[id];
+		if ( id >= nbImg_ ) {
+			Log.w("Grid", "out of range : "+id+":"+nbImg_);
+		}
+		return grid_[id%nbImg_];
 	}
 	
 	public float boxH() {

@@ -149,9 +149,25 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 		float offsetX = screen_.getW() / 2;
 		float offsetY = screen_.getH() / 2;
 
-		canvas_.drawBitmap(background.getImage().getBitmap().getBitmap(), 
+		/*canvas_.drawBitmap(background.getImage().getBitmap().getBitmap(), 
 				x - offsetX, 
 				y - offsetY, 
+				null);*/
+		background.draw(Math.abs(offsetX-x), Math.abs(offsetY-y));
+	}
+	
+	/**
+	 * Draw the background according to the camera position
+	 * Screen must be locked
+	 * @param 
+	 * @param 
+	 * @param 
+	 * @see #lockScreen()
+	 */
+	void drawBackground(Image im, float x, float y)  {
+		canvas_.drawBitmap(im.getBitmap().getBitmap(), 
+				x, 
+				y, 
 				null);
 	}
 
