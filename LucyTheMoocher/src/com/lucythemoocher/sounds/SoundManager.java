@@ -19,7 +19,7 @@ import android.util.Log;
  * Warning : I use SoundPool to play the music, this is bad because SoundPool
  * uses audio stream uncompressed in memory, but this is the only way to have the power
  * to choice the speed of the sounds.\n
- * N.B. the music samples must have the exact same duration
+ * N.B. the music samples must have the exact same duration !
  */
 public class SoundManager {
 
@@ -57,6 +57,8 @@ public class SoundManager {
 		//Chemins des fichiers de son
 		soundsBackground_.get(BACKGROUND_THEME).add(R.raw.theme1);
 		soundsBackground_.get(BACKGROUND_THEME).add(R.raw.theme2);
+		soundsBackground_.get(BACKGROUND_LVL3).add(R.raw.lvl1_1);
+		soundsBackground_.get(BACKGROUND_LVL3).add(R.raw.lvl2_1);
 		soundsBackground_.get(BACKGROUND_LVL3).add(R.raw.lvl3_1);
 
 		//Ici on charge les sons
@@ -66,7 +68,7 @@ public class SoundManager {
 			}
 		}
 		
-		state_ = new StateNormal(this, 10);
+		state_ = new StateNormal(this, SoundsState.MTL_NORMAL);
 	}
 
 	public void update() {

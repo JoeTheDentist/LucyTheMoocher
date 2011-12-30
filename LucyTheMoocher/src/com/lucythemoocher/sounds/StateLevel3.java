@@ -2,12 +2,12 @@ package com.lucythemoocher.sounds;
 
 import com.lucythemoocher.R;
 
-public class StateQuick extends SoundsState {
+public class StateLevel3 extends SoundsState {
 
-	public StateQuick(SoundManager context, int mesuresToLive) {
+	public StateLevel3(SoundManager context, int mesuresToLive) {
 		super(context, mesuresToLive);
 	}
-
+	
 	@Override
 	void changeMesure() {
 		super.changeMesure();
@@ -21,35 +21,27 @@ public class StateQuick extends SoundsState {
 	
 	@Override
 	void increaseNormal() {
-		if ( mesuresToLive_ <= 0 ) {
-			mesuresToLive_ = 0;
-		}
+		super.increaseNormal();
 	}
 
 	@Override
 	void increaseQuick() {
-		if ( mesuresToLive_ <= 0 ) {
-			mesuresToLive_ = 0;
-		}
+		super.increaseQuick();
 	}
 
 	@Override
 	void decreaseNormal() {
-		if ( mesuresToLive_ > MTL_NORMAL ) {
-			mesuresToLive_ = MTL_NORMAL;
-		}
+		super.decreaseNormal();
 		if ( mesuresToLive_ <= 0 ) {
-			changeState(new StateNormal(context_, MTL_NORMAL));
+			changeState(new StateLevel2(context_, MTL_NORMAL));
 		}
 	}
 
 	@Override
 	void decreaseQuickly() {
-		if ( mesuresToLive_ > MTL_QUICK ) {
-			mesuresToLive_ = MTL_QUICK;
-		}
+		super.decreaseQuickly();
 		if ( mesuresToLive_ <= 0 ) {
-			changeState(new StateNormal(context_, MTL_NORMAL));
+			changeState(new StateLevel2(context_, MTL_NORMAL));
 		}
 	}
 

@@ -2,8 +2,8 @@ package com.lucythemoocher.sounds;
 
 public abstract class SoundsState {
 
-	protected static final int MTL_NORMAL = 2;
-	protected static final int MTL_QUICK = 1;
+	static final int MTL_NORMAL = 4;
+	static final int MTL_QUICK = 2;
 	
 	protected SoundManager context_;
 	protected int mesuresToLive_;
@@ -27,20 +27,36 @@ public abstract class SoundsState {
 	/**
 	 * When the ambiance is slowly going more and more active
 	 */
-	abstract void increaseNormal();
+	void increaseNormal() {
+		if ( mesuresToLive_ > MTL_NORMAL ) {
+			mesuresToLive_ = MTL_NORMAL;
+		}
+	}
 	
 	/**
 	 * When the ambiance is quickly going more and more active
 	 */
-	abstract void increaseQuick();
+	void increaseQuick() {
+		if ( mesuresToLive_ > MTL_QUICK ) {
+			mesuresToLive_ = MTL_QUICK;
+		}
+	}
 	
 	/**
 	 * When the ambiance is slowly going less and less active
 	 */
-	abstract void decreaseNormal();
+	void decreaseNormal() {
+		if ( mesuresToLive_ > MTL_NORMAL ) {
+			mesuresToLive_ = MTL_NORMAL;
+		}
+	}
 	
 	/**
 	 * When the ambiance is quickly going less and less active
 	 */
-	abstract void decreaseQuickly();
+	void decreaseQuickly() {
+		if ( mesuresToLive_ > MTL_QUICK ) {
+			mesuresToLive_ = MTL_QUICK;
+		}
+	}
 }
