@@ -16,6 +16,8 @@ import android.view.SurfaceView;
  * Handle scrolling
  * Can also support effects (black and white for now)
  * Camera's system is used in MasterLoop
+ * Camera is not the physical screen, but a representation of the screen, so w() et h() are independent from the
+ * hardware screen's size.
  * @see MasterLoop
  */
 public class Camera extends SurfaceView implements SurfaceHolder.Callback {
@@ -25,11 +27,11 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 
 	private static float DT_ = 1;
 
-	private Box screen_;
+	private Box screen_; // hardware screen's size
 	private Canvas canvas_;
 	private float currX_;
 	private float currY_;
-	private float scale_;
+	private float scale_; // coefficient depending on hardware screen's size
 
 
 	private boolean canDraw_ = false;
@@ -107,17 +109,31 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 
 	/**
 	 * Getter
-	 * @return Screen's height
+	 * @return Camera's height
+	 * 
+	 * Doesn't depend on the hardware screen's size
+	 * @see #physicalH()
 	 */
 	public float h() {
-		return screen_.getH();
+		return screen_.getH() / scale_;
 	}
 	
 	/**
 	 * Getter
-	 * @return Screen's width
+	 * @return Camera's width
+	 * 
+	 * Doesn't depend on the hardware screen's size
+	 * @see #physicalW()
 	 */
 	public float w() {
+		return screen_.getW() / scale_;
+	}
+	
+	public float physicalH() {
+		return screen_.getH();
+	}
+	
+	public float physicalW() {
 		return screen_.getW();
 	}
 

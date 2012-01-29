@@ -2,6 +2,7 @@ package com.lucythemoocher.actors;
 
 import java.util.ListIterator;
 
+import android.content.res.Resources;
 import android.util.Log;
 
 import com.lucythemoocher.actors.maincharacter.state.*;
@@ -104,8 +105,9 @@ public class PlayerCharacter extends Actor {
 		while (it.hasNext()) {
 			Monster monster = it.next();
 			if (collidesWith(monster)) {
-				if (state_.isAttacking())
+				if (state_.isAttacking()) {
 					monster.setToRemove();
+				}
 			}
 		}
 	}

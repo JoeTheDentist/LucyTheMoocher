@@ -149,21 +149,21 @@ public class PlayerController extends TouchListener {
 
 		int i = 0;
 		for ( Point p : pos_ ) {
-			if ( p.y < cam.h()/5) {
+			if ( p.y < cam.physicalH()/5) {
 				pushed_[UP][i] = true;
 			}
-			if ( p.x > 4*cam.w()/5 &&
-					p.y > cam.h()/5 &&
-					p.y < 4*cam.h()/5) {
+			if ( p.x > 4*cam.physicalW()/5 &&
+					p.y > cam.physicalH()/5 &&
+					p.y < 4*cam.physicalH()/5) {
 				pushed_[RIGHT][i] = true;
 			}
-			if (p.x < cam.w()/5 &&
-					p.y > cam.h()/5 &&
-					p.y < 4*cam.h()/5) {
+			if (p.x < cam.physicalW()/5 &&
+					p.y > cam.physicalH()/5 &&
+					p.y < 4*cam.physicalH()/5) {
 				pushed_[LEFT][i] = true;
 			}
 
-			if ( p.y > 4*cam.h()/5) {
+			if ( p.y > 4*cam.physicalH()/5) {
 				pushed_[DOWN][i] = true;
 			}
 			i++;
@@ -173,21 +173,21 @@ public class PlayerController extends TouchListener {
 	private int getPos(Point p) {
 		Camera cam = Globals.getInstance().getCamera();
 		int ret = 4;
-		if ( p.y < cam.h()/5) {
+		if ( p.y < cam.physicalH()/5) {
 			ret = UP;
 		}
-		if ( p.x > 4*cam.w()/5 &&
-				p.y > cam.h()/5 &&
-				p.y < 4*cam.h()/5) {
+		if ( p.x > 4*cam.physicalW()/5 &&
+				p.y > cam.physicalH()/5 &&
+				p.y < 4*cam.physicalH()/5) {
 			ret = RIGHT;
 		}
-		if (p.x < cam.w()/5 &&
-				p.y > cam.h()/5 &&
-				p.y < 4*cam.h()/5) {
+		if (p.x < cam.physicalW()/5 &&
+				p.y > cam.physicalH()/5 &&
+				p.y < 4*cam.physicalH()/5) {
 			ret = LEFT;
 		}
 
-		if ( p.y > 4*cam.h()/5) {
+		if ( p.y > 4*cam.physicalH()/5) {
 			ret = DOWN;
 		}
 		return ret;
