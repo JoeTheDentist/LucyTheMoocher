@@ -60,6 +60,7 @@ public class LucyTheMoocherActivity extends Activity {
     }
     
     protected void onPause() {
+    	finish(); // TODO: only FOR DEVELOPMENT
     	super.onPause();
     	Log.d(TAG, "!!! Pausing...");
     }

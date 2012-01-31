@@ -96,6 +96,7 @@ public class Game {
 		nbUpdates++;
 		timer_.addDt(Globals.getInstance().getTimer().getDt());
 		getCharacter().update();
+		Globals.getInstance().getCamera().followPoint(getCharacter().getX(), getCharacter().getY());
 		monsters_.update();
 	}
 	

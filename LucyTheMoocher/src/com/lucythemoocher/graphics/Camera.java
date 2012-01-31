@@ -7,6 +7,8 @@ import com.lucythemoocher.physics.Box;
 import com.lucythemoocher.util.Resources;
 
 import android.graphics.Canvas;
+import android.graphics.PointF;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -22,7 +24,7 @@ import android.view.SurfaceView;
  */
 public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 
-	private static final float CAMERASPEED = (float) 0.3;
+	private static final float CAMERASPEED = (float) 0.15;
 	static final float BACKGROUNDSPEED = (float) 0.5;
 
 	private static float DT_ = 1;
@@ -59,11 +61,32 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 	 * Update position of the camera
 	 */
 	public void update() {
+
+	}
+	
+	/**
+	 * Follow the point (x, y) without exceeding camera's speed
+	 * @param x
+	 * @param y
+	 */
+	public void followPoint(float x, float y) {
 		//Camera follows the player
-		currX_ += (Game.getCharacter().getX()-currX_)*camSpeed() / scale_ * Game.getDt();
-		currY_ += (Game.getCharacter().getY()-currY_)*camSpeed() / scale_ * Game.getDt();
-		screen_.setX((currX_ - screen_.getW() / scale_ / 2));
-		screen_.setY((currY_ - screen_.getH() / scale_ / 2));
+		
+		PointF direction = new PointF(Game.getCharacter().getX()-currX_,
+									Game.getCharacter().getY()-currY_);
+		float distance = direction.length();
+		if (distance == 0)
+			return;
+		float coeff = camSpeed() * distance * Game.getDt();
+		direction.x /= distance; // normalize
+		direction.y /= distance; // normalize
+		if (Math.abs(coeff) > distance) {
+			coeff = distance; // do not exceed the point
+		}
+		currX_ += direction.x * coeff;
+		currY_ += direction.y * coeff;
+		screen_.setX((currX_ - w() / 2));
+		screen_.setY((currY_ - h() / 2));
 	}
 
 
@@ -100,6 +123,9 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 	/**
 	 * Getter
 	 * @return Camera's speed
+	 * 
+	 * This is just a coeff used, the speed also depends on the distance with 
+	 * the target point
 	 */
 	private float camSpeed() {
 		return CAMERASPEED*DT_;
