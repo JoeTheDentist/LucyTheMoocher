@@ -8,19 +8,20 @@ public abstract class State {
 	protected Cinematic pos_;
 	protected Animation anim_;
 	protected PlayerCharacter pc_;
+	protected Direction dir_;
 	protected final static float ANIMATION_SPEED = 100;
 	protected final static int WALL_WALKING_TIME = 500;
 	protected final static int WALL_WALKING_PAUSE = 400;
 
 	
-	public State(PlayerCharacter pc, Cinematic pos, Animation anim) {
+	public State(PlayerCharacter pc, Cinematic pos, Animation anim, Direction dir) {
 		pos_ = pos;
 		anim_ = anim;
 		pc_ = pc;
+		dir_ = dir;
 	}
 	
-	public void update() {
-	}
+	public void update() {}
 	
 	public void moveUp() {}
 	

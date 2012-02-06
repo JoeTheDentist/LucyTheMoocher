@@ -4,12 +4,17 @@ import com.lucythemoocher.actors.PlayerCharacter;
 import com.lucythemoocher.graphics.Animation;
 import com.lucythemoocher.physics.Cinematic;
 
-public class StateAttackRight extends State {
+public class StateAttack extends State {
 
-	public StateAttackRight(PlayerCharacter pc, Cinematic pos, Animation anim) {
-		super(pc, pos, anim);
-		int tab[] = {28,29,30,31};
-		anim_.setAnimation(tab, ANIMATION_SPEED);
+	public StateAttack(PlayerCharacter pc, Cinematic pos, Animation anim, Direction dir) {
+		super(pc, pos, anim, dir);
+		if ( dir == Direction.LEFT ) {
+			int tab[] = {32,33,34,35};
+			anim_.setAnimation(tab, ANIMATION_SPEED);
+		} else {
+			int tab[] = {28,29,30,31};
+			anim_.setAnimation(tab, ANIMATION_SPEED);
+		}
 		pc_.getDrawer().enablePersistence(150);
 	}
 	
@@ -18,7 +23,7 @@ public class StateAttackRight extends State {
 		pos_.moveDown();
 		if ( pos_.hasDownCollision() ) {
 			onLeave();
-			pc_.changeState(new StateNoneRight(pc_, pos_, anim_));
+			pc_.changeState(new StateNone(pc_, pos_, anim_, dir_));
 		}
 	}
 	
@@ -32,4 +37,5 @@ public class StateAttackRight extends State {
 	public boolean isAttacking() {
 		return true;
 	}
+
 }

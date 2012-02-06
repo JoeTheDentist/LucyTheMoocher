@@ -1,7 +1,6 @@
 package com.lucythemoocher.actors;
 
 import com.lucythemoocher.R;
-import com.lucythemoocher.game.Game;
 
 public class Monster extends Actor {
 	

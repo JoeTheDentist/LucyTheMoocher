@@ -3,7 +3,6 @@ package com.lucythemoocher.graphics;
 import java.io.InputStream;
 
 import android.graphics.drawable.BitmapDrawable;
-import android.util.Log;
 
 import com.lucythemoocher.R;
 import com.lucythemoocher.Globals.Globals;
@@ -76,7 +75,6 @@ public class Background implements Drawable {
 	 * @see Camera
 	 */
 	void draw(float x, float y) {
-		Log.d("BACK", ""+x+" "+y);
 		int i = (int) (y/backgroundUp_.boxW());
 		int j = (int) (x/backgroundUp_.boxH());
 		int h = (int) (Globals.getInstance().getCamera().h()/backgroundUp_.boxH())+2;

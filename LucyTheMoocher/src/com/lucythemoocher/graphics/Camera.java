@@ -8,7 +8,6 @@ import com.lucythemoocher.util.Resources;
 
 import android.graphics.Canvas;
 import android.graphics.PointF;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;

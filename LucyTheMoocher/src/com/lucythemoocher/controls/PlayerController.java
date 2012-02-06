@@ -29,6 +29,9 @@ public class PlayerController extends TouchListener {
 	private LinkedList<Point> pos_;
 	private PlayerCharacter player_;
 
+	/**
+	 * Constructor
+	 */
 	public PlayerController() {
 		lastTouch_ = new float[5];
 		player_ = null;
@@ -36,10 +39,18 @@ public class PlayerController extends TouchListener {
 		pos_ = new LinkedList<Point>();
 	}
 
+	/**
+	 * Setter
+	 * @param player, targeted controlled
+	 */
 	public void setPlayer(PlayerCharacter player) {
 		player_ = player;
 	}
 
+	/**
+	 * Fill a list of point according to the touch events
+	 * @param event
+	 */
 	synchronized public void motion(MotionEvent event) {
 		//dumpEvent(event);
 		if ( event.getActionMasked() == MotionEvent.ACTION_DOWN || 
@@ -52,6 +63,9 @@ public class PlayerController extends TouchListener {
 		}
 	}
 
+	/**
+	 * Call the actions of the controlled according to the action array
+	 */
 	synchronized public void update() {
 		refreshPushed();
 
@@ -138,6 +152,9 @@ public class PlayerController extends TouchListener {
 		}
 	}
 
+	/**
+	 * Update action event
+	 */
 	private void refreshPushed() {
 		Camera cam = Globals.getInstance().getCamera();
 
@@ -172,27 +189,31 @@ public class PlayerController extends TouchListener {
 
 	private int getPos(Point p) {
 		Camera cam = Globals.getInstance().getCamera();
-		int ret = 4;
 		if ( p.y < cam.physicalH()/5) {
-			ret = UP;
+			return UP;
 		}
 		if ( p.x > 4*cam.physicalW()/5 &&
 				p.y > cam.physicalH()/5 &&
 				p.y < 4*cam.physicalH()/5) {
-			ret = RIGHT;
+			return RIGHT;
 		}
 		if (p.x < cam.physicalW()/5 &&
 				p.y > cam.physicalH()/5 &&
 				p.y < 4*cam.physicalH()/5) {
-			ret = LEFT;
+			return LEFT;
 		}
 
 		if ( p.y > 4*cam.physicalH()/5) {
-			ret = DOWN;
+			return DOWN;
 		}
-		return ret;
+		return 4;
 	}
 
+	/**
+	 * To print event in details
+	 * @param event
+	 */
+	@SuppressWarnings("unused")
 	private void dumpEvent(MotionEvent event) {
 		String names[] = { "DOWN" , "UP" , "MOVE" , "CANCEL" , "OUTSIDE" ,
 				"POINTER_DOWN" , "POINTER_UP" , "7?" , "8?" , "9?" };

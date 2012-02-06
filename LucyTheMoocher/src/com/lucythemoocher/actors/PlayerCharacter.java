@@ -2,12 +2,8 @@ package com.lucythemoocher.actors;
 
 import java.util.ListIterator;
 
-import android.content.res.Resources;
-import android.util.Log;
-
 import com.lucythemoocher.actors.maincharacter.state.*;
 
-import com.lucythemoocher.physics.Cinematic;
 import com.lucythemoocher.controls.PlayerController;
 import com.lucythemoocher.game.Game;
 import com.lucythemoocher.R;
@@ -26,7 +22,7 @@ public class PlayerCharacter extends Actor {
 		super();
 		getDrawer().initializeAnimation(R.drawable.lucy_states, 80, 76);
 		getCinematic().addBox(50, 50, getH(), getW());
-		state_ = new StateNoneLeft(this, pos_, getDrawer().getAnim());
+		state_ = new StateNone(this, pos_, getDrawer().getAnim(), Direction.LEFT);
 		controller_ = controller;
 		controller_.setPlayer(this);
 	}
