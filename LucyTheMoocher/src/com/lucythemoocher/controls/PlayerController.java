@@ -108,6 +108,9 @@ public class PlayerController extends TouchListener {
 				player_.moveRight();
 			}
 		}
+		if ( !moveLeft && !moveRight ) {
+			player_.moveStop();
+		}
 
 		boolean moveUp = false;
 		for ( int i=0; i<3; i++) {

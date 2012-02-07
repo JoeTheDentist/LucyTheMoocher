@@ -28,10 +28,18 @@ public class StateWallSliding extends State {
 			pc_.changeState(new StateFalling(pc_, pos_, anim_, dir_));
 		}
 
-		if ( pos_.hasLeftCollision() ) {
-			pos_.stay();
+		if ( dir_ == Direction.LEFT ) {
+			if ( pos_.hasLeftCollision() ) {
+				pos_.stay();
+			} else {
+				pc_.changeState(new StateFalling(pc_, pos_, anim_, dir_));
+			}
 		} else {
-			pc_.changeState(new StateFalling(pc_, pos_, anim_, dir_));
+			if ( pos_.hasRightCollision() ) {
+				pos_.stay();
+			} else {
+				pc_.changeState(new StateFalling(pc_, pos_, anim_, dir_));
+			}
 		}
 	}
 
@@ -57,7 +65,7 @@ public class StateWallSliding extends State {
 			}
 		}
 	}
-	
+
 	@Override
 	public void moveRight() {
 		if ( dir_ == Direction.LEFT ) {
