@@ -6,7 +6,7 @@ public class Monster extends Actor {
 	
 	public Monster() {
 		super();
-		getDrawer().initializeAnimation(R.drawable.tank, 40, 100);
+		getDrawer().initializeAnimation(R.drawable.tank, 70, 150);
 		getCinematic().addBox(60, 1199, getH(), getW());
 	}
 	
