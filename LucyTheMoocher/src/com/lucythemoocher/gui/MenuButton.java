@@ -12,6 +12,9 @@ import com.lucythemoocher.graphics.Image;
  * You can connect a listener to the button: when the button is clicked, onButtonClicked(int) 
  * will be called from the listener, with the value of the button's index. Reimplement this method
  * to to whatever you want when the button is clicked
+ * 
+ * The button has to be destroyed with destroy() method when you don't use it anymore (or the button will stay alive, 
+ * and won't be rendered but will be clicked)
  */
 public class MenuButton implements Drawable {
 	private float posx_;
@@ -124,5 +127,13 @@ public class MenuButton implements Drawable {
 	public void centerOn(float x, float y) {
 		posx_ = x - w() / 2;
 		posy_ = y - h() / 2;
+	}
+	
+	/**
+	 * Has to be called when you don't use the button anymore
+	 * (or the button will stay activated but won't be rendered)
+	 */
+	public void destroy() {
+		menuButtonTouchListener_.unregister();
 	}
 }

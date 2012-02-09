@@ -78,4 +78,9 @@ public class InitMenuLoop extends Loop implements MenuButtonListener {
 		
 	}
 
+	public void onLeaveLoop() {
+		super.onLeaveLoop();
+		buttonNewGame_.destroy();
+		buttonLeave_.destroy();
+	}
 }

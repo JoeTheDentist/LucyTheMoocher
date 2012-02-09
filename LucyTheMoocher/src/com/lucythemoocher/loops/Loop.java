@@ -31,7 +31,14 @@ public abstract class Loop {
 	 * @param loop The new loop
 	 */
 	public void changeCurrentLoop(Loop loop) {
+		onLeaveLoop();
 		MasterLoop.getInstance().setLoop(loop);
 	}
 
+	/**
+	 * Called when the loop is left for another loop
+	 */
+	public void onLeaveLoop() {
+		
+	}
 }

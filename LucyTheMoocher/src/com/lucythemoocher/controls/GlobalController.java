@@ -44,6 +44,10 @@ public class GlobalController {
 	void registerTouch(TouchListener l) {
 		touchListenners_.add(l);
 	}
+
+	public void unregisterTouch(TouchListener l) {
+		touchListenners_.remove(l);
+	}
 	
 	/**
 	 * Register
@@ -52,6 +56,7 @@ public class GlobalController {
 	void registerButton(ButtonListener l) {
 		buttonListenners_.add(l);
 	}
+	
 	
 	/**
 	 * Process the event
@@ -62,8 +67,8 @@ public class GlobalController {
 	}
 	
 	private void alertTouch(MotionEvent event) {
-		for ( TouchListener l : touchListenners_ ) {
-			l.motion(event);
+		for (int i = 0; i < touchListenners_.size(); ++i) {
+			touchListenners_.get(i).motion(event);
 		}
 	}
 	
