@@ -1,6 +1,7 @@
 package com.lucythemoocher.graphics;
 
 
+import com.lucythemoocher.R;
 import com.lucythemoocher.controls.GlobalController;
 import com.lucythemoocher.game.Game;
 import com.lucythemoocher.physics.Box;
@@ -11,6 +12,7 @@ import android.graphics.PointF;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.widget.Button;
 
 /**
  * Render Drawables and Background
@@ -54,6 +56,7 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 		setFocusable(true);
 		scale_ = screen_.getW() / 800f;
 		setSpeed(1.0f / 30.0f);
+
 	}
 
 	/**

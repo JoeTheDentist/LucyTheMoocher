@@ -62,7 +62,7 @@ public class MasterLoop {
 	 * Private constructor for singleton pattern
 	 */
 	private MasterLoop() {
-		loop_ = new LoopGame();
+		loop_ = new InitMenuLoop();
 	}
 	
 	private static volatile MasterLoop instance_ = null;

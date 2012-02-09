@@ -64,5 +64,6 @@ public class LucyTheMoocherActivity extends Activity {
     	super.onPause();
     	Log.d(TAG, "!!! Pausing...");
     }
+    
 
 }

@@ -15,6 +15,7 @@ public class Timer {
 	float dt_;
 	float factor_;
 	long previousSystemTime_;
+	float initTime_;
 	
 	
 	/**
@@ -26,6 +27,7 @@ public class Timer {
 		currentTime_ = time;
 		factor_ = 1.0f; // no factor by default
 		previousSystemTime_ = System.currentTimeMillis();
+		initTime_ = currentTime_;
 	}
 	
 	/**
@@ -72,5 +74,14 @@ public class Timer {
 	 */
 	public void setFactor(float factor) {
 		factor_ = factor;
+	}
+	
+	/**
+	 * Update the timer and return the time from it's creation
+	 * @return time in ms
+	 */
+	public float timeFromCreation() {
+		update();
+		return currentTime_ - initTime_;
 	}
 }
