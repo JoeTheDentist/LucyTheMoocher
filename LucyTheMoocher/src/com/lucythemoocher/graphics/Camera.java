@@ -1,7 +1,6 @@
 package com.lucythemoocher.graphics;
 
 
-import com.lucythemoocher.R;
 import com.lucythemoocher.controls.GlobalController;
 import com.lucythemoocher.game.Game;
 import com.lucythemoocher.physics.Box;
@@ -12,7 +11,6 @@ import android.graphics.PointF;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.widget.Button;
 
 /**
  * Render Drawables and Background
@@ -41,8 +39,8 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 	/**
 	 * Constructor
 	 * @param context
-	 * @param h Height in pixels
-	 * @param w Width in pixels
+	 * @param h Height in dp pixels
+	 * @param w Width in dp pixels
 	 */
 	public Camera() {
 		super(Resources.getActivity());
@@ -137,7 +135,7 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 
 	/**
 	 * Getter
-	 * @return Camera's height
+	 * @return Camera's height in dp pixels
 	 * 
 	 * Doesn't depend on the hardware screen's size
 	 * @see #physicalH()
@@ -148,7 +146,7 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 	
 	/**
 	 * Getter
-	 * @return Camera's width
+	 * @return Camera's width in dp pixels
 	 * 
 	 * Doesn't depend on the hardware screen's size
 	 * @see #physicalW()
@@ -169,8 +167,8 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 	 * Draw the image at the position x y
 	 * Screen must be locked
 	 * 
-	 * @param x x position in pixels
-	 * @param y y position in pixels
+	 * @param x x position in dp pixels
+	 * @param y y position in dp pixels
 	 * @param image
 	 * @see #lockScreen()
 	 */
@@ -181,22 +179,27 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 	}
 	
 	/**
+	 * Draw the image without using the scrolling
+	 * @param  x position in dp pixels
+	 * @param y y position in dp pixels
+	 * @param image
+	 * @see #lockScreen()
+	 */
+	public void drawImageOnHud(float x, float y, Image image) {
+		canvas_.drawBitmap(image.getBitmap().getBitmap(), x, y, image.getBitmap().getPaint());
+	}
+	
+	/**
 	 * Draw the background according to the camera position
 	 * Screen must be locked
 	 * @param background
 	 * @see #lockScreen()
 	 */
 	public void drawBackground(Background background)  {
-		// background
 		float x = -(currX_ - screen_.getW() / 2) * BACKGROUNDSPEED;
 		float y = -(currY_ - screen_.getH() / 2) * BACKGROUNDSPEED;
 		float offsetX = screen_.getW() / 2;
 		float offsetY = screen_.getH() / 2;
-
-		/*canvas_.drawBitmap(background.getImage().getBitmap().getBitmap(), 
-				x - offsetX, 
-				y - offsetY, 
-				null);*/
 		background.draw(Math.abs(offsetX-x), Math.abs(offsetY-y));
 	}
 	
@@ -247,6 +250,10 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 
 	public float offsety() {
 		return screen_.getY();
+	}
+	
+	public float getScale() {
+		return scale_;
 	}
 	
 

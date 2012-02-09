@@ -60,8 +60,8 @@ public class LucyTheMoocherActivity extends Activity {
     }
     
     protected void onPause() {
-    	finish(); // TODO: only FOR DEVELOPMENT
     	super.onPause();
+    	Globals.getInstance().leave(); // TODO: only FOR DEVELOPMENT
     	Log.d(TAG, "!!! Pausing...");
     }
     

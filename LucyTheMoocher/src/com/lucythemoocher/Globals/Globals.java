@@ -4,8 +4,10 @@
 package com.lucythemoocher.Globals;
 
 
+import com.lucythemoocher.R;
 import com.lucythemoocher.graphics.Camera;
 import com.lucythemoocher.sounds.SoundManager;
+import com.lucythemoocher.util.Resources;
 import com.lucythemoocher.util.Timer;
 
 /**
@@ -60,5 +62,9 @@ public class Globals {
 		camera_ = new Camera();
 		timer_ = new Timer(0f);
 		sounds_ = new SoundManager();
+	}
+	
+	public void leave() {
+		Resources.getActivity().finish();
 	}
 }
