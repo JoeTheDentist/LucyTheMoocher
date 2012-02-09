@@ -8,6 +8,8 @@ import com.lucythemoocher.util.Resources;
 
 import android.graphics.Canvas;
 import android.graphics.PointF;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -54,6 +56,9 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 		setFocusable(true);
 		scale_ = screen_.getW() / 800f;
 		setSpeed(1.0f / 30.0f);
+		this.requestFocus();
+		this.setFocusableInTouchMode(true);
+
 
 	}
 
@@ -230,6 +235,11 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 
 	public boolean onTouchEvent(MotionEvent event) {
 		GlobalController.getInstance().process(event);
+		return true;
+	}
+	
+	public boolean onKeyDown (int keyCode, KeyEvent event) {
+		GlobalController.getInstance().processKey(keyCode, event);
 		return true;
 	}
 

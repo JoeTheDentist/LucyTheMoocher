@@ -31,9 +31,9 @@ public class Grid {
 	}
 	
 	public Image getImage(int id) {
-		if ( id >= nbImg_ ) {
-			Log.w("Grid", "out of range : "+id+":"+nbImg_);
-		}
+		//if ( id >= nbImg_ ) {
+		//	Log.w("Grid", "out of range : "+id+":"+nbImg_);
+		//}
 		return grid_[id%nbImg_];
 	}
 	

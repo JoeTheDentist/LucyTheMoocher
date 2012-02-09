@@ -1,6 +1,5 @@
 package com.lucythemoocher.gui;
 
-import java.util.Currency;
 
 import com.lucythemoocher.Globals.Globals;
 import com.lucythemoocher.graphics.Drawable;
@@ -20,6 +19,7 @@ public class MenuButton implements Drawable {
 	private float posx_;
 	private float posy_;
 	private int index_;
+	private boolean active_;
 	private boolean clicked_;
 	private boolean focussed_;
 	private Image normalImage_;
@@ -43,6 +43,7 @@ public class MenuButton implements Drawable {
 		posx_ = x;
 		posy_ = x;
 		index_ = index;
+		active_ = true;
 		clicked_ = false;
 		focussed_ = false;
 		normalImage_ = new Image(idImage);
@@ -57,7 +58,8 @@ public class MenuButton implements Drawable {
 	 * Draw the button at the correct position, without using scrolling
 	 */
 	public void draw() {
-		Globals.getInstance().getCamera().drawImageOnHud(posx_, posy_, currentImage());
+		if (active_)
+			Globals.getInstance().getCamera().drawImageOnHud(posx_, posy_, currentImage());
 	}
 
 	/**
@@ -103,19 +105,23 @@ public class MenuButton implements Drawable {
 	}
 	
 	public void setClicked(boolean clicked) {
-		clicked_ = true;
-		currentImage_ = clickedImage_;
-		if (listenerToNotify_ != null)
-			listenerToNotify_.onButtonClicked(index_);
+		if (active_) {
+			clicked_ = true;
+			currentImage_ = clickedImage_;
+			if (listenerToNotify_ != null)
+				listenerToNotify_.onButtonClicked(index_);
+		}
 	}
 	
 	public void setFocussed(boolean focussed) {
-		if (!focussed_ && focussed) {
-			focussed_ = true;
-			currentImage_ = focussedImage_;
-		} else if (focussed_ && !focussed) {
-			focussed_ = false;
-			currentImage_ = normalImage_;
+		if (active_) {
+			if (!focussed_ && focussed) {
+				focussed_ = true;
+				currentImage_ = focussedImage_;
+			} else if (focussed_ && !focussed) {
+				focussed_ = false;
+				currentImage_ = normalImage_;
+			}
 		}
 	}
 	
@@ -129,11 +135,20 @@ public class MenuButton implements Drawable {
 		posy_ = y - h() / 2;
 	}
 	
+	public void hide() {
+		active_ = false;
+	}
+	
+	public void show() {
+		active_ = true;
+	}
+	
 	/**
 	 * Has to be called when you don't use the button anymore
 	 * (or the button will stay activated but won't be rendered)
 	 */
 	public void destroy() {
+		hide();
 		menuButtonTouchListener_.unregister();
 	}
 }

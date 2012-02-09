@@ -4,8 +4,6 @@ import com.lucythemoocher.Globals.Globals;
 import com.lucythemoocher.graphics.Image;
 import com.lucythemoocher.gui.MenuButton;
 import com.lucythemoocher.gui.MenuButtonListener;
-import com.lucythemoocher.util.Timer;
-
 import com.lucythemoocher.R;
 
 /**
@@ -13,7 +11,6 @@ import com.lucythemoocher.R;
  */
 public class InitMenuLoop extends Loop implements MenuButtonListener {
 
-	Timer timer_;
 	Image menuBackground_;
 	MenuButton buttonNewGame_;
 	MenuButton buttonSound_;
@@ -35,7 +32,6 @@ public class InitMenuLoop extends Loop implements MenuButtonListener {
 	 * Public constructor
 	 */
 	public InitMenuLoop() {
-		timer_ = new Timer(0);
 		menuBackground_ = new Image(R.drawable.menu_background);
 		buttonNewGame_ = new MenuButton(30, 30, NEWGAMEINDEX, R.drawable.mainmenu_button_newgame_normal, 
 				R.drawable.mainmenu_button_newgame_focussed, R.drawable.mainmenu_button_newgame_clicked, this);
@@ -59,12 +55,12 @@ public class InitMenuLoop extends Loop implements MenuButtonListener {
 	 * Don't compute anything here, prefer update
 	 */
 	public void render() {
-		Globals.getInstance().getCamera().drawImage(0,  0, menuBackground_);
+		Globals.getInstance().getCamera().drawImageOnHud(0,  0, menuBackground_);
 		buttonNewGame_.draw();
 		buttonLeave_.draw();
 	}
 
-	@Override
+
 	public void onButtonClicked(int buttonIndex) {
 		switch (buttonIndex) {
 		case NEWGAMEINDEX:
