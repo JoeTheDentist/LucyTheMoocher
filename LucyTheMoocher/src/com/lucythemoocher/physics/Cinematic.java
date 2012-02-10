@@ -5,16 +5,16 @@ import com.lucythemoocher.game.Game;
 import com.lucythemoocher.util.MathUtil;
 
 public class Cinematic {
-	private static final float GRAVITY = 0.004f;
-	private static final float MOVESPEED = 0.8f;
-	private static final float JUMPSPEED = 1.5f;
-	private static final float ATTACKSPEED = 2f;
+	protected static final float GRAVITY = 0.004f;
+	protected static final float MOVESPEED = 0.8f;
+	protected static final float JUMPSPEED = 1.5f;
+	protected static final float ATTACKSPEED = 2f;
 	
 	
 	private float posx_;
 	private float posy_;
-	private float speedx_;
-	private float speedy_;
+	protected float speedx_;
+	protected float speedy_;
 	private float offsetx_;
 	private float offsety_;
 	
