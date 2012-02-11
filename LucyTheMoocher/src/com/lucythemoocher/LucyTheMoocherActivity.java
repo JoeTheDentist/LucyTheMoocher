@@ -1,6 +1,7 @@
 package com.lucythemoocher;
 
 import com.lucythemoocher.game.Game;
+import com.lucythemoocher.game.GameThread;
 import com.lucythemoocher.util.Resources;
 import com.lucythemoocher.Globals.Globals;
 import android.app.Activity;
@@ -12,6 +13,7 @@ import android.view.WindowManager;
 
 public class LucyTheMoocherActivity extends Activity {
 	private static final String TAG = LucyTheMoocherActivity.class.getSimpleName();
+	private static GameThread gameThread_;
 	
 	/** Called when the activity is first created. */
     @Override
@@ -25,7 +27,9 @@ public class LucyTheMoocherActivity extends Activity {
         Resources.setActivity(this);
         Globals.getInstance(); // call it once here to be sure the instance is created
         setContentView(Globals.getInstance().getCamera());
-        Game.launchGame();
+		gameThread_ = new GameThread();
+		gameThread_.start();
+
     }
     
     public void onConfigurationChanged(Configuration newConfig) {
@@ -55,7 +59,7 @@ public class LucyTheMoocherActivity extends Activity {
     
     protected void onStop() {
     	super.onStop();
-    	Game.stop();
+		gameThread_.setRunning(false);
     	Log.d(TAG, "!!! Stopping...");
     }
     

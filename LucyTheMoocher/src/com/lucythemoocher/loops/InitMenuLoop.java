@@ -64,7 +64,7 @@ public class InitMenuLoop extends Loop implements MenuButtonListener {
 	public void onButtonClicked(int buttonIndex) {
 		switch (buttonIndex) {
 		case NEWGAMEINDEX:
-			changeCurrentLoop(new LoopGame());
+			changeCurrentLoop(new LoopGame(1)); // start at level 1
 			break;
 		case LEAVEINDEX:
 			Globals.getInstance().leave();

@@ -15,7 +15,6 @@ import com.lucythemoocher.R;
 public class Game {
 	private static PlayerCharacter character_;
 	private static Map map_;
-	private static GameThread gameThread_;
 	private static int nbUpdates = 0;
 	private static Event event_;
 	private static Background background_;
@@ -25,17 +24,23 @@ public class Game {
 	/**
 	 * Launch a game
 	 */
-	public static void launchGame() {
+	public static void launchGame(int lvl) {
 		Log.d("Game", "launchGame");
 		timer_ = new Timer(0);
 		character_ = new PlayerCharacter(new PlayerController());
-		gameThread_ = new GameThread();
-		map_ = new Map(R.raw.lvl1);
+		switch (lvl) {
+		case 1:
+			map_ = new Map(R.raw.lvl1);
+			break;
+		default:
+			Log.w("Game", "Can't find this level, game may crash");
+			break;
+		}
+		
 		monsters_ = new MonstersManager();
 
 		event_ = new EventNormal();
 		background_ = new Background();
-		gameThread_.start();
 		Globals.getInstance().getSounds().start();
 	}
 	
@@ -134,13 +139,5 @@ public class Game {
 	public static float getDt() {
 		return timer_.getDt();
 	}
-	
-	/**
-	 * Stop the game
-	 */
-	public static void stop() {
-		gameThread_.setRunning(false);
-	}
-	
 
 }

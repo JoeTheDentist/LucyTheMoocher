@@ -16,10 +16,24 @@ public class LoopGame extends Loop implements KeysListener {
 	
 	/**
 	 * Public constructor
+	 * This constructor won't reset or launch the game. The
+	 * game's instance should already have been initialized
+	 * and game will continue.
 	 */	
 	public LoopGame() {
 		registerKeys();
 		lifeTime_ = new Timer(0);
+	}
+	
+	/**
+	 * Public constructor
+	 * By specifying the level, you will reset the game and launch
+	 * a new level. Use the default constructor to continue game.
+	 * @param level
+	 */
+	public LoopGame(int level) {
+		this();
+		Game.launchGame(level);
 	}
 	
 	/**
