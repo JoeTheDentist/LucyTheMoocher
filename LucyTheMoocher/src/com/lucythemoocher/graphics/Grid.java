@@ -2,11 +2,9 @@ package com.lucythemoocher.graphics;
 
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
-import android.util.Log;
 
 public class Grid {
 	private Image fullImage_;
-	private int name_;
 	private Image grid_[];
 	private int nbImg_;
 	private float height_;
@@ -22,7 +20,6 @@ public class Grid {
 	 */
 	public Grid(int imgId) {
 		fullImage_ = new Image(imgId);
-		name_ = imgId;
 		
 		//Search the first occurrence of pink
 		for ( int i=1; i<fullImage_.getBitmap().getBitmap().getWidth(); i++ ) {
