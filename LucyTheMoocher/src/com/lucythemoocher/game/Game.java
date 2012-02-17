@@ -2,6 +2,7 @@ package com.lucythemoocher.game;
 
 import android.util.Log;
 
+import com.lucythemoocher.FX.FXManager;
 import com.lucythemoocher.Globals.Globals;
 import com.lucythemoocher.actors.MonstersManager;
 import com.lucythemoocher.actors.PlayerCharacter;
@@ -20,6 +21,7 @@ public class Game {
 	private static Background background_;
 	private static Timer timer_;
 	private static MonstersManager monsters_; // temporary
+	private static FXManager fx_;
 	
 	/**
 	 * Launch a game
@@ -38,6 +40,7 @@ public class Game {
 		}
 		
 		monsters_ = new MonstersManager();
+		fx_ = new FXManager();
 
 		event_ = new EventNormal();
 		background_ = new Background();
@@ -103,6 +106,7 @@ public class Game {
 		getCharacter().update();
 		Globals.getInstance().getCamera().followPoint(getCharacter().getX(), getCharacter().getY());
 		monsters_.update();
+		fx_.update();
 	}
 	
 	public static void render() {
@@ -110,6 +114,7 @@ public class Game {
 		getMap().draw();
 		getCharacter().draw();	
 		monsters_.render();
+		fx_.render();
 	}
 	
 	/**

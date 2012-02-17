@@ -1,6 +1,7 @@
 package com.lucythemoocher.actors;
 
 import com.lucythemoocher.R;
+import com.lucythemoocher.FX.FX;
 import com.lucythemoocher.physics.TankCinematic;
 
 public class Tank extends Monster {
@@ -10,7 +11,7 @@ public class Tank extends Monster {
 	public Tank() {
 		super();
 		
-		getDrawer().initializeAnimation(R.drawable.tank, 70, 150);
+		getDrawer().initializeAnimation(R.drawable.tank);
 		setCinematic(new TankCinematic());
 		getCinematic().addBox(60, 1199, getH(), getW());
 		
@@ -56,6 +57,7 @@ class MoveLeft extends TankState {
 	public void update() {
 		context_.moveLeft();
 		if ( context_.pos_.hasLeftCollision() ) {
+			FX fx = new FX(R.drawable.spawning, 0, context_.pos_.x(), context_.pos_.y());
 			changeState(new MoveRight(context_));
 		}
 	}

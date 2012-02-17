@@ -1,7 +1,7 @@
 package com.lucythemoocher.actors;
 
 import java.util.ArrayList;
-import java.util.ListIterator;
+import java.util.Iterator;
 
 
 /**
@@ -22,7 +22,7 @@ public class MonstersManager {
 	}
 
 	public void update() {
-		ListIterator<Monster> it = getIterator();
+		Iterator<Monster> it = getIterator();
 		while(it.hasNext()) {
 			Monster monster = it.next();
 			if (monster.isToRemove()) {
@@ -43,8 +43,8 @@ public class MonstersManager {
 		monsters_.add(monster);
 	}
 	
-	public ListIterator<Monster> getIterator() {
-		return monsters_.listIterator();
+	public Iterator<Monster> getIterator() {
+		return monsters_.iterator();
 	}
 	
 }

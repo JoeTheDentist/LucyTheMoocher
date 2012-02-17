@@ -38,9 +38,9 @@ public class Background implements Drawable {
 		InputStream is = Resources.openRawRessources(R.drawable.background1);
 		BitmapDrawable bd = new BitmapDrawable(is);
 		background_ = new Image(bd);
-		backgroundUp_ = new Grid(R.drawable.background_up, 256, 256);
-		backgroundDown_ = new Grid(R.drawable.background_down, 256, 256);
-		backgroundMiddle_ = new Grid(R.drawable.background_middle, 256, 1024);
+		backgroundUp_ = new Grid(R.drawable.background_up);
+		backgroundDown_ = new Grid(R.drawable.background_down);
+		backgroundMiddle_ = new Grid(R.drawable.background_middle);
 		pxH_ = Game.getMap().pxH()*Camera.BACKGROUNDSPEED + 2*Globals.getInstance().getCamera().h();
 		pxW_ = Game.getMap().pxW()*Camera.BACKGROUNDSPEED + 2*Globals.getInstance().getCamera().w();
 		nbBoxH_ = (int) (pxH_/backgroundDown_.boxH());

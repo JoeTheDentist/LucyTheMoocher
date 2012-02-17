@@ -10,36 +10,54 @@ public class Animation {
 	private int currentFrame_; // we print grid[tab_[currentFrame_]]
 	private float timeOnLastDraw_; 
 	private float offsetCurrentFrame_; // will be added to currentFrame_ when >= 1
-	
+	private boolean cycleEnded_ = false;
+
+	private static final float DEFAULT_PERIOD = 100;
+
 	public Animation() {
 		grid_ = null;
 		offsetCurrentFrame_ = 0.0f;
 	}
-	
+
 	/**
-	 * Constructor 
+	 * Constructor
 	 * @param resource Resource index
-	 * @param picH Pictures's height
-	 * @param picW Pictures's width
+	 * @see Grid
 	 */
-	public Animation(int resource, int picH, int picW) {
+	public Animation(int resource) {
 		this();
-		initialize(resource, picH, picW);
+		initialize(resource);
 	}
-	
+
+	/**
+	 * Constructor
+	 * @param resource Resource index
+	 * @param allImages : set or not all the images 
+	 * @see Grid
+	 */
+	public Animation(int resource, boolean allImages) {
+		this(resource);
+		if ( allImages ) {
+			int t[] = new int[grid_.getSize()];
+			for ( int i=0; i<t.length; i++ ) {
+				t[i] = i;
+			}
+			setAnimation(t, DEFAULT_PERIOD);
+		}
+	}
+
 	/**
 	 * Initialize the animation 
 	 * @param resource Resource index
-	 * @param picH Pictures's height
-	 * @param picW Pictures's width
+	 * @see Grid
 	 */	
-	public void initialize(int resource, int picH, int picW) {
-		grid_ = new Grid(resource, picH, picW);
+	public void initialize(int resource) {
+		grid_ = new Grid(resource);
 		int t[] = {0};
 		setAnimation(t, 1);
 		timeOnLastDraw_ = Game.getTime();
 	}
-	
+
 	/**
 	 * 
 	 * @param tab Indices of the pictures the the animation grid
@@ -53,7 +71,7 @@ public class Animation {
 		period_ = period;
 		currentFrame_ = 0;
 	}
-	
+
 	/**
 	 * Getter
 	 * @return Pictures' height in pixels
@@ -61,7 +79,7 @@ public class Animation {
 	public float getH() {
 		return grid_.getImage(0).h();
 	}
-	
+
 	/**
 	 * Getter
 	 * @return Pictures' width in pixels
@@ -69,7 +87,7 @@ public class Animation {
 	public float getW() {
 		return grid_.getImage(0).w();
 	}
-	
+
 	/**
 	 * Draw the animation at the position x, y
 	 * @param x
@@ -78,7 +96,7 @@ public class Animation {
 	public void draw(float x, float y) {
 		Globals.getInstance().getCamera().drawImage(x, y, getCurrentImage());
 	}
-	
+
 	/**
 	 * Getter
 	 * @return The current image
@@ -86,16 +104,29 @@ public class Animation {
 	public Image getCurrentImage() {
 		return grid_.getImage(tab_[currentFrame_]);
 	}
-	
+
 	/**
 	 * Update the animation, must be called at least once a frame
 	 */
 	public void update() {
 		offsetCurrentFrame_ += (Game.getTime() - timeOnLastDraw_) / period_;
 		currentFrame_ += (int) (offsetCurrentFrame_);
+		if ( currentFrame_ == tab_.length ) {
+			cycleEnded_ = true;
+		} else {
+			cycleEnded_ = false;
+		}
 		currentFrame_ %= tab_.length;
 		offsetCurrentFrame_ -= Math.floor((double)(offsetCurrentFrame_));
 		timeOnLastDraw_ = Game.getTime();
 	}
-	
+
+	/**
+	 * True when the first image of the animation will be displayed in the coming cycle.
+	 * @return if the this is the end of the cycle of the animation
+	 */
+	public boolean cycleEnded() {
+		return cycleEnded_;
+	}
+
 }

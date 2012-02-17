@@ -33,8 +33,8 @@ public class ActorDrawer {
 		persistentEffect_.update();
 	}
 	
-	public void initializeAnimation(int resource, int picH, int picW) {
-		getAnim().initialize(resource, picH, picW);
+	public void initializeAnimation(int resource) {
+		getAnim().initialize(resource);
 	}
 	
 	public void setAnimation(int tab[], float period) {

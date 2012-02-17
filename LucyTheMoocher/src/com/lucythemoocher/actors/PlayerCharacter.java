@@ -1,6 +1,6 @@
 package com.lucythemoocher.actors;
 
-import java.util.ListIterator;
+import java.util.Iterator;
 
 import com.lucythemoocher.actors.maincharacter.state.*;
 
@@ -20,7 +20,7 @@ public class PlayerCharacter extends Actor {
 	 */
 	public PlayerCharacter(PlayerController controller) {
 		super();
-		getDrawer().initializeAnimation(R.drawable.lucy_states, 80, 76);
+		getDrawer().initializeAnimation(R.drawable.lucy_states);
 		getCinematic().addBox(50, 50, getH(), getW());
 		state_ = new StateNone(this, pos_, getDrawer().getAnim(), Direction.LEFT);
 		controller_ = controller;
@@ -97,7 +97,7 @@ public class PlayerCharacter extends Actor {
 	
 	// temporary
 	private void checkMonstersCollisions() {
-		ListIterator<Monster> it = Game.getMonstersManager().getIterator();
+		Iterator<Monster> it = Game.getMonstersManager().getIterator();
 		while (it.hasNext()) {
 			Monster monster = it.next();
 			if (collidesWith(monster)) {

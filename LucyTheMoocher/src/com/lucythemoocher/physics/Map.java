@@ -22,7 +22,7 @@ public class Map {
 		w_ = ll.getW();
 		map_ = ll.getMap();
 		
-		grid_ = new Grid(R.drawable.sets,32,32);
+		grid_ = new Grid(R.drawable.sets);
 	}
 	
 	/**

@@ -2,7 +2,6 @@ package com.lucythemoocher.graphics;
 
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
-import android.util.Log;
 
 public class Grid {
 	private Image fullImage_;
@@ -11,12 +10,32 @@ public class Grid {
 	private float height_;
 	private float width_;
 	
-	public Grid(int imgId, int height, int width) {
-		height_ = height;
-		width_ = width;
+	/**
+	 * Constructor<br/>
+	 * Create an array of images with one image<br/>
+	 * Warning, all the images in the full image must be
+	 * delimited by one pixel width of pink 0xFF00FF. Be sure that the 0xFF00FF
+	 * is only used for delimit the box.
+	 * @param imgId
+	 */
+	public Grid(int imgId) {
 		fullImage_ = new Image(imgId);
-		int ver = (int)fullImage_.h()/(height+2) ;
-		int hor = (int)fullImage_.w()/(width+2);
+		
+		for ( int i=1; i<fullImage_.getBitmap().getBitmap().getWidth(); i++ ) {
+			if ( fullImage_.getBitmap().getBitmap().getPixel(i,1) == -65281 ) {
+				width_ = i-1;
+				break;
+			}
+		}
+		for ( int j=1; j<fullImage_.getBitmap().getBitmap().getHeight(); j++ ) {
+			if ( fullImage_.getBitmap().getBitmap().getPixel(1,j) == -65281 ) {
+				height_ = j-1;
+				break;
+			}
+		}
+		
+		int ver = (int) ((int)fullImage_.h()/(height_+2)) ;
+		int hor = (int) ((int)fullImage_.w()/(width_+2));
 		
 		nbImg_ = ver*hor;
 		grid_ = new Image[nbImg_];
@@ -24,12 +43,17 @@ public class Grid {
 			for (int j=0; j<hor; j++) {
 				BitmapDrawable currBitmap = new BitmapDrawable(
 						Bitmap.createBitmap(fullImage_.getBitmap().getBitmap(),
-								(int)(1+j*(width+2)), (int)(1+i*(height+2)), (int)width, (int)height, null, true));
+								(int)(1+j*(width_+2)), (int)(1+i*(height_+2)), (int)width_, (int)height_, null, true));
 				grid_[i*hor+j] = new Image(currBitmap);
 			}
 		}
 	}
 	
+	/**
+	 * Get the image at position id
+	 * @param id
+	 * @return image at id
+	 */
 	public Image getImage(int id) {
 		//if ( id >= nbImg_ ) {
 		//	Log.w("Grid", "out of range : "+id+":"+nbImg_);
