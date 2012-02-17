@@ -58,7 +58,7 @@ class MoveLeft extends TankState {
 		context_.moveLeft();
 		if ( context_.pos_.hasLeftCollision() ) {
 			FX fx = new FX(R.drawable.spawning, 0, context_.pos_.x(), context_.pos_.y());
-			changeState(new MoveRight(context_));
+			changeState(new FireRight(context_));
 		}
 	}
 	
@@ -76,8 +76,39 @@ class MoveRight extends TankState {
 	public void update() {
 		context_.moveRight();
 		if ( context_.pos_.hasRightCollision() ) {
+			changeState(new FireLeft(context_));
+		}
+	}
+}
+
+class FireLeft extends TankState {
+
+	public FireLeft(Tank context) {
+		super(context);
+		int tab[] = {8,9,10,11};
+		context_.getDrawer().setAnimation(tab, 100);
+	}
+
+	@Override
+	public void update() {
+		if ( context_.getDrawer().getAnim().cycleEnded() ) {
 			changeState(new MoveLeft(context_));
 		}
 	}
-	
+}
+
+class FireRight extends TankState {
+
+	public FireRight(Tank context) {
+		super(context);
+		int tab[] = {12,13,14,15};
+		context_.getDrawer().setAnimation(tab, 100);
+	}
+
+	@Override
+	public void update() {
+		if ( context_.getDrawer().getAnim().cycleEnded() ) {
+			changeState(new MoveRight(context_));
+		}
+	}
 }
