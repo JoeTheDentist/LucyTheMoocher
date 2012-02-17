@@ -17,11 +17,27 @@ public class Cinematic {
 	protected float speedy_;
 	private float offsetx_;
 	private float offsety_;
+	private float normalSpeed_;
 	
 	private ArrayList<Box> boundingBoxes_;
 	
+	/**
+	 * Constructor
+	 */
 	public Cinematic() {
 		boundingBoxes_ = new ArrayList<Box>();
+		normalSpeed_ = MOVESPEED;
+		offsetx_ = 0.0f;
+		offsety_ = 0.0f;
+	}
+	
+	/**
+	 * Constructor with default speed
+	 * @param speed : default speed for walking
+	 */
+	public Cinematic(float speed) {
+		boundingBoxes_ = new ArrayList<Box>();
+		normalSpeed_ = speed;
 		offsetx_ = 0.0f;
 		offsety_ = 0.0f;
 	}
@@ -107,11 +123,11 @@ public class Cinematic {
 	}
 
 	public void moveLeft() {
-		speedx_ = -MOVESPEED;
+		speedx_ = -normalSpeed_;
 	}
 
 	public void moveRight() {
-		speedx_ = MOVESPEED;
+		speedx_ = normalSpeed_;
 	}
 
 	public void moveFastUp() {

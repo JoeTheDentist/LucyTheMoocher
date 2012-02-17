@@ -2,9 +2,11 @@ package com.lucythemoocher.graphics;
 
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.util.Log;
 
 public class Grid {
 	private Image fullImage_;
+	private int name_;
 	private Image grid_[];
 	private int nbImg_;
 	private float height_;
@@ -20,7 +22,9 @@ public class Grid {
 	 */
 	public Grid(int imgId) {
 		fullImage_ = new Image(imgId);
+		name_ = imgId;
 		
+		//Search the first occurrence of pink
 		for ( int i=1; i<fullImage_.getBitmap().getBitmap().getWidth(); i++ ) {
 			if ( fullImage_.getBitmap().getBitmap().getPixel(i,1) == -65281 ) {
 				width_ = i-1;
@@ -33,7 +37,6 @@ public class Grid {
 				break;
 			}
 		}
-		
 		int ver = (int) ((int)fullImage_.h()/(height_+2)) ;
 		int hor = (int) ((int)fullImage_.w()/(width_+2));
 		
@@ -55,9 +58,6 @@ public class Grid {
 	 * @return image at id
 	 */
 	public Image getImage(int id) {
-		//if ( id >= nbImg_ ) {
-		//	Log.w("Grid", "out of range : "+id+":"+nbImg_);
-		//}
 		return grid_[id%nbImg_];
 	}
 	

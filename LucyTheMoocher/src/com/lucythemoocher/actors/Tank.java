@@ -2,7 +2,7 @@ package com.lucythemoocher.actors;
 
 import com.lucythemoocher.R;
 import com.lucythemoocher.FX.FX;
-import com.lucythemoocher.physics.TankCinematic;
+import com.lucythemoocher.physics.Cinematic;
 
 public class Tank extends Monster {
 	
@@ -12,7 +12,7 @@ public class Tank extends Monster {
 		super();
 		
 		getDrawer().initializeAnimation(R.drawable.tank);
-		setCinematic(new TankCinematic());
+		setCinematic(new Cinematic(0.4f));
 		getCinematic().addBox(60, 1199, getH(), getW());
 		
 		state_ = new MoveLeft(this);
