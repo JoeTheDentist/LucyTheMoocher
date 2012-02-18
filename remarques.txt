@@ -1,0 +1,7 @@
+
+Game a tout en static...
+
+ActorManager ne sert à rien ?
+
+G: J'utilise une ref static des FX vers FXManager pour éviter de le passer en argument partout (ou par Game mais qui est static
+pour le moment) pour la construction, l'init se fait dans le constructeur de FXManager c'est pratique, mais est-ce pas trop dégueu ?
