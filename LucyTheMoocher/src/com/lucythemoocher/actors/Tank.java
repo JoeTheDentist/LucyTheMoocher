@@ -86,7 +86,7 @@ class FireLeft extends TankState {
 	public FireLeft(Tank context) {
 		super(context);
 		int tab[] = {8,9,10,11};
-		context_.getDrawer().setAnimation(tab, 100);
+		context_.getDrawer().setAnimation(tab, 70);
 	}
 
 	@Override
@@ -102,7 +102,7 @@ class FireRight extends TankState {
 	public FireRight(Tank context) {
 		super(context);
 		int tab[] = {12,13,14,15};
-		context_.getDrawer().setAnimation(tab, 100);
+		context_.getDrawer().setAnimation(tab, 70);
 	}
 
 	@Override

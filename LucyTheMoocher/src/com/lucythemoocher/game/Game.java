@@ -6,6 +6,7 @@ import com.lucythemoocher.FX.FXManager;
 import com.lucythemoocher.Globals.Globals;
 import com.lucythemoocher.actors.MonstersManager;
 import com.lucythemoocher.actors.PlayerCharacter;
+import com.lucythemoocher.actors.ProjectilesManager;
 import com.lucythemoocher.controls.PlayerController;
 import com.lucythemoocher.events.*;
 import com.lucythemoocher.graphics.Background;
@@ -21,7 +22,8 @@ public class Game {
 	private static Background background_;
 	private static Timer timer_;
 	private static MonstersManager monsters_; // temporary
-	private static FXManager fx_;
+	private static FXManager fx_; //temp
+	private static ProjectilesManager projectiles_;
 	
 	/**
 	 * Launch a game
@@ -41,6 +43,7 @@ public class Game {
 		
 		monsters_ = new MonstersManager();
 		fx_ = new FXManager();
+		projectiles_ = new ProjectilesManager();
 
 		event_ = new EventNormal();
 		background_ = new Background();
@@ -107,13 +110,15 @@ public class Game {
 		Globals.getInstance().getCamera().followPoint(getCharacter().getX(), getCharacter().getY());
 		monsters_.update();
 		fx_.update();
+		projectiles_.update();
 	}
 	
 	public static void render() {
 		getBackground().draw();
 		getMap().draw();
-		getCharacter().draw();	
+		projectiles_.render();
 		monsters_.render();
+		getCharacter().draw();
 		fx_.render();
 	}
 	
