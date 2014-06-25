@@ -5,7 +5,7 @@ package com.lucythemoocher.graphics;
 
 import java.util.LinkedList;
 
-import com.lucythemoocher.game.Game;
+import com.lucythemoocher.Globals.Globals;
 
 /**
  * Persistent effect which can be applied on any Drawable using pictures
@@ -41,7 +41,7 @@ public class PersistentEffect implements Drawable {
 	 * @param persistenceTime Time until the picture disappears in ms
 	 */
 	public void add(Image image, int x, int y, int persistenceTime) {
-		float currentTime = Game.getTime();
+		float currentTime = Globals.getInstance().getGame().getTime();
 		boolean hasDrawn = false;
 		if (lastDrawTime_ == 0) { // first add
 			list_.addLast(new PersistentPic(image, x, y, persistenceTime));
@@ -58,7 +58,7 @@ public class PersistentEffect implements Drawable {
 		if (hasDrawn) {
 			lastX_ = (int)x;
 			lastY_ = (int)y;
-			lastDrawTime_ = Game.getTime();
+			lastDrawTime_ = Globals.getInstance().getGame().getTime();
 		}
 	}
 	

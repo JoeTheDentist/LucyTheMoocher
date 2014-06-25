@@ -4,7 +4,6 @@ import java.util.Iterator;
 import java.util.LinkedList;
 
 import com.lucythemoocher.Globals.Globals;
-import com.lucythemoocher.game.Game;
 import com.lucythemoocher.graphics.Camera;
 import com.lucythemoocher.actors.PlayerCharacter;
 
@@ -92,7 +91,7 @@ public class PlayerController extends TouchListener {
 		}
 
 		if ( moveLeft ) {
-			if ( Game.getTime()-lastTouch_[LEFT] < DOUBLE_TOUCH_SENSIBILITY) {
+			if ( Globals.getInstance().getGame().getTime()-lastTouch_[LEFT] < DOUBLE_TOUCH_SENSIBILITY) {
 				player_.moveFastLeft();
 			} else {
 				if ( moveRight && lastTouch_[LEFT] < lastTouch_[RIGHT] ) {
@@ -102,7 +101,7 @@ public class PlayerController extends TouchListener {
 				}
 			}
 		} else if ( moveRight ) {
-			if ( Game.getTime()-lastTouch_[RIGHT] < DOUBLE_TOUCH_SENSIBILITY) {
+			if ( Globals.getInstance().getGame().getTime()-lastTouch_[RIGHT] < DOUBLE_TOUCH_SENSIBILITY) {
 				player_.moveFastRight();
 			} else {
 				player_.moveRight();
@@ -141,14 +140,14 @@ public class PlayerController extends TouchListener {
 
 	private void up(MotionEvent event) {
 		if ( pos_.size() == 1 ) {
-			lastTouch_[getPos(pos_.get(0))] = Game.getTime();
+			lastTouch_[getPos(pos_.get(0))] = Globals.getInstance().getGame().getTime();
 			pos_.clear();
 		} else {
 			Iterator<Point> it = pos_.iterator();
 			while ( it.hasNext() ) {
 				Point p = it.next();
 				if ( p.pid ==  event.getAction() >> MotionEvent.ACTION_POINTER_ID_SHIFT) {
-					lastTouch_[getPos(p)] = Game.getTime();
+					lastTouch_[getPos(p)] = Globals.getInstance().getGame().getTime();
 					it.remove();
 				}
 			}

@@ -6,7 +6,6 @@ import com.lucythemoocher.R;
 import com.lucythemoocher.Globals.Globals;
 import com.lucythemoocher.controls.GlobalController;
 import com.lucythemoocher.controls.KeysListener;
-import com.lucythemoocher.game.Game;
 import com.lucythemoocher.gui.MenuButton;
 import com.lucythemoocher.gui.MenuButtonListener;
 import com.lucythemoocher.util.Timer;
@@ -41,7 +40,7 @@ public class LoopPause extends Loop implements MenuButtonListener, KeysListener 
 
 
 	public void render() {
-		Game.render();
+		Globals.getInstance().getGame().render();
 		buttonResume_.draw();
 		buttonLeaveGame_.draw();
 	}

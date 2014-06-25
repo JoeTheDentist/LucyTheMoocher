@@ -1,10 +1,10 @@
 package com.lucythemoocher.events;
 
-import com.lucythemoocher.game.Game;
+import com.lucythemoocher.Globals.Globals;
 
 public class EventSlow extends Event{
 	public EventSlow() {
 		speed_ = (float) 0.5;
-		Game.setSpeed(speed_);
+		Globals.getInstance().getGame().setSpeed(speed_);
 	}
 }

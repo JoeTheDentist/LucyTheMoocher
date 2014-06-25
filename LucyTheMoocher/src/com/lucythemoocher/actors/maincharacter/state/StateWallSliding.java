@@ -1,7 +1,7 @@
 package com.lucythemoocher.actors.maincharacter.state;
 
+import com.lucythemoocher.Globals.Globals;
 import com.lucythemoocher.actors.PlayerCharacter;
-import com.lucythemoocher.game.Game;
 import com.lucythemoocher.graphics.Animation;
 import com.lucythemoocher.physics.Cinematic;
 
@@ -18,13 +18,13 @@ public class StateWallSliding extends State {
 			int tab[] = {12,13,14,15};
 			anim_.setAnimation(tab, ANIMATION_SPEED);
 		}
-		begin_ = Game.getTime();
+		begin_ = Globals.getInstance().getGame().getTime();
 	}
 
 	@Override
 	public void update() {
 		super.update();
-		if ( Game.getTime() - begin_ > WALL_WALKING_PAUSE ) {
+		if ( Globals.getInstance().getGame().getTime() - begin_ > WALL_WALKING_PAUSE ) {
 			pc_.changeState(new StateFalling(pc_, pos_, anim_, dir_));
 		}
 

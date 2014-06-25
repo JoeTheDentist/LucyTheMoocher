@@ -1,7 +1,6 @@
 package com.lucythemoocher.graphics;
 
 import com.lucythemoocher.Globals.Globals;
-import com.lucythemoocher.game.Game;
 
 /**
  * Auxiliary class for PersistentEffect.
@@ -31,7 +30,7 @@ public class PersistentPic implements Drawable {
 		image_ = image;
 		x_ = x;
 		y_ = y;
-		timeOnCreation_ = (int)Game.getTime();
+		timeOnCreation_ = (int)Globals.getInstance().getGame().getTime();
 		timeLife_ = timeLife;
 	}
 	
@@ -40,7 +39,7 @@ public class PersistentPic implements Drawable {
 	 * @return True if the picture has to be destroyed
 	 */
 	public boolean isDead() {
-		return Game.getTime() - timeOnCreation_ > timeLife_;
+		return Globals.getInstance().getGame().getTime() - timeOnCreation_ > timeLife_;
 	}
 	
 	/**
@@ -48,7 +47,7 @@ public class PersistentPic implements Drawable {
 	 */
 	public void draw() {
 		int previousAlpha = image_.getBitmap().getPaint().getAlpha();
-		image_.getBitmap().getPaint().setAlpha(255 - (((int)Game.getTime() - timeOnCreation_) * 255) / timeLife_);
+		image_.getBitmap().getPaint().setAlpha(255 - (((int)Globals.getInstance().getGame().getTime() - timeOnCreation_) * 255) / timeLife_);
 		Globals.getInstance().getCamera().drawImage(x_, y_, image_);
 		image_.getBitmap().getPaint().setAlpha(previousAlpha);
 	}

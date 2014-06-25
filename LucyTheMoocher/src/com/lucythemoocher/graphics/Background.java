@@ -6,7 +6,6 @@ import android.graphics.drawable.BitmapDrawable;
 
 import com.lucythemoocher.R;
 import com.lucythemoocher.Globals.Globals;
-import com.lucythemoocher.game.Game;
 import com.lucythemoocher.util.MathUtil;
 import com.lucythemoocher.util.Resources;
 
@@ -41,8 +40,8 @@ public class Background implements Drawable {
 		backgroundUp_ = new Grid(R.drawable.background_up);
 		backgroundDown_ = new Grid(R.drawable.background_down);
 		backgroundMiddle_ = new Grid(R.drawable.background_middle);
-		pxH_ = Game.getMap().pxH()*Camera.BACKGROUNDSPEED + 2*Globals.getInstance().getCamera().h();
-		pxW_ = Game.getMap().pxW()*Camera.BACKGROUNDSPEED + 2*Globals.getInstance().getCamera().w();
+		pxH_ = Globals.getInstance().getGame().getMap().pxH()*Camera.BACKGROUNDSPEED + 2*Globals.getInstance().getCamera().h();
+		pxW_ = Globals.getInstance().getGame().getMap().pxW()*Camera.BACKGROUNDSPEED + 2*Globals.getInstance().getCamera().w();
 		nbBoxH_ = (int) (pxH_/backgroundDown_.boxH());
 		nbBoxW_ = (int) (pxW_/backgroundDown_.boxW());
 		mapping_ = new int[nbBoxH_][nbBoxW_];

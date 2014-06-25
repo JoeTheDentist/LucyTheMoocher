@@ -1,7 +1,6 @@
 package com.lucythemoocher.graphics;
 
 import com.lucythemoocher.Globals.Globals;
-import com.lucythemoocher.game.Game;
 
 public class Animation {
 	private Grid grid_;
@@ -55,7 +54,7 @@ public class Animation {
 		grid_ = new Grid(resource);
 		int t[] = {0};
 		setAnimation(t, 1);
-		timeOnLastDraw_ = Game.getTime();
+		timeOnLastDraw_ = Globals.getInstance().getGame().getTime();
 	}
 
 	/**
@@ -109,7 +108,7 @@ public class Animation {
 	 * Update the animation, must be called at least once a frame
 	 */
 	public void update() {
-		offsetCurrentFrame_ += (Game.getTime() - timeOnLastDraw_) / period_;
+		offsetCurrentFrame_ += (Globals.getInstance().getGame().getTime() - timeOnLastDraw_) / period_;
 		currentFrame_ += (int) (offsetCurrentFrame_);
 		if ( currentFrame_ == tab_.length ) {
 			cycleEnded_ = true;
@@ -118,7 +117,7 @@ public class Animation {
 		}
 		currentFrame_ %= tab_.length;
 		offsetCurrentFrame_ -= Math.floor((double)(offsetCurrentFrame_));
-		timeOnLastDraw_ = Game.getTime();
+		timeOnLastDraw_ = Globals.getInstance().getGame().getTime();
 	}
 
 	/**

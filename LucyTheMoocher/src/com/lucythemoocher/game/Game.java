@@ -15,20 +15,20 @@ import com.lucythemoocher.util.Timer;
 import com.lucythemoocher.R;
 
 public class Game {
-	private static PlayerCharacter character_;
-	private static Map map_;
-	private static int nbUpdates = 0;
-	private static Event event_;
-	private static Background background_;
-	private static Timer timer_;
-	private static MonstersManager monsters_; // temporary
-	private static FXManager fx_; //temp
-	private static ProjectilesManager projectiles_;
+	private PlayerCharacter character_;
+	private Map map_;
+	private int nbUpdates = 0;
+	private Event event_;
+	private Background background_;
+	private Timer timer_;
+	private MonstersManager monsters_; // temporary
+	private FXManager fx_; //temp
+	private ProjectilesManager projectiles_;
 	
 	/**
 	 * Launch a game
 	 */
-	public static void launchGame(int lvl) {
+	public void launchGame(int lvl) {
 		Log.d("Game", "launchGame");
 		timer_ = new Timer(0);
 		character_ = new PlayerCharacter(new PlayerController());
@@ -56,7 +56,7 @@ public class Game {
 	 * twice slower. Default value is 1.0f
 	 * @param factorDt
 	 */
-	public static void setSpeed(float factorDt) {
+	public void setSpeed(float factorDt) {
 		timer_.setFactor(factorDt);
 	}
 	
@@ -64,7 +64,7 @@ public class Game {
 	 * Getter
 	 * @return The current map
 	 */
-	public static Map getMap() {
+	public Map getMap() {
 		return map_;
 	}
 	
@@ -72,7 +72,7 @@ public class Game {
 	 * Getter
 	 * @return Current event
 	 */
-	public static Event getEvent() {
+	public Event getEvent() {
 		return event_;
 	}
 	
@@ -80,7 +80,7 @@ public class Game {
 	 * Getter
 	 * @return The main character
 	 */
-	public static PlayerCharacter getCharacter() {
+	public PlayerCharacter getCharacter() {
 		return character_;
 	}
 	
@@ -88,7 +88,7 @@ public class Game {
 	 * Getter
 	 * @return Monsters Manager
 	 */
-	public static MonstersManager getMonstersManager() {
+	public MonstersManager getMonstersManager() {
 		return monsters_;
 	}
 	
@@ -96,14 +96,14 @@ public class Game {
 	 * Getter
 	 * @return Level's background
 	 */
-	public static Background getBackground() {
+	public Background getBackground() {
 		return background_;
 	}
 	
 	/**
 	 * Update the game 
 	 */
-	public static void update() {
+	public void update() {
 		nbUpdates++;
 		timer_.addDt(Globals.getInstance().getTimer().getDt());
 		getCharacter().update();
@@ -113,7 +113,7 @@ public class Game {
 		projectiles_.update();
 	}
 	
-	public static void render() {
+	public void render() {
 		getBackground().draw();
 		getMap().draw();
 		projectiles_.render();
@@ -126,7 +126,7 @@ public class Game {
 	 * Getter
 	 * @return Number of frames since the begining
 	 */
-	public static int getTick() {
+	public int getTick() {
 		return nbUpdates;
 	}
 	
@@ -138,7 +138,7 @@ public class Game {
 	 * or accelerated by events. However, it doesn't depend on the
 	 * hardware speed)
 	 */
-	public static float getTime() {
+	public float getTime() {
 		return timer_.getTime();
 	}
 	
@@ -146,7 +146,7 @@ public class Game {
 	 * Getter
 	 * @return Time elapsed between the two last frames in ms
 	 */
-	public static float getDt() {
+	public float getDt() {
 		return timer_.getDt();
 	}
 

@@ -2,10 +2,10 @@ package com.lucythemoocher.actors;
 
 import java.util.Iterator;
 
+import com.lucythemoocher.Globals.Globals;
 import com.lucythemoocher.actors.maincharacter.state.*;
 
 import com.lucythemoocher.controls.PlayerController;
-import com.lucythemoocher.game.Game;
 import com.lucythemoocher.R;
 
 public class PlayerCharacter extends Actor {
@@ -26,7 +26,6 @@ public class PlayerCharacter extends Actor {
 		controller_ = controller;
 		controller_.setPlayer(this);
 	}
-
 	
 	/**
 	 * Update the character
@@ -97,7 +96,7 @@ public class PlayerCharacter extends Actor {
 	
 	// temporary
 	private void checkMonstersCollisions() {
-		Iterator<Monster> it = Game.getMonstersManager().getIterator();
+		Iterator<Monster> it = Globals.getInstance().getGame().getMonstersManager().getIterator();
 		while (it.hasNext()) {
 			Monster monster = it.next();
 			if (collidesWith(monster)) {

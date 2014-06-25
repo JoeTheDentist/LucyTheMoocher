@@ -1,7 +1,8 @@
 package com.lucythemoocher.physics;
 
 import java.util.ArrayList;
-import com.lucythemoocher.game.Game;
+
+import com.lucythemoocher.Globals.Globals;
 import com.lucythemoocher.util.MathUtil;
 
 public class Cinematic {
@@ -68,8 +69,8 @@ public class Cinematic {
 	
 
 	private void updatePos() {
-		float tempx = speedx() * Game.getDt() + offsetx_;
-		float tempy = speedy() * Game.getDt() + offsety_;
+		float tempx = speedx() * Globals.getInstance().getGame().getDt() + offsetx_;
+		float tempy = speedy() * Globals.getInstance().getGame().getDt() + offsety_;
 		int movex = (int)tempx;
 		int movey = (int)tempy;
 		if (tempx > 0)
@@ -77,17 +78,17 @@ public class Cinematic {
 		else 
 			offsetx_ = tempx - (float)Math.ceil((double)tempx); 
 
-		for ( int i=0; i< Math.abs(movex) && !Game.getMap().hasCollision(boundingBoxes_) ; i++ ) {
+		for ( int i=0; i< Math.abs(movex) && !Globals.getInstance().getGame().getMap().hasCollision(boundingBoxes_) ; i++ ) {
 			posx_ += MathUtil.sign(movex);
 		}
-		if ( Game.getMap().hasCollision(boundingBoxes_) ) {
+		if ( Globals.getInstance().getGame().getMap().hasCollision(boundingBoxes_) ) {
 			posx_ -= MathUtil.sign(movex);
 			speedx_ *= 0;
 		}
-		for ( int i=0; i< (int)Math.abs(movey) && !Game.getMap().hasCollision(boundingBoxes_) ; i++ ) {
+		for ( int i=0; i< (int)Math.abs(movey) && !Globals.getInstance().getGame().getMap().hasCollision(boundingBoxes_) ; i++ ) {
 			posy_ += MathUtil.sign(movey);
 		}
-		if ( Game.getMap().hasCollision(boundingBoxes_) ) {
+		if ( Globals.getInstance().getGame().getMap().hasCollision(boundingBoxes_) ) {
 			posy_ -= MathUtil.sign(movey);
 			speedy_ = 0;
 		}
@@ -143,19 +144,19 @@ public class Cinematic {
 	}
 
 	private void updateNormalSpeed() {
-		speedy_ += GRAVITY * Game.getDt();
+		speedy_ += GRAVITY * Globals.getInstance().getGame().getDt();
 	}
 	
 	public boolean hasDownCollision() {
-		return Game.getMap().hasDownCollision(boundingBoxes_);
+		return Globals.getInstance().getGame().getMap().hasDownCollision(boundingBoxes_);
 	}
 	
 	public boolean hasLeftCollision() {
-		return Game.getMap().hasLeftCollision(boundingBoxes_);
+		return Globals.getInstance().getGame().getMap().hasLeftCollision(boundingBoxes_);
 	}
 	
 	public boolean hasRightCollision() {
-		return Game.getMap().hasRightCollision(boundingBoxes_);
+		return Globals.getInstance().getGame().getMap().hasRightCollision(boundingBoxes_);
 	}
 	
 	/**

@@ -1,6 +1,5 @@
 package com.lucythemoocher;
 
-import com.lucythemoocher.game.Game;
 import com.lucythemoocher.game.GameThread;
 import com.lucythemoocher.util.Resources;
 import com.lucythemoocher.Globals.Globals;
