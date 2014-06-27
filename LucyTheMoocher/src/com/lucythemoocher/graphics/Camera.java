@@ -98,23 +98,27 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 	/**
 	 * Must be called before renderings
 	 * This locking is currently handled in the MasterLoop
+	 * @return true if managed to create the canvas
 	 * @see #unlockScreen()
 	 * @see MasterLoop
 	 */
-	public void lockScreen() {
+	public boolean lockScreen() {
 		canvas_ = getHolder().lockCanvas();
-		canvas_.scale(scale_, scale_);
+		if ( canvas_ != null ) {
+			//TODO find a clearer to handle scale (and move it out of here)
+			canvas_.scale(scale_, scale_);
+		}
+		return canvas_ != null;
 	}
 	
 	/**
 	 * Must be called after renderings, to unlock canvas
+	 * Assumes the canvas is not null
 	 * @see #lockScreen()
 	 */
 	public void unlockScreen() {
-		if ( canvas_ != null ) {
-			canvas_.scale(1.0f, 1.0f);
-			getHolder().unlockCanvasAndPost(canvas_);
-		}
+		canvas_.scale(1.0f, 1.0f);
+		getHolder().unlockCanvasAndPost(canvas_);
 	}
 	
 	/**
