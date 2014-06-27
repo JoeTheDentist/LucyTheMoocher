@@ -57,7 +57,7 @@ public class MasterLoop {
 				loop_.render();
 				cam.unlockScreen();
 			}
-			Log.w("MasterLoop", "Failing to draw, canvas not ready.");
+			//Log.w("MasterLoop", "Failing to draw, canvas not ready.");
 		}
 		
 	}

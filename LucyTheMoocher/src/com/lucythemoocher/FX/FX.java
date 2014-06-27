@@ -1,5 +1,6 @@
 package com.lucythemoocher.FX;
 
+import com.lucythemoocher.Globals.Globals;
 import com.lucythemoocher.graphics.Animation;
 import com.lucythemoocher.graphics.Drawable;
 
@@ -13,12 +14,6 @@ public class FX implements Drawable {
 	private float x_;
 	private float y_;
 	
-	private static FXManager MANAGER_;
-	
-	static void setManager(FXManager manager) {
-		MANAGER_ = manager;
-	}
-	
 	/**
 	 * Constructor
 	 * @param resourceImg : resource of the image
@@ -30,7 +25,7 @@ public class FX implements Drawable {
 		anim_ = new Animation(resourceImg, true);
 		x_ = x;
 		y_ = y;
-		MANAGER_.add(this);
+		Globals.getInstance().getGame().getFXManager().add(this);
 	}
 	
 	/**

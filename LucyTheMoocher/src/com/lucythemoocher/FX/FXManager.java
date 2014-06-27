@@ -10,8 +10,6 @@ public class FXManager {
 	 * Constructor
 	 */
 	public FXManager() {
-		//Oui c'est moche !
-		FX.setManager(this);
 		fx_ = new LinkedList<FX>();
 	}
 	

@@ -94,6 +94,14 @@ public class Game {
 	
 	/**
 	 * Getter
+	 * @return FXManager
+	 */
+	public FXManager getFXManager() {
+		return fx_;
+	}
+	
+	/**
+	 * Getter
 	 * @return Level's background
 	 */
 	public Background getBackground() {

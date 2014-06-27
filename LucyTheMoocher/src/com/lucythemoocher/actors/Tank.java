@@ -13,7 +13,7 @@ public class Tank extends Monster {
 		
 		getDrawer().initializeAnimation(R.drawable.tank);
 		setCinematic(new Cinematic(0.4f));
-		getCinematic().addBox(60, 1199, getH(), getW());
+		getCinematic().addBox(100, 100, getH(), getW());
 		
 		state_ = new MoveLeft(this);
 	}

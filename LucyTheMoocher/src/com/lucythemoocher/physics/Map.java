@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import com.lucythemoocher.Globals.Globals;
 import com.lucythemoocher.graphics.Grid;
-import com.lucythemoocher.graphics.Camera;
 import com.lucythemoocher.R;
 
 public class Map {
@@ -146,7 +145,6 @@ public class Map {
 	}
 
 	public void draw() {
-		drawContour();
 		for (int i=0; i<h_; i++) {
 			for (int j=0; j<w_; j++) {
 				if ( map_[i][j] != 0 ) {
@@ -154,50 +152,5 @@ public class Map {
 				}
 			}
 		}
-	}
-	
-	private void drawContour() {
-		Camera cam = Globals.getInstance().getCamera();
-		//Horizontal
-		for (int j=2; j<w_+2; j++) {
-			cam.drawImage((j-2)*grid_.boxW(),-2*grid_.boxH(), grid_.getImage(16));
-			cam.drawImage((j-2)*grid_.boxW(),-grid_.boxH(), grid_.getImage(10));
-			
-			cam.drawImage((j-2)*grid_.boxW(),(h_)*grid_.boxH(), grid_.getImage(16));
-			cam.drawImage((j-2)*grid_.boxW(),(h_+1)*grid_.boxH(), grid_.getImage(10));
-		}
-		
-		//Vertical
-		for (int i=2; i<h_+2; i++) {
-			cam.drawImage(-2*grid_.boxW(),(i-2)*grid_.boxH(), grid_.getImage(14));
-			cam.drawImage(-grid_.boxW(),(i-2)*grid_.boxH(), grid_.getImage(12));
-			
-			cam.drawImage((w_)*grid_.boxW(),(i-2)*grid_.boxH(), grid_.getImage(14));
-			cam.drawImage((w_+1)*grid_.boxW(),(i-2)*grid_.boxH(), grid_.getImage(12));
-		}
-		
-		//Top left
-		cam.drawImage(-2*grid_.boxW(),-2*grid_.boxH(), grid_.getImage(0));
-		cam.drawImage(-2*grid_.boxW(),-1*grid_.boxH(), grid_.getImage(14));
-		cam.drawImage(-1*grid_.boxW(),-2*grid_.boxH(), grid_.getImage(16));
-		cam.drawImage(-1*grid_.boxW(),-1*grid_.boxH(), grid_.getImage(9));
-		
-		//Top right
-		cam.drawImage((w_+1)*grid_.boxW(),-2*grid_.boxH(), grid_.getImage(2));
-		cam.drawImage((w_+1)*grid_.boxW(),-1*grid_.boxH(), grid_.getImage(12));
-		cam.drawImage((w_)*grid_.boxW(),-2*grid_.boxH(), grid_.getImage(16));
-		cam.drawImage((w_)*grid_.boxW(),-1*grid_.boxH(), grid_.getImage(11));
-		
-		//Bottom left
-		cam.drawImage(-2*grid_.boxW(),(h_+1)*grid_.boxH(), grid_.getImage(6));
-		cam.drawImage(-1*grid_.boxW(),(h_+1)*grid_.boxH(), grid_.getImage(10));
-		cam.drawImage(-2*grid_.boxW(),(h_)*grid_.boxH(), grid_.getImage(14));
-		cam.drawImage(-1*grid_.boxW(),(h_)*grid_.boxH(), grid_.getImage(15));
-		
-		//Top right
-		cam.drawImage((w_+1)*grid_.boxW(),(h_+1)*grid_.boxH(), grid_.getImage(8));
-		cam.drawImage((w_)*grid_.boxW(),(h_+1)*grid_.boxH(), grid_.getImage(10));
-		cam.drawImage((w_+1)*grid_.boxW(),(h_)*grid_.boxH(), grid_.getImage(12));
-		cam.drawImage((w_)*grid_.boxW(),(h_)*grid_.boxH(), grid_.getImage(17));
 	}
 }
