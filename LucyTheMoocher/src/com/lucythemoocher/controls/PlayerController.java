@@ -155,17 +155,12 @@ public class PlayerController extends TouchListener {
 			if ( p.y < cam.physicalH()/5) {
 				pushed_[UP] = true;
 			}
-			if ( p.x > 4*cam.physicalW()/5 &&
-					p.y > cam.physicalH()/5 &&
-					p.y < 4*cam.physicalH()/5) {
+			if ( p.x > 4*cam.physicalW()/5) {
 				pushed_[RIGHT] = true;
 			}
-			if (p.x < cam.physicalW()/5 &&
-					p.y > cam.physicalH()/5 &&
-					p.y < 4*cam.physicalH()/5) {
+			if (p.x < cam.physicalW()/5) {
 				pushed_[LEFT] = true;
 			}
-
 			if ( p.y > 4*cam.physicalH()/5) {
 				pushed_[DOWN] = true;
 			}
