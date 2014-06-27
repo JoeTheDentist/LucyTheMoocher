@@ -25,6 +25,9 @@ public class StateRunning extends State {
 		} else {
 			pos_.moveRight();
 		}
+		if ( !pos_.hasDownCollision() ) {
+			pc_.changeState(new StateFalling(pc_, pos_, anim_, dir_));
+		}
 	}
 
 	@Override
