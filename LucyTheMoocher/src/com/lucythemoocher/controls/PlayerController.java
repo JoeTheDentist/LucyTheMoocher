@@ -24,7 +24,7 @@ public class PlayerController extends TouchListener {
 	private static final float DOUBLE_TOUCH_SENSIBILITY = 200;
 
 	private float[] lastTouch_;
-	private boolean[][] pushed_;
+	private boolean[] pushed_;
 	private LinkedList<Point> pos_;
 	private PlayerCharacter player_;
 
@@ -34,7 +34,7 @@ public class PlayerController extends TouchListener {
 	public PlayerController() {
 		lastTouch_ = new float[5];
 		player_ = null;
-		pushed_ = new boolean[4][3]; //on suppose qu'on a que trois points au max
+		pushed_ = new boolean[4];
 		pos_ = new LinkedList<Point>();
 	}
 
@@ -72,7 +72,7 @@ public class PlayerController extends TouchListener {
 		boolean allDown = true;
 		for ( int i=0; i<4; i++) {
 			for ( int j=0; j<3; j++) {
-				allDown &= !pushed_[i][j];
+				allDown &= !pushed_[i];
 			}
 		}
 		if ( allDown ) {
@@ -80,15 +80,8 @@ public class PlayerController extends TouchListener {
 			return;
 		}
 
-		boolean moveLeft = false;
-		for ( int i=0; i<3; i++) {
-			moveLeft |= pushed_[LEFT][i];
-		}
-
-		boolean moveRight = false;
-		for ( int i=0; i<3; i++) {
-			moveRight |= pushed_[RIGHT][i];
-		}
+		boolean moveLeft = pushed_[LEFT];
+		boolean moveRight = pushed_[RIGHT];
 
 		if ( moveLeft ) {
 			if ( Globals.getInstance().getGame().getTime()-lastTouch_[LEFT] < DOUBLE_TOUCH_SENSIBILITY) {
@@ -111,18 +104,12 @@ public class PlayerController extends TouchListener {
 			player_.moveStop();
 		}
 
-		boolean moveUp = false;
-		for ( int i=0; i<3; i++) {
-			moveUp |= pushed_[UP][i];
-		}
+		boolean moveUp = pushed_[UP];
 		if ( moveUp ) {
 			player_.moveUp();
 		}
 
-		boolean moveDown = false;
-		for ( int i=0; i<3; i++) {
-			moveDown |= pushed_[DOWN][i];
-		}
+		boolean moveDown = pushed_[DOWN];
 		if ( moveDown ) {
 			player_.moveDown();
 		}
@@ -161,31 +148,27 @@ public class PlayerController extends TouchListener {
 		Camera cam = Globals.getInstance().getCamera();
 
 		for ( int i=0; i<4; i++) {
-			for ( int j=0; j<3; j++) {
-				pushed_[i][j] = false;
-			}
+			pushed_[i] = false;
 		}
-
-		int i = 0;
+		
 		for ( Point p : pos_ ) {
 			if ( p.y < cam.physicalH()/5) {
-				pushed_[UP][i] = true;
+				pushed_[UP] = true;
 			}
 			if ( p.x > 4*cam.physicalW()/5 &&
 					p.y > cam.physicalH()/5 &&
 					p.y < 4*cam.physicalH()/5) {
-				pushed_[RIGHT][i] = true;
+				pushed_[RIGHT] = true;
 			}
 			if (p.x < cam.physicalW()/5 &&
 					p.y > cam.physicalH()/5 &&
 					p.y < 4*cam.physicalH()/5) {
-				pushed_[LEFT][i] = true;
+				pushed_[LEFT] = true;
 			}
 
 			if ( p.y > 4*cam.physicalH()/5) {
-				pushed_[DOWN][i] = true;
+				pushed_[DOWN] = true;
 			}
-			i++;
 		}
 	}
 

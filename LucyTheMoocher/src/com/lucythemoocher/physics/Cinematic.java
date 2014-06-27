@@ -73,17 +73,17 @@ public class Cinematic {
 		float tempy = speedy() * Globals.getInstance().getGame().getDt() + offsety_;
 		int movex = (int)tempx;
 		int movey = (int)tempy;
-		if (tempx > 0)
+		if ( tempx > 0 ) {
 			offsetx_ = tempx - (float)Math.floor((double)tempx);
-		else 
+		} else {
 			offsetx_ = tempx - (float)Math.ceil((double)tempx); 
-
+		}
 		for ( int i=0; i< Math.abs(movex) && !Globals.getInstance().getGame().getMap().hasCollision(boundingBoxes_) ; i++ ) {
 			posx_ += MathUtil.sign(movex);
 		}
 		if ( Globals.getInstance().getGame().getMap().hasCollision(boundingBoxes_) ) {
 			posx_ -= MathUtil.sign(movex);
-			speedx_ *= 0;
+			speedx_ = 0;
 		}
 		for ( int i=0; i< (int)Math.abs(movey) && !Globals.getInstance().getGame().getMap().hasCollision(boundingBoxes_) ; i++ ) {
 			posy_ += MathUtil.sign(movey);
