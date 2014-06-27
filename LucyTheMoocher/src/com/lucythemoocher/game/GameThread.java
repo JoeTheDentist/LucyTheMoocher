@@ -12,10 +12,9 @@ public class GameThread extends Thread {
 	private long timeDiff_;
 	private int framesSkipped_;
 
-	private static final int MAX_FPS = 50;
+	private static final int MAX_FPS = 30;
 	private static final int MAX_FRAME_SKIPS = 5;
-	private static final int FRAME_PERIOD = 1000 / MAX_FPS; 
-
+	private static final int FRAME_PERIOD = 1000 / MAX_FPS;
 
 	public void setRunning(boolean running) {
 		this.running = running;
@@ -30,10 +29,9 @@ public class GameThread extends Thread {
 			beginTime_ = System.currentTimeMillis();
 			framesSkipped_ = 0;
 
-			
 			update();
 			render();
-			/*
+			
 			timeDiff_ = System.currentTimeMillis() - beginTime_;
 			
 			sleepTime = (int)(FRAME_PERIOD - timeDiff_);
@@ -50,7 +48,6 @@ public class GameThread extends Thread {
 				sleepTime += FRAME_PERIOD;
 				framesSkipped_++;
 			}
-			*/
 			
 		}
 		
