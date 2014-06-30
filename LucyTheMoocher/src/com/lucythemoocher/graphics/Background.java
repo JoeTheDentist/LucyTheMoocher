@@ -1,13 +1,8 @@
 package com.lucythemoocher.graphics;
 
-import java.io.InputStream;
-
-import android.graphics.drawable.BitmapDrawable;
-
 import com.lucythemoocher.R;
 import com.lucythemoocher.Globals.Globals;
 import com.lucythemoocher.util.MathUtil;
-import com.lucythemoocher.util.Resources;
 
 /**
  * Background of the level\n
@@ -19,7 +14,6 @@ import com.lucythemoocher.util.Resources;
  */
 public class Background implements Drawable {
 
-	private Image background_;
 	private Grid backgroundUp_;
 	private Grid backgroundDown_;
 	private Grid backgroundMiddle_;
@@ -34,9 +28,6 @@ public class Background implements Drawable {
 	 * @todo 
 	 */
 	public Background() {
-		InputStream is = Resources.openRawRessources(R.drawable.background1);
-		BitmapDrawable bd = new BitmapDrawable(is);
-		background_ = new Image(bd);
 		backgroundUp_ = new Grid(R.drawable.background_up);
 		backgroundDown_ = new Grid(R.drawable.background_down);
 		backgroundMiddle_ = new Grid(R.drawable.background_middle);
@@ -102,14 +93,6 @@ public class Background implements Drawable {
 				}
 			}
 		}
-	}
-	
-	/**
-	 * Getter
-	 * @return The image of the Background
-	 */
-	public Image getImage() {
-		return background_;
 	}
 	
 	private Image getImage(int i, int j) {
