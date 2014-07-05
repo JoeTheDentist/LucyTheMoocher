@@ -5,12 +5,13 @@ import java.util.Iterator;
 import com.lucythemoocher.Globals.Globals;
 import com.lucythemoocher.actors.maincharacter.state.*;
 
-import com.lucythemoocher.controls.PlayerController;
+import com.lucythemoocher.controls.Controllable;
+import com.lucythemoocher.controls.ActionController;
 import com.lucythemoocher.R;
 
-public class PlayerCharacter extends Actor {
+public class PlayerCharacter extends Actor implements Controllable {
 	private State state_;
-	private PlayerController controller_;
+	private ActionController controller_;
 	
 	/**
 	 * Constructor. The controller will be attached with 
@@ -18,13 +19,13 @@ public class PlayerCharacter extends Actor {
 	 * to do it outside
 	 * @param controller Player's controller
 	 */
-	public PlayerCharacter(PlayerController controller) {
+	public PlayerCharacter(ActionController controller) {
 		super();
 		getDrawer().initializeAnimation(R.drawable.lucy_states);
 		getCinematic().addBox(100, 100, getH(), getW());
 		state_ = new StateNone(this, pos_, getDrawer().getAnim(), Direction.LEFT);
 		controller_ = controller;
-		controller_.setPlayer(this);
+		controller_.setControllable(this);
 	}
 	
 	/**

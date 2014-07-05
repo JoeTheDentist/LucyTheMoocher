@@ -54,6 +54,7 @@ public class MasterLoop {
 		Camera cam = Globals.getInstance().getCamera();
 		if (cam.canDraw()) {
 			if (cam.lockScreen()) {
+				cam.prepare();
 				loop_.render();
 				cam.unlockScreen();
 			}

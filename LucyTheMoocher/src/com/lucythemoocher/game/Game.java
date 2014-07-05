@@ -7,9 +7,10 @@ import com.lucythemoocher.Globals.Globals;
 import com.lucythemoocher.actors.MonstersManager;
 import com.lucythemoocher.actors.PlayerCharacter;
 import com.lucythemoocher.actors.ProjectilesManager;
-import com.lucythemoocher.controls.PlayerController;
+import com.lucythemoocher.controls.ActionController;
 import com.lucythemoocher.events.*;
 import com.lucythemoocher.graphics.Background;
+import com.lucythemoocher.graphics.HUD;
 import com.lucythemoocher.physics.Map;
 import com.lucythemoocher.util.Timer;
 import com.lucythemoocher.R;
@@ -24,6 +25,7 @@ public class Game {
 	private MonstersManager monsters_; // temporary
 	private FXManager fx_; //temp
 	private ProjectilesManager projectiles_;
+	private HUD hud_;
 	
 	/**
 	 * Launch a game
@@ -31,7 +33,8 @@ public class Game {
 	public void launchGame(int lvl) {
 		Log.d("Game", "launchGame");
 		timer_ = new Timer(0);
-		character_ = new PlayerCharacter(new PlayerController());
+		character_ = new PlayerCharacter(new ActionController());
+		hud_ = new HUD(new ActionController());
 		switch (lvl) {
 		case 1:
 			map_ = new Map(R.raw.lvl1);
@@ -119,6 +122,7 @@ public class Game {
 		monsters_.update();
 		fx_.update();
 		projectiles_.update();
+		hud_.update();
 	}
 	
 	public void render() {
@@ -128,6 +132,7 @@ public class Game {
 		monsters_.render();
 		getCharacter().draw();
 		fx_.render();
+		hud_.draw();
 	}
 	
 	/**

@@ -7,6 +7,7 @@ import com.lucythemoocher.physics.Box;
 import com.lucythemoocher.util.Resources;
 
 import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.graphics.PointF;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -35,9 +36,8 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 	private float currX_;
 	private float currY_;
 	private float scale_; // coefficient depending on hardware screen's size
-
-
 	private boolean canDraw_ = false;
+	
 	/**
 	 * Constructor
 	 * @param context
@@ -58,8 +58,6 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 		setSpeed(1.0f / 30.0f);
 		this.requestFocus();
 		this.setFocusableInTouchMode(true);
-
-
 	}
 
 	/**
@@ -104,11 +102,15 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 	 */
 	public boolean lockScreen() {
 		canvas_ = getHolder().lockCanvas();
-		if ( canvas_ != null ) {
-			//TODO find a clearer to handle scale (and move it out of here)
-			canvas_.scale(scale_, scale_);
-		}
 		return canvas_ != null;
+	}
+	
+	/**
+	 * Graphical operation to perform before drawing things
+	 * Assume the canvas is not null
+	 */
+	public void prepare() {
+		canvas_.scale(scale_, scale_);
 	}
 	
 	/**
@@ -196,6 +198,14 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 	 */
 	public void drawImageOnHud(float x, float y, Image image) {
 		canvas_.drawBitmap(image.getBitmap().getBitmap(), x, y, image.getBitmap().getPaint());
+	}
+	
+	
+	public void drawRectOnHud(float x, float y, float h, float w, int c) {
+		Paint p = new Paint();
+		p.setColor(c);
+		p.setAlpha(50);
+		canvas_.drawRect(x, y, x+w, y+h, p);
 	}
 	
 	/**

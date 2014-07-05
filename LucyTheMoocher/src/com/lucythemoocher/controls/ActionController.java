@@ -11,12 +11,9 @@ import android.util.Log;
 import android.view.MotionEvent;
 
 /**
- * Control a PlayerCharacter
- * Don't forget to call setPlayer() after the constructor
- * before updating
- *
+ * Control a game actions
  */
-public class PlayerController extends TouchListener {
+public class ActionController extends TouchListener {
 	private static final int LEFT = 0;
 	private static final int RIGHT = 1;
 	private static final int DOWN = 2;
@@ -26,24 +23,24 @@ public class PlayerController extends TouchListener {
 	private float[] lastTouch_;
 	private boolean[] pushed_;
 	private LinkedList<Point> pos_;
-	private PlayerCharacter player_;
+	private Controllable ctrlable_;
 
 	/**
 	 * Constructor
 	 */
-	public PlayerController() {
+	public ActionController() {
 		lastTouch_ = new float[5];
-		player_ = null;
+		ctrlable_ = null;
 		pushed_ = new boolean[4];
 		pos_ = new LinkedList<Point>();
 	}
 
 	/**
 	 * Setter
-	 * @param player, targeted controlled
+	 * @param ctrlable, targeted controlled
 	 */
-	public void setPlayer(PlayerCharacter player) {
-		player_ = player;
+	public void setControllable(Controllable ctrlable) {
+		ctrlable_ = ctrlable;
 	}
 
 	/**
@@ -76,7 +73,7 @@ public class PlayerController extends TouchListener {
 			}
 		}
 		if ( allDown ) {
-			player_.moveStop();
+			ctrlable_.moveStop();
 			return;
 		}
 
@@ -85,33 +82,33 @@ public class PlayerController extends TouchListener {
 
 		if ( moveLeft ) {
 			if ( Globals.getInstance().getGame().getTime()-lastTouch_[LEFT] < DOUBLE_TOUCH_SENSIBILITY) {
-				player_.moveFastLeft();
+				ctrlable_.moveFastLeft();
 			} else {
 				if ( moveRight && lastTouch_[LEFT] < lastTouch_[RIGHT] ) {
-					player_.moveRight();
+					ctrlable_.moveRight();
 				} else {
-					player_.moveLeft();
+					ctrlable_.moveLeft();
 				}
 			}
 		} else if ( moveRight ) {
 			if ( Globals.getInstance().getGame().getTime()-lastTouch_[RIGHT] < DOUBLE_TOUCH_SENSIBILITY) {
-				player_.moveFastRight();
+				ctrlable_.moveFastRight();
 			} else {
-				player_.moveRight();
+				ctrlable_.moveRight();
 			}
 		}
 		if ( !moveLeft && !moveRight ) {
-			player_.moveStop();
+			ctrlable_.moveStop();
 		}
 
 		boolean moveUp = pushed_[UP];
 		if ( moveUp ) {
-			player_.moveUp();
+			ctrlable_.moveUp();
 		}
 
 		boolean moveDown = pushed_[DOWN];
 		if ( moveDown ) {
-			player_.moveDown();
+			ctrlable_.moveDown();
 		}
 	}
 
