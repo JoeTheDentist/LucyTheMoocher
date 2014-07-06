@@ -35,6 +35,7 @@ public class HUD implements Controllable, Drawable {
 	}
 	
 	public void update() {
+		clearColors();
 		ctrl_.update();
 	}
 	
@@ -80,7 +81,6 @@ public class HUD implements Controllable, Drawable {
 		cam.drawRectOnHud(0, 0, cam.physicalH() / 5, cam.physicalW(), colors_[UP]);
 		cam.drawRectOnHud(6 * cam.physicalW() / 7, 0, cam.physicalH(), cam.physicalW() / 7, colors_[RIGHT]);
 		cam.drawRectOnHud(0, 4 *cam.physicalH() / 5, cam.physicalH() / 5, cam.physicalW(), colors_[DOWN]);
-		clearColors();
 	}
 
 }
