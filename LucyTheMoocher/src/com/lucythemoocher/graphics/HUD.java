@@ -5,18 +5,12 @@ import android.graphics.Color;
 import com.lucythemoocher.Globals.Globals;
 import com.lucythemoocher.controls.ActionController;
 import com.lucythemoocher.controls.Controllable;
+import com.lucythemoocher.util.Direction;
 
 public class HUD implements Controllable, Drawable {
-
-	// copied from ActionControler.
-	// TODO, move to generic class
-	private static final int LEFT = 0;
-	private static final int RIGHT = 1;
-	private static final int DOWN = 2;
-	private static final int UP = 3;
 	
 	private static final int DEFAULT_COLOR = Color.GRAY;
-	private static final int ACTIVE_COLOR = Color.RED;
+	private static final int ACTIVE_COLOR = Color.BLACK;
 	
 	private int colors_[];
 	private ActionController ctrl_;
@@ -51,12 +45,12 @@ public class HUD implements Controllable, Drawable {
 
 	@Override
 	public void moveRight() {
-		colors_[RIGHT] = ACTIVE_COLOR;
+		colors_[Direction.RIGHT] = ACTIVE_COLOR;
 	}
 
 	@Override
 	public void moveLeft() {
-		colors_[LEFT] = ACTIVE_COLOR;
+		colors_[Direction.LEFT] = ACTIVE_COLOR;
 	}
 
 	@Override
@@ -66,21 +60,21 @@ public class HUD implements Controllable, Drawable {
 
 	@Override
 	public void moveUp() {
-		colors_[UP] = ACTIVE_COLOR;
+		colors_[Direction.UP] = ACTIVE_COLOR;
 	}
 
 	@Override
 	public void moveDown() {
-		colors_[DOWN] = ACTIVE_COLOR;
+		colors_[Direction.DOWN] = ACTIVE_COLOR;
 	}
 
 	@Override
 	public void draw() {
 		Camera cam = Globals.getInstance().getCamera();
-		cam.drawRectOnHud(0, 0, cam.physicalH(), cam.physicalW() / 7, colors_[LEFT]);
-		cam.drawRectOnHud(0, 0, cam.physicalH() / 5, cam.physicalW(), colors_[UP]);
-		cam.drawRectOnHud(6 * cam.physicalW() / 7, 0, cam.physicalH(), cam.physicalW() / 7, colors_[RIGHT]);
-		cam.drawRectOnHud(0, 4 *cam.physicalH() / 5, cam.physicalH() / 5, cam.physicalW(), colors_[DOWN]);
+		cam.drawRectOnHud(Direction.LEFT, colors_[Direction.LEFT]);
+		cam.drawRectOnHud(Direction.UP, colors_[Direction.UP]);
+		cam.drawRectOnHud(Direction.RIGHT, colors_[Direction.RIGHT]);
+		cam.drawRectOnHud(Direction.DOWN, colors_[Direction.DOWN]);
 	}
 
 }

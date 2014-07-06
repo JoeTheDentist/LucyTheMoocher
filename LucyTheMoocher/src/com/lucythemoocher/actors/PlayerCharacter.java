@@ -7,6 +7,7 @@ import com.lucythemoocher.actors.maincharacter.state.*;
 
 import com.lucythemoocher.controls.Controllable;
 import com.lucythemoocher.controls.ActionController;
+import com.lucythemoocher.util.Direction;
 import com.lucythemoocher.R;
 
 public class PlayerCharacter extends Actor implements Controllable {

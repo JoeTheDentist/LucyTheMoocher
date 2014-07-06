@@ -4,12 +4,13 @@ import com.lucythemoocher.Globals.Globals;
 import com.lucythemoocher.actors.PlayerCharacter;
 import com.lucythemoocher.graphics.Animation;
 import com.lucythemoocher.physics.Cinematic;
+import com.lucythemoocher.util.Direction;
 
 public class StateWallWalking extends State {
 
 	private float begin_;
 
-	public StateWallWalking(PlayerCharacter pc, Cinematic pos, Animation anim, Direction dir) {
+	public StateWallWalking(PlayerCharacter pc, Cinematic pos, Animation anim, int dir) {
 		super(pc, pos, anim, dir);
 		if ( dir_ == Direction.LEFT ) {
 			int tab[] = {16,17,18,19};

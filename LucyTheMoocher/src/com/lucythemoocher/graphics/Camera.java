@@ -4,11 +4,15 @@ package com.lucythemoocher.graphics;
 import com.lucythemoocher.Globals.Globals;
 import com.lucythemoocher.controls.GlobalController;
 import com.lucythemoocher.physics.Box;
+import com.lucythemoocher.util.Direction;
 import com.lucythemoocher.util.Resources;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PointF;
+import android.graphics.RadialGradient;
+import android.graphics.RectF;
+import android.graphics.Shader.TileMode;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -201,11 +205,32 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 	}
 	
 	
-	public void drawRectOnHud(float x, float y, float h, float w, int c) {
+	public void drawRectOnHud(int dir, int c) {
+		
+		int start_radix = 0;
+		if (dir == Direction.UP) {
+			start_radix = -45 - 90;
+		} else if (dir == Direction.RIGHT) {
+			start_radix = -45;
+		} else if (dir == Direction.DOWN) {
+			start_radix = 45;
+		} else if (dir == Direction.LEFT) {
+			start_radix = 45 + 90;
+		}
+		
+		// TODO move untouched objects into constructor (avoid massive new's...)
+		RadialGradient grad = new RadialGradient(physicalW() / 2, physicalH() / 2, 1200, 0x00000000, 0xFF000000, TileMode.CLAMP);
 		Paint p = new Paint();
+		//p.setDither(true);
+		//p.setShader(grad);
+		p.setStrokeWidth(250);
+		p.setStyle(Paint.Style.STROKE);
 		p.setColor(c);
 		p.setAlpha(50);
-		canvas_.drawRect(x, y, x+w, y+h, p);
+		
+		RectF oval = new RectF(-100, -100, physicalW() + 100, physicalH() + 100);
+
+		canvas_.drawArc(oval, start_radix, 90, false, p);
 	}
 	
 	/**

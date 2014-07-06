@@ -5,7 +5,7 @@ import java.util.LinkedList;
 
 import com.lucythemoocher.Globals.Globals;
 import com.lucythemoocher.graphics.Camera;
-import com.lucythemoocher.actors.PlayerCharacter;
+import com.lucythemoocher.util.Direction;
 
 import android.util.Log;
 import android.view.MotionEvent;
@@ -14,10 +14,6 @@ import android.view.MotionEvent;
  * Control a game actions
  */
 public class ActionController extends TouchListener {
-	private static final int LEFT = 0;
-	private static final int RIGHT = 1;
-	private static final int DOWN = 2;
-	private static final int UP = 3;
 	private static final float DOUBLE_TOUCH_SENSIBILITY = 200;
 
 	private float[] lastTouch_;
@@ -77,21 +73,21 @@ public class ActionController extends TouchListener {
 			return;
 		}
 
-		boolean moveLeft = pushed_[LEFT];
-		boolean moveRight = pushed_[RIGHT];
+		boolean moveLeft = pushed_[Direction.LEFT];
+		boolean moveRight = pushed_[Direction.RIGHT];
 
 		if ( moveLeft ) {
-			if ( Globals.getInstance().getGame().getTime()-lastTouch_[LEFT] < DOUBLE_TOUCH_SENSIBILITY) {
+			if ( Globals.getInstance().getGame().getTime()-lastTouch_[Direction.LEFT] < DOUBLE_TOUCH_SENSIBILITY) {
 				ctrlable_.moveFastLeft();
 			} else {
-				if ( moveRight && lastTouch_[LEFT] < lastTouch_[RIGHT] ) {
+				if ( moveRight && lastTouch_[Direction.LEFT] < lastTouch_[Direction.RIGHT] ) {
 					ctrlable_.moveRight();
 				} else {
 					ctrlable_.moveLeft();
 				}
 			}
 		} else if ( moveRight ) {
-			if ( Globals.getInstance().getGame().getTime()-lastTouch_[RIGHT] < DOUBLE_TOUCH_SENSIBILITY) {
+			if ( Globals.getInstance().getGame().getTime()-lastTouch_[Direction.RIGHT] < DOUBLE_TOUCH_SENSIBILITY) {
 				ctrlable_.moveFastRight();
 			} else {
 				ctrlable_.moveRight();
@@ -101,12 +97,12 @@ public class ActionController extends TouchListener {
 			ctrlable_.moveStop();
 		}
 
-		boolean moveUp = pushed_[UP];
+		boolean moveUp = pushed_[Direction.UP];
 		if ( moveUp ) {
 			ctrlable_.moveUp();
 		}
 
-		boolean moveDown = pushed_[DOWN];
+		boolean moveDown = pushed_[Direction.DOWN];
 		if ( moveDown ) {
 			ctrlable_.moveDown();
 		}
@@ -150,16 +146,16 @@ public class ActionController extends TouchListener {
 		
 		for ( Point p : pos_ ) {
 			if ( p.y < cam.physicalH()/5) {
-				pushed_[UP] = true;
+				pushed_[Direction.UP] = true;
 			}
 			if ( p.x > 4*cam.physicalW()/5) {
-				pushed_[RIGHT] = true;
+				pushed_[Direction.RIGHT] = true;
 			}
 			if (p.x < cam.physicalW()/5) {
-				pushed_[LEFT] = true;
+				pushed_[Direction.LEFT] = true;
 			}
 			if ( p.y > 4*cam.physicalH()/5) {
-				pushed_[DOWN] = true;
+				pushed_[Direction.DOWN] = true;
 			}
 		}
 	}
@@ -167,21 +163,21 @@ public class ActionController extends TouchListener {
 	private int getPos(Point p) {
 		Camera cam = Globals.getInstance().getCamera();
 		if ( p.y < cam.physicalH()/5) {
-			return UP;
+			return Direction.UP;
 		}
 		if ( p.x > 4*cam.physicalW()/5 &&
 				p.y > cam.physicalH()/5 &&
 				p.y < 4*cam.physicalH()/5) {
-			return RIGHT;
+			return Direction.RIGHT;
 		}
 		if (p.x < cam.physicalW()/5 &&
 				p.y > cam.physicalH()/5 &&
 				p.y < 4*cam.physicalH()/5) {
-			return LEFT;
+			return Direction.LEFT;
 		}
 
 		if ( p.y > 4*cam.physicalH()/5) {
-			return DOWN;
+			return Direction.DOWN;
 		}
 		return 4;
 	}

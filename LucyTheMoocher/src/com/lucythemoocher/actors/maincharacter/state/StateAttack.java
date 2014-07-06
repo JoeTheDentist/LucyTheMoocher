@@ -3,10 +3,11 @@ package com.lucythemoocher.actors.maincharacter.state;
 import com.lucythemoocher.actors.PlayerCharacter;
 import com.lucythemoocher.graphics.Animation;
 import com.lucythemoocher.physics.Cinematic;
+import com.lucythemoocher.util.Direction;
 
 public class StateAttack extends State {
 
-	public StateAttack(PlayerCharacter pc, Cinematic pos, Animation anim, Direction dir) {
+	public StateAttack(PlayerCharacter pc, Cinematic pos, Animation anim, int dir) {
 		super(pc, pos, anim, dir);
 		if ( dir == Direction.LEFT ) {
 			int tab[] = {32,33,34,35};
