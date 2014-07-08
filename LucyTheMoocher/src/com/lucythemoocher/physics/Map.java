@@ -67,11 +67,6 @@ public class Map {
 	}
 	
 	public boolean hasCollision(Box b) {
-		if ( (0 >= b.getX()) || (b.getX()+b.getW() >= pxW()) 
-				|| (0 >= b.getY()) || (b.getY()+b.getH() >= pxH()) ) {
-			return true;
-		}
-		
 		boolean br = false;
 		for (int i=(int) (b.getX()/prcW()); i<(b.getW()+b.getX())/prcW(); i++) {
 			br |= map_[(int) ((b.getY())/prcH())][i] > 0; 
