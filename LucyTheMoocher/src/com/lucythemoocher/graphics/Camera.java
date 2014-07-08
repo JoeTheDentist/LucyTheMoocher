@@ -72,6 +72,13 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 	}
 	
 	/**
+	 * Getter
+	 */
+	public Box getScreen() {
+		return screen_;
+	}
+	
+	/**
 	 * Follow the point (x, y) without exceeding camera's speed
 	 * @param x
 	 * @param y

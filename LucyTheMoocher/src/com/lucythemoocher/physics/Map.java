@@ -3,6 +3,7 @@ package com.lucythemoocher.physics;
 import java.util.ArrayList;
 
 import com.lucythemoocher.Globals.Globals;
+import com.lucythemoocher.graphics.Camera;
 import com.lucythemoocher.graphics.Grid;
 import com.lucythemoocher.R;
 
@@ -140,10 +141,19 @@ public class Map {
 	}
 
 	public void draw() {
-		for (int i=0; i<h_; i++) {
-			for (int j=0; j<w_; j++) {
+		Camera cam = Globals.getInstance().getCamera();
+		int iStart = (int) (cam.getScreen().getY() / grid_.boxH());
+		int iEnd = (int) (iStart + cam.getScreen().getH() / grid_.boxH());
+		int jStart = (int) (cam.getScreen().getX() / grid_.boxW());
+		int jEnd = (int) (jStart + cam.getScreen().getW() / grid_.boxW());
+		iStart = Math.max(iStart, 0);
+		iEnd = Math.min(iEnd+1, h_);
+		jStart = Math.max(jStart, 0);
+		jEnd = Math.min(jEnd+1, w_);
+		for (int i=iStart; i<iEnd; i++) {
+			for (int j=jStart; j<jEnd; j++) {
 				if ( map_[i][j] != 0 ) {
-					Globals.getInstance().getCamera().drawImage(j*grid_.boxW(),i*grid_.boxH(), grid_.getImage(map_[i][j]-1));
+					cam.drawImage(j*grid_.boxW(),i*grid_.boxH(), grid_.getImage(map_[i][j]-1));
 				}
 			}
 		}
