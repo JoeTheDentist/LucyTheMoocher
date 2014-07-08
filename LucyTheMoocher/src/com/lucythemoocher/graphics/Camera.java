@@ -218,11 +218,7 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 			start_radix = 45 + 90;
 		}
 		
-		// TODO move untouched objects into constructor (avoid massive new's...)
-		RadialGradient grad = new RadialGradient(physicalW() / 2, physicalH() / 2, 1200, 0x00000000, 0xFF000000, TileMode.CLAMP);
 		Paint p = new Paint();
-		//p.setDither(true);
-		//p.setShader(grad);
 		p.setStrokeWidth(250);
 		p.setStyle(Paint.Style.STROKE);
 		p.setColor(c);
