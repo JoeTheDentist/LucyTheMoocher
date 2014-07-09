@@ -9,6 +9,13 @@ public class Box {
 	private float w_;
 	private Cinematic cin_ = null;
 	
+	public Box(Box b) {
+		x_ = b.x_;
+		y_ = b.y_;
+		h_ = b.h_;
+		w_ = b.w_;
+	}
+	
 	public Box(float x, float y, float h, float w) {
 		x_ = x;
 		y_ = y;

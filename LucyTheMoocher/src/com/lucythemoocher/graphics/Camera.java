@@ -10,10 +10,7 @@ import com.lucythemoocher.util.Resources;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PointF;
-import android.graphics.RadialGradient;
 import android.graphics.RectF;
-import android.graphics.Shader.TileMode;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
@@ -58,7 +55,7 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 
 		getHolder().addCallback(this);
 		setFocusable(true);
-		scale_ = screen_.getW() / 800f;
+		scale_ = screen_.getW() / 1000f;
 		setSpeed(1.0f / 30.0f);
 		this.requestFocus();
 		this.setFocusableInTouchMode(true);
@@ -75,7 +72,10 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 	 * Getter
 	 */
 	public Box getScreen() {
-		return screen_;
+		Box scaledScreen = new Box(screen_);
+		scaledScreen.setH(scaledScreen.getH() / scale_);
+		scaledScreen.setW(scaledScreen.getW() / scale_);
+		return scaledScreen;
 	}
 	
 	/**
@@ -130,7 +130,6 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 	 * @see #lockScreen()
 	 */
 	public void unlockScreen() {
-		canvas_.scale(1.0f, 1.0f);
 		getHolder().unlockCanvasAndPost(canvas_);
 	}
 	
@@ -152,8 +151,6 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 	private float camSpeed() {
 		return CAMERASPEED*DT_;
 	}
-
-
 
 	/**
 	 * Getter
@@ -233,7 +230,10 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 		
 		RectF oval = new RectF(-100, -100, physicalW() + 100, physicalH() + 100);
 
+		// Insensitive to scale 5auite dirty :s)
+		canvas_.scale(1/scale_, 1/scale_);
 		canvas_.drawArc(oval, start_radix, 90, false, p);
+		canvas_.scale(scale_, scale_);
 	}
 	
 	/**
