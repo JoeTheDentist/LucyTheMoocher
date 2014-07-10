@@ -147,7 +147,7 @@ public class Map {
 		int jStart = (int) (cam.getScreen().getX() / grid_.boxW());
 		int jEnd = (int) (jStart + cam.getScreen().getW() / grid_.boxW());
 		iStart = Math.max(iStart, 0);
-		iEnd = Math.min(iEnd+1, h_);
+		iEnd = Math.min(iEnd+2, h_);
 		jStart = Math.max(jStart, 0);
 		jEnd = Math.min(jEnd+1, w_);
 		for (int i=iStart; i<iEnd; i++) {
