@@ -148,10 +148,14 @@ public class ActionController extends TouchListener {
 			if ( p.y < cam.physicalH()/5) {
 				pushed_[Direction.UP] = true;
 			}
-			if ( p.x > 4*cam.physicalW()/5) {
+			if ( p.x > 4*cam.physicalW()/5 &&
+					p.y > cam.physicalH()/5 &&
+					p.y < 4*cam.physicalH()/5) {
 				pushed_[Direction.RIGHT] = true;
 			}
-			if (p.x < cam.physicalW()/5) {
+			if (p.x < cam.physicalW()/5 &&
+					p.y > cam.physicalH()/5 &&
+					p.y < 4*cam.physicalH()/5) {
 				pushed_[Direction.LEFT] = true;
 			}
 			if ( p.y > 4*cam.physicalH()/5) {
