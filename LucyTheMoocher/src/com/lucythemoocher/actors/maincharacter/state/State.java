@@ -48,4 +48,12 @@ public abstract class State {
 	public boolean isAttacking() {
 		return false;
 	}
+	
+	/**
+	 * Direction in state (left or right)
+	 * @return
+	 */
+	public int getDir() {
+		return dir_;
+	}
 }

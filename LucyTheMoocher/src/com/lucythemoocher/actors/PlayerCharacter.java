@@ -114,4 +114,8 @@ public class PlayerCharacter extends Actor implements Controllable {
 		checkMonstersCollisions();
 	}
 	
+	public int getDir() {
+		return state_.getDir();
+	}
+	
 }

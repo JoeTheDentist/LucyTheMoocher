@@ -2,6 +2,7 @@ package com.lucythemoocher.graphics;
 
 
 import com.lucythemoocher.Globals.Globals;
+import com.lucythemoocher.actors.PlayerCharacter;
 import com.lucythemoocher.controls.GlobalController;
 import com.lucythemoocher.physics.Box;
 import com.lucythemoocher.util.Direction;
@@ -65,7 +66,11 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 	 * Update position of the camera
 	 */
 	public void update() {
-
+		PlayerCharacter pc = Globals.getInstance().getGame().getCharacter();
+		// follow player if exists
+		if (pc != null) {
+			followPoint( pc.getX(), pc.getY());
+		}
 	}
 	
 	/**
@@ -86,8 +91,7 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 	public void followPoint(float x, float y) {
 		//Camera follows the player
 		
-		PointF direction = new PointF(Globals.getInstance().getGame().getCharacter().getX()-currX_,
-				Globals.getInstance().getGame().getCharacter().getY()-currY_);
+		PointF direction = new PointF(x-currX_, y-currY_);
 		float distance = direction.length();
 		if (distance == 0)
 			return;
@@ -97,7 +101,7 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 		if (Math.abs(coeff) > distance) {
 			coeff = distance; // do not exceed the point
 		}
-		currX_ += direction.x * coeff;
+		currX_ += direction.x * coeff * 0.5f;
 		currY_ += direction.y * coeff;
 		screen_.setX((currX_ - w() / 2));
 		screen_.setY((currY_ - h() / 2));
