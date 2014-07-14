@@ -53,20 +53,31 @@ public class LucyTheMoocherActivity extends Activity {
     
     protected void onDestroy() {
     	super.onDestroy();
+    	android.os.Process.killProcess(android.os.Process.myPid());
     	Log.d(TAG, "!!! Destroying...");
     }
     
     protected void onStop() {
     	super.onStop();
-		gameThread_.setRunning(false);
+		closure();
     	Log.d(TAG, "!!! Stopping...");
     }
     
     protected void onPause() {
     	super.onPause();
-    	Globals.getInstance().leave(); // TODO: only FOR DEVELOPMENT
+    	closure();
     	Log.d(TAG, "!!! Pausing...");
     }
     
-
+    private void closure() {
+    	Globals.getInstance().stop();
+    	gameThread_.setRunning(false);
+    	try {
+			gameThread_.join();
+		} catch (InterruptedException e) {
+			// TODO destroy?
+			e.printStackTrace();
+		}
+    	android.os.Process.killProcess(android.os.Process.myPid());
+    }
 }

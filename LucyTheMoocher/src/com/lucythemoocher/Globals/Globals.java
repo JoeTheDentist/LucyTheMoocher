@@ -72,6 +72,13 @@ public class Globals {
 		game_ = new Game();
 	}
 	
+	/**
+	 * Stop everything
+	 */
+	public void stop() {
+		sounds_.stop();
+	}
+	
 	public void leave() {
 		Resources.getActivity().finish();
 	}

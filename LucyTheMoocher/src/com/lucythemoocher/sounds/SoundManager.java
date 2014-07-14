@@ -36,6 +36,7 @@ public class SoundManager {
 	private float lastPlay_;
 	private boolean started_;
 	private SoundsState state_;
+	private int lastPlayed_;
 	
 	public SoundManager() {
 		sounds_ = new SoundPool(10, AudioManager.STREAM_MUSIC, 100);
@@ -95,11 +96,16 @@ public class SoundManager {
 		float streamVolumeCurrent = mgr.getStreamVolume(AudioManager.STREAM_MUSIC);
 		float streamVolumeMax = mgr.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
 		float volume = streamVolumeCurrent / streamVolumeMax;
-		//TODO dernier arg => vitesse du jeu
+		//TODO last argument should be the game speed
 		playing_.put(resource, sounds_.play(loaded_.get(resource), volume, volume, 1, 0, 1f));
+		lastPlayed_ = resource;
 	}
 	
 	void changeState(SoundsState newState) {
 		state_ = newState;
+	}
+	
+	public void stop() {
+		sounds_.stop(lastPlayed_);
 	}
 }
