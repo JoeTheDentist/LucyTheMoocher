@@ -53,20 +53,20 @@ public class LucyTheMoocherActivity extends Activity {
     
     protected void onDestroy() {
     	super.onDestroy();
-    	android.os.Process.killProcess(android.os.Process.myPid());
     	Log.d(TAG, "!!! Destroying...");
+    	android.os.Process.killProcess(android.os.Process.myPid());
     }
     
     protected void onStop() {
     	super.onStop();
-		closure();
     	Log.d(TAG, "!!! Stopping...");
+		closure();
     }
     
     protected void onPause() {
     	super.onPause();
-    	closure();
     	Log.d(TAG, "!!! Pausing...");
+    	closure();
     }
     
     private void closure() {
@@ -75,7 +75,6 @@ public class LucyTheMoocherActivity extends Activity {
     	try {
 			gameThread_.join();
 		} catch (InterruptedException e) {
-			// TODO destroy?
 			e.printStackTrace();
 		}
     	android.os.Process.killProcess(android.os.Process.myPid());

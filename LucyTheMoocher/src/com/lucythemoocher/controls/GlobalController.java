@@ -78,7 +78,6 @@ public class GlobalController {
 	}
 	
 	public void processKey(int KeyCode, KeyEvent event) {
-		Log.d("plop", "processKey");
 		for (int i = 0; i < keysListeners_.size(); ++i) {
 			keysListeners_.get(i).onKeyDown(KeyCode, event);
 		}
