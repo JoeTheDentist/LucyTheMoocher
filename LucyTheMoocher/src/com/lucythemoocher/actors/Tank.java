@@ -1,5 +1,7 @@
 package com.lucythemoocher.actors;
 
+import android.util.Log;
+
 import com.lucythemoocher.R;
 import com.lucythemoocher.FX.FX;
 import com.lucythemoocher.physics.Cinematic;
@@ -8,12 +10,12 @@ public class Tank extends Monster {
 	
 	private TankState state_;
 	
-	public Tank() {
+	public Tank(float x, float y) {
 		super();
 		
 		getDrawer().initializeAnimation(R.drawable.tank);
 		setCinematic(new Cinematic(0.4f));
-		getCinematic().addBox(100, 100, getH(), getW());
+		getCinematic().addBox(x, y, getH(), getW());
 		
 		state_ = new MoveLeft(this);
 	}

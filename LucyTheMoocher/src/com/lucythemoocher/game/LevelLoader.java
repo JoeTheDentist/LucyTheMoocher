@@ -1,9 +1,17 @@
-package com.lucythemoocher.physics;
+package com.lucythemoocher.game;
 
 import java.io.InputStream;
 import java.util.Scanner;
 
 
+import android.util.Log;
+
+import com.lucythemoocher.R;
+import com.lucythemoocher.actors.MonstersManager;
+import com.lucythemoocher.actors.PlayerCharacter;
+import com.lucythemoocher.actors.Tank;
+import com.lucythemoocher.controls.ActionController;
+import com.lucythemoocher.graphics.Grid;
 import com.lucythemoocher.util.Resources;
 
 public class LevelLoader {
@@ -16,6 +24,11 @@ public class LevelLoader {
 	public LevelLoader(int mapName) {
 		InputStream inputStream = Resources.openRawRessources(mapName);
 		Scanner s = new Scanner(inputStream);
+		
+		// temporary grid to have box dimensions
+		Grid grid = new Grid(R.drawable.sets);
+		
+		monsters_ = new MonstersManager();
 		
 		//dimensions
 		String cur = s.next();
@@ -42,7 +55,22 @@ public class LevelLoader {
 		for (int i=2; i<h_-2; i++) {
 			for (int j=2; j<w_-2; j++) {
 				cur = s.next();
-				map_[i][j] = Integer.parseInt(cur);
+				char curChar = cur.charAt(0);
+				if (Character.isDigit(curChar)) {
+					map_[i][j] = Integer.parseInt(cur);
+				} else {
+					switch (curChar) {
+					case 'L':
+						character_ = new PlayerCharacter(new ActionController(), j * grid.boxW(), i * grid.boxH());
+						break;
+					case 'T':
+						monsters_.addMonster(new Tank(j * grid.boxW(), i * grid.boxH()));
+						break;
+					default:
+						Log.w("LevelLoader", "Bad code: "+curChar+" skipping...");
+						break;
+					}
+				}
 			}
 		}
 		
@@ -153,7 +181,17 @@ public class LevelLoader {
 		return map_;
 	}
 	
+	public PlayerCharacter getCharacter() {
+		return character_;
+	}
+	
+	public MonstersManager getMonsters() {
+		return monsters_;
+	}
+	
 	private int h_;
 	private int w_;
 	private int[][] map_;
+	private PlayerCharacter character_;
+	private MonstersManager monsters_;
 }

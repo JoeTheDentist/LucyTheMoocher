@@ -22,7 +22,7 @@ public class Game {
 	private Event event_;
 	private Background background_;
 	private Timer timer_;
-	private MonstersManager monsters_; // temporary
+	private MonstersManager monsters_;
 	private FXManager fx_; //temp
 	private ProjectilesManager projectiles_;
 	private HUD hud_;
@@ -33,18 +33,19 @@ public class Game {
 	public void launchGame(int lvl) {
 		Log.d("Game", "launchGame");
 		timer_ = new Timer(0);
-		character_ = new PlayerCharacter(new ActionController());
-		hud_ = new HUD(new ActionController());
 		switch (lvl) {
 		case 1:
-			map_ = new Map(R.raw.lvl1);
+			LevelLoader ll = new LevelLoader(R.raw.lvl1);
+			character_ = ll.getCharacter();
+			monsters_ = ll.getMonsters();
+			map_ = new Map(ll);
 			break;
 		default:
-			Log.w("Game", "Can't find this level, game may crash");
+			Log.e("Game", "Can't find this level, game may crash");
 			break;
 		}
+		hud_ = new HUD(new ActionController());
 		
-		monsters_ = new MonstersManager();
 		fx_ = new FXManager();
 		projectiles_ = new ProjectilesManager();
 
@@ -93,6 +94,14 @@ public class Game {
 	 */
 	public MonstersManager getMonstersManager() {
 		return monsters_;
+	}
+	
+	/**
+	 * Getter
+	 * @return Monsters Manager
+	 */
+	public ProjectilesManager getProjectilesManager() {
+		return projectiles_;
 	}
 	
 	/**

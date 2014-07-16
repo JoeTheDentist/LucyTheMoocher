@@ -15,8 +15,6 @@ public class MonstersManager {
 
 	public MonstersManager() {
 		monsters_ = new ArrayList<Monster>();
-		Monster m = new Tank();
-		addMonster(m);
 	}
 
 	public void update() {

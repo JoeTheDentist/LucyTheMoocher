@@ -3,6 +3,7 @@ package com.lucythemoocher.physics;
 import java.util.ArrayList;
 
 import com.lucythemoocher.Globals.Globals;
+import com.lucythemoocher.game.LevelLoader;
 import com.lucythemoocher.graphics.Camera;
 import com.lucythemoocher.graphics.Grid;
 import com.lucythemoocher.R;
@@ -15,9 +16,7 @@ public class Map {
 	private Grid grid_;
 	private int map_[][];
 	
-	public Map(int mapName) {
-		LevelLoader ll = new LevelLoader(mapName);
-
+	public Map(LevelLoader ll) {
 		h_ = ll.getH();
 		w_ = ll.getW();
 		map_ = ll.getMap();

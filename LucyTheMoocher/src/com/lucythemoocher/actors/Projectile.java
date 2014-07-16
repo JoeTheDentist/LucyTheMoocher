@@ -1,17 +1,14 @@
 package com.lucythemoocher.actors;
 
+import com.lucythemoocher.Globals.Globals;
+
 /**
  * Class for projectiles
  */
 public class Projectile extends Actor {
-
-	private static ProjectilesManager MANAGER_;
-	
-	static void setManager(ProjectilesManager manager) {
-		MANAGER_ = manager;
-	}
 	
 	public Projectile() {
-		MANAGER_.add(this);
+		super();
+		Globals.getInstance().getGame().getProjectilesManager().add(this);
 	}
 }

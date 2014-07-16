@@ -19,11 +19,13 @@ public class PlayerCharacter extends Actor implements Controllable {
 	 * the character in the constructor, you don't have
 	 * to do it outside
 	 * @param controller Player's controller
+	 * @param x
+	 * @param y
 	 */
-	public PlayerCharacter(ActionController controller) {
+	public PlayerCharacter(ActionController controller, float x, float y) {
 		super();
 		getDrawer().initializeAnimation(R.drawable.lucy_states);
-		getCinematic().addBox(100, 100, getH(), getW());
+		getCinematic().addBox(x, y, getH(), getW());
 		state_ = new StateNone(this, pos_, getDrawer().getAnim(), Direction.LEFT);
 		controller_ = controller;
 		controller_.setControllable(this);
