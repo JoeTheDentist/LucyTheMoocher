@@ -42,9 +42,6 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 	
 	/**
 	 * Constructor
-	 * @param context
-	 * @param h Height in dp pixels
-	 * @param w Width in dp pixels
 	 */
 	public Camera() {
 		super(Resources.getActivity());
@@ -209,10 +206,28 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 	 * @see #lockScreen()
 	 */
 	public void drawImageOnHud(float x, float y, Image image) {
-		canvas_.drawBitmap(image.getBitmap().getBitmap(), x, y, image.getBitmap().getPaint());
+		drawImageOnHud(x, y, image, false);
 	}
 	
+	/**
+	 * Draw the image without using the scrolling
+	 * @param  x position in dp pixels
+	 * @param y y position in dp pixels
+	 * @param image
+	 * @param scale does the image need to be scaled or not
+	 * @see #lockScreen()
+	 */
+	public void drawImageOnHud(float x, float y, Image image, boolean scale) {
+		if (scale) canvas_.scale(1/scale_, 1/scale_);
+		canvas_.drawBitmap(image.getBitmap().getBitmap(), x, y, image.getBitmap().getPaint());
+		if (scale) canvas_.scale(scale_, scale_);
+	}
 	
+	/**
+	 * Draw the HUD rect, insensitive to scale
+	 * @param dir
+	 * @param c
+	 */
 	public void drawRectOnHud(int dir, int c) {
 		
 		int start_radix = 0;
@@ -269,7 +284,6 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 				null);
 	}
 
-
 	/**
 	 * Mutator 
 	 * @param dt New dt speed
@@ -289,7 +303,6 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 		return true;
 	}
 
-	
 	public void surfaceChanged(SurfaceHolder arg0, int arg1, int arg2, int arg3) {}
 
 	public void surfaceCreated(SurfaceHolder arg0) {
@@ -311,7 +324,4 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 	public float getScale() {
 		return scale_;
 	}
-	
-
-
 }
