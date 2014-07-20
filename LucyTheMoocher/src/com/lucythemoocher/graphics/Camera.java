@@ -1,6 +1,8 @@
 package com.lucythemoocher.graphics;
 
 
+import java.util.HashMap;
+
 import com.lucythemoocher.Globals.Globals;
 import com.lucythemoocher.actors.PlayerCharacter;
 import com.lucythemoocher.controls.GlobalController;
@@ -9,9 +11,11 @@ import com.lucythemoocher.util.Direction;
 import com.lucythemoocher.util.Resources;
 
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.RectF;
+import android.util.SparseArray;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
@@ -40,6 +44,9 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 	private float scale_; // coefficient depending on hardware screen's size
 	private boolean canDraw_ = false;
 	
+	private SparseArray<Paint> hudPaints_;
+	private RectF hudOval_;
+	
 	/**
 	 * Constructor
 	 */
@@ -50,13 +57,32 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 		currX_ = 1;
 		currY_ = 1;
 		screen_ = new Box(currX_,currY_,h,w);
-
+		
+		hudPaints_ = new SparseArray<Paint>();
+		initHudColors(new int[] {Color.GRAY, Color.BLACK});
+		hudOval_ = new RectF(-100, -100, w + 100, h + 100);
+		
 		getHolder().addCallback(this);
 		setFocusable(true);
 		scale_ = screen_.getW() / 1000f;
 		setSpeed(1.0f / 30.0f);
 		this.requestFocus();
 		this.setFocusableInTouchMode(true);
+	}
+	
+	/**
+	 * Initialize the HUD colors
+	 * @param colorArray colors to initialize
+	 */
+	private void initHudColors(int colorArray[]) {
+		for (int color : colorArray) {
+			Paint currPaint = new Paint();
+			currPaint.setStrokeWidth(250);
+			currPaint.setStyle(Paint.Style.STROKE);
+			currPaint.setColor(color);
+			currPaint.setAlpha(50);
+			hudPaints_.put(color, currPaint);
+		}
 	}
 
 	/**
@@ -104,12 +130,11 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 		screen_.setY((currY_ - h() / 2));
 	}
 
-
 	/**
 	 * Must be called before renderings
 	 * This locking is currently handled in the MasterLoop
 	 * @return true if managed to create the canvas
-	 * @see #unlockScreen()
+	 * @see unlockScreen
 	 * @see MasterLoop
 	 */
 	public boolean lockScreen() {
@@ -128,7 +153,7 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 	/**
 	 * Must be called after renderings, to unlock canvas
 	 * Assumes the canvas is not null
-	 * @see #lockScreen()
+	 * @see lockScreen
 	 */
 	public void unlockScreen() {
 		getHolder().unlockCanvasAndPost(canvas_);
@@ -175,10 +200,18 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 		return screen_.getW() / scale_;
 	}
 	
+	/**
+	 * Getter
+	 * @return height of the physical screen (real resolution)
+	 */
 	public float physicalH() {
 		return screen_.getH();
 	}
 	
+	/**
+	 * Getter
+	 * @return width of the physical screen (real resolution)
+	 */
 	public float physicalW() {
 		return screen_.getW();
 	}
@@ -231,27 +264,26 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 	public void drawRectOnHud(int dir, int c) {
 		
 		int start_radix = 0;
+		int radix_range = 90;
+		int big_radix = 90;
+		int small_radix = 180 - big_radix;
 		if (dir == Direction.UP) {
-			start_radix = -45 - 90;
+			start_radix = -90 - big_radix / 2;
+			radix_range = big_radix;
 		} else if (dir == Direction.RIGHT) {
-			start_radix = -45;
+			start_radix = 0 - small_radix / 2;
+			radix_range = small_radix;
 		} else if (dir == Direction.DOWN) {
-			start_radix = 45;
+			start_radix = 90 - big_radix / 2;
+			radix_range = big_radix;
 		} else if (dir == Direction.LEFT) {
-			start_radix = 45 + 90;
+			start_radix = 180 - small_radix / 2;
+			radix_range = small_radix;
 		}
-		
-		Paint p = new Paint();
-		p.setStrokeWidth(250);
-		p.setStyle(Paint.Style.STROKE);
-		p.setColor(c);
-		p.setAlpha(50);
-		
-		RectF oval = new RectF(-100, -100, physicalW() + 100, physicalH() + 100);
 
-		// Insensitive to scale 5auite dirty :s)
+		// Insensitive to scale (quite dirty :s)
 		canvas_.scale(1/scale_, 1/scale_);
-		canvas_.drawArc(oval, start_radix, 90, false, p);
+		canvas_.drawArc(hudOval_, start_radix, radix_range, false, hudPaints_.get(c));
 		canvas_.scale(scale_, scale_);
 	}
 	
@@ -321,6 +353,10 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 		return screen_.getY();
 	}
 	
+	/**
+	 * Getter
+	 * @return current scale
+	 */
 	public float getScale() {
 		return scale_;
 	}

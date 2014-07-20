@@ -1,7 +1,5 @@
 package com.lucythemoocher.actors;
 
-import android.util.Log;
-
 import com.lucythemoocher.R;
 import com.lucythemoocher.FX.FX;
 import com.lucythemoocher.physics.Cinematic;
