@@ -2,6 +2,8 @@ package com.lucythemoocher.physics;
 
 import java.util.ArrayList;
 
+import android.util.Log;
+
 import com.lucythemoocher.Globals.Globals;
 import com.lucythemoocher.util.MathUtil;
 
@@ -163,6 +165,22 @@ public class Cinematic {
 
 	private void updateNormalSpeed() {
 		speedy_ += GRAVITY * Globals.getInstance().getGame().getDt();
+	}
+	
+	/**
+	 * Get the aimed position (x)
+	 * @return
+	 */
+	public float getTargetX() {
+		return posx_ + 100 * speedx_;
+	}
+	
+	/**
+	 * Get the aimed position (y)
+	 * @return
+	 */
+	public float getTargetY() {
+		return posy_ + 100 * speedy_;
 	}
 	
 	public boolean hasDownCollision() {

@@ -106,6 +106,8 @@ public class PlayerCharacter extends Actor implements Controllable {
 			if (collidesWith(monster)) {
 				if (state_.isAttacking()) {
 					monster.setToRemove();
+				} else {
+					// game over?
 				}
 			}
 		}

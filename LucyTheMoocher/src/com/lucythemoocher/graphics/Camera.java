@@ -32,7 +32,7 @@ import android.view.SurfaceView;
  */
 public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 
-	private static final float CAMERASPEED = (float) 0.15;
+	private static final float CAMERASPEED = (float) 0.25;
 	static final float BACKGROUNDSPEED = (float) 0.5;
 
 	private static float DT_ = 1;
@@ -92,7 +92,7 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 		PlayerCharacter pc = Globals.getInstance().getGame().getCharacter();
 		// follow player if exists
 		if (pc != null) {
-			followPoint( pc.getX(), pc.getY());
+			followPoint( pc.getCinematic().getTargetX(), pc.getCinematic().getTargetY());
 		}
 	}
 	
@@ -112,19 +112,17 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 	 * @param y
 	 */
 	public void followPoint(float x, float y) {
-		//Camera follows the player
-		
 		PointF direction = new PointF(x-currX_, y-currY_);
 		float distance = direction.length();
 		if (distance == 0)
 			return;
 		float coeff = camSpeed() * distance * Globals.getInstance().getGame().getDt();
-		direction.x /= distance; // normalize
-		direction.y /= distance; // normalize
+		direction.x /= distance;
+		direction.y /= distance;
 		if (Math.abs(coeff) > distance) {
 			coeff = distance; // do not exceed the point
 		}
-		currX_ += direction.x * coeff * 0.5f;
+		currX_ += direction.x * coeff * 5f;
 		currY_ += direction.y * coeff;
 		screen_.setX((currX_ - w() / 2));
 		screen_.setY((currY_ - h() / 2));
