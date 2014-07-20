@@ -19,6 +19,7 @@ public class Cinematic {
 	private float offsetx_;
 	private float offsety_;
 	private float normalSpeed_;
+	private boolean withGravity_;
 	
 	private ArrayList<Box> boundingBoxes_;
 	
@@ -30,17 +31,32 @@ public class Cinematic {
 		normalSpeed_ = MOVESPEED;
 		offsetx_ = 0.0f;
 		offsety_ = 0.0f;
+		withGravity_ = true;
 	}
 	
 	/**
 	 * Constructor with default speed
-	 * @param speed : default speed for walking
+	 * @param speed: default speed for walking
 	 */
 	public Cinematic(float speed) {
 		boundingBoxes_ = new ArrayList<Box>();
 		normalSpeed_ = speed;
 		offsetx_ = 0.0f;
 		offsety_ = 0.0f;
+		withGravity_ = true;
+	}
+	
+	/**
+	 * Constructor with default speed
+	 * @param speed: default speed for walking
+	 * @param withGravity: take gravity or not
+	 */
+	public Cinematic(float speed, boolean withGravity) {
+		boundingBoxes_ = new ArrayList<Box>();
+		normalSpeed_ = speed;
+		offsetx_ = 0.0f;
+		offsety_ = 0.0f;
+		withGravity_ = withGravity;
 	}
 	
 	public Cinematic(Box box) {
@@ -63,7 +79,9 @@ public class Cinematic {
 	}
 	
 	public void update() {
-		updateNormalSpeed();
+		if (withGravity_) {
+			updateNormalSpeed();
+		}
 		updatePos();
 	}
 	

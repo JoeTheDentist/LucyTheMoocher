@@ -1,5 +1,6 @@
 package com.lucythemoocher.actors;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 
 public class ProjectilesManager {
@@ -25,8 +26,13 @@ public class ProjectilesManager {
 	}
 	
 	public void update() {
-		for ( Projectile p : proj_ ) {
+		Iterator<Projectile> i = proj_.iterator();
+		while ( i.hasNext() ) {
+			Projectile p = i.next();
 			p.update();
+			if (p.isToRemove()) {
+				i.remove();
+			}
 		}
 	}
 }

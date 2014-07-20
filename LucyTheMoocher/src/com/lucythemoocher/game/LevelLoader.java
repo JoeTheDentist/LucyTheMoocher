@@ -12,6 +12,7 @@ import com.lucythemoocher.actors.PlayerCharacter;
 import com.lucythemoocher.actors.Tank;
 import com.lucythemoocher.controls.ActionController;
 import com.lucythemoocher.graphics.Grid;
+import com.lucythemoocher.util.Direction;
 import com.lucythemoocher.util.Resources;
 
 public class LevelLoader {
@@ -64,7 +65,7 @@ public class LevelLoader {
 						character_ = new PlayerCharacter(new ActionController(), j * grid.boxW(), i * grid.boxH());
 						break;
 					case 'T':
-						monsters_.addMonster(new Tank(j * grid.boxW(), i * grid.boxH()));
+						monsters_.addMonster(new Tank(j * grid.boxW(), i * grid.boxH(), Direction.LEFT));
 						break;
 					default:
 						Log.w("LevelLoader", "Bad code: "+curChar+" skipping...");
