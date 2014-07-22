@@ -23,7 +23,7 @@ public class Projectile extends Actor {
 			int tab[] = {0};
 			getDrawer().setAnimation(tab, 200);
 		}
-		setCinematic(new Cinematic(1f, false));
+		setCinematic(new Cinematic(0.75f, false));
 		getCinematic().addBox(x, y, getH(), getW());
 	}
 	

@@ -1,8 +1,5 @@
 package com.lucythemoocher.graphics;
 
-
-import java.util.HashMap;
-
 import com.lucythemoocher.Globals.Globals;
 import com.lucythemoocher.actors.PlayerCharacter;
 import com.lucythemoocher.controls.GlobalController;
@@ -24,7 +21,6 @@ import android.view.SurfaceView;
 /**
  * Render Drawables and Background
  * Handle scrolling
- * Can also support effects (black and white for now)
  * Camera's system is used in MasterLoop
  * Camera is not the physical screen, but a representation of the screen, so w() et h() are independent from the
  * hardware screen's size.
@@ -32,8 +28,8 @@ import android.view.SurfaceView;
  */
 public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 
-	private static final float CAMERASPEED = (float) 0.25;
-	static final float BACKGROUNDSPEED = (float) 0.5;
+	private static final float CAMERASPEED = 2f;
+	static final float BACKGROUNDSPEED = 0.5f;
 
 	private static float DT_ = 1;
 
@@ -68,6 +64,18 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 		setSpeed(1.0f / 30.0f);
 		this.requestFocus();
 		this.setFocusableInTouchMode(true);
+	}
+	
+	/**
+	 * Target a position at the middle of the screen
+	 * @param x coor
+	 * @param y coor
+	 */
+	public void moveTo(float x, float y) {
+		currX_ = x;
+		currY_ = y;
+		screen_.setX((currX_ - w() / 2));
+		screen_.setY((currY_ - h() / 2));
 	}
 	
 	/**
@@ -112,18 +120,20 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 	 * @param y
 	 */
 	public void followPoint(float x, float y) {
-		PointF direction = new PointF(x-currX_, y-currY_);
-		float distance = direction.length();
-		if (distance == 0)
+		float coeff = camSpeed() * Globals.getInstance().getGame().getDt();
+		float diffX = x - currX_;
+		float diffY = y - currY_;
+		if (diffX == 0 && diffY == 0) {
 			return;
-		float coeff = camSpeed() * distance * Globals.getInstance().getGame().getDt();
-		direction.x /= distance;
-		direction.y /= distance;
-		if (Math.abs(coeff) > distance) {
-			coeff = distance; // do not exceed the point
 		}
-		currX_ += direction.x * coeff * 5f;
-		currY_ += direction.y * coeff;
+		float ratio = (float) Math.sqrt(Math.abs(diffX) + Math.abs(diffY));
+		if (coeff / ratio < 1) {
+			currX_ += diffX / ratio * coeff;
+			currY_ += diffY / ratio * coeff;
+		} else {
+			currX_ += diffX;
+			currY_ += diffY;
+		}
 		screen_.setX((currX_ - w() / 2));
 		screen_.setY((currY_ - h() / 2));
 	}

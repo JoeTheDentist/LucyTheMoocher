@@ -45,6 +45,7 @@ public class Game {
 			break;
 		}
 		hud_ = new HUD(new ActionController());
+		Globals.getInstance().getCamera().moveTo(character_.getX(), character_.getY());
 		
 		fx_ = new FXManager();
 		projectiles_ = new ProjectilesManager();
