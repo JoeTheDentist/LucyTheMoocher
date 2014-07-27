@@ -12,6 +12,7 @@ import com.lucythemoocher.events.*;
 import com.lucythemoocher.graphics.Background;
 import com.lucythemoocher.graphics.HUD;
 import com.lucythemoocher.physics.Map;
+import com.lucythemoocher.sounds.SoundManager;
 import com.lucythemoocher.util.Timer;
 import com.lucythemoocher.R;
 
@@ -23,14 +24,17 @@ public class Game {
 	private Background background_;
 	private Timer timer_;
 	private MonstersManager monsters_;
-	private FXManager fx_; //temp
+	private FXManager fx_;
 	private ProjectilesManager projectiles_;
 	private HUD hud_;
+	private SoundManager sounds_;
+	private boolean started_ = false;
 	
 	/**
-	 * Launch a game
+	 * Load the game with the given level
+	 * @param level to load
 	 */
-	public void launchGame(int lvl) {
+	public void load(int lvl) {
 		Log.d("Game", "launchGame");
 		timer_ = new Timer(0);
 		switch (lvl) {
@@ -52,7 +56,32 @@ public class Game {
 
 		event_ = new EventNormal();
 		background_ = new Background();
-		Globals.getInstance().getSounds().start();
+		sounds_ = new SoundManager();
+	}
+	
+	/**
+	 * Start the game
+	 */
+	public void start() {
+		timer_.reset();
+		sounds_.start();
+		started_ = true;
+	}
+	
+	/**
+	 * Stop the game
+	 */
+	public void stop() {
+		sounds_.stop();
+		started_ = false;
+	}
+	
+	/**
+	 * Getter
+	 * @return whether the game is started or not
+	 */
+	public boolean isStarted() {
+		return started_;
 	}
 	
 	/**
@@ -133,6 +162,7 @@ public class Game {
 		fx_.update();
 		projectiles_.update();
 		hud_.update();
+		sounds_.update();
 	}
 	
 	public void render() {

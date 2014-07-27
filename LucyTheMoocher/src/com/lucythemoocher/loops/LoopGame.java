@@ -13,6 +13,7 @@ import com.lucythemoocher.util.Timer;
 public class LoopGame extends Loop implements KeysListener {
 
 	private Timer lifeTime_;
+	private int level_;
 	
 	/**
 	 * Public constructor
@@ -33,7 +34,17 @@ public class LoopGame extends Loop implements KeysListener {
 	 */
 	public LoopGame(int level) {
 		this();
-		Globals.getInstance().getGame().launchGame(level);
+		level_ = level;
+	}
+	
+	@Override
+	protected void load() {
+		Globals.getInstance().getGame().load(level_);
+	}
+	
+	@Override
+	protected void start() {
+		Globals.getInstance().getGame().start();
 	}
 	
 	/**

@@ -1,7 +1,5 @@
 package com.lucythemoocher.loops;
 
-import android.util.Log;
-
 import com.lucythemoocher.Globals.Globals;
 import com.lucythemoocher.graphics.Camera;
 
@@ -58,7 +56,6 @@ public class MasterLoop {
 				loop_.render();
 				cam.unlockScreen();
 			}
-			//Log.w("MasterLoop", "Failing to draw, canvas not ready.");
 		}
 		
 	}

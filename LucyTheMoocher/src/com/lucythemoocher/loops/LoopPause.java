@@ -52,6 +52,7 @@ public class LoopPause extends Loop implements MenuButtonListener, KeysListener 
 			changeCurrentLoop(new LoopGame());
 			break;
 		case LEAVEGAMEINDEX:
+			Globals.getInstance().stopGame();
 			changeCurrentLoop(new InitMenuLoop());
 			break;
 		}

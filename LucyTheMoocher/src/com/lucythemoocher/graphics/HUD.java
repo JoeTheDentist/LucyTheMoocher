@@ -71,10 +71,10 @@ public class HUD implements Controllable, Drawable {
 	@Override
 	public void draw() {
 		Camera cam = Globals.getInstance().getCamera();
-		cam.drawRectOnHud(Direction.LEFT, colors_[Direction.LEFT]);
-		cam.drawRectOnHud(Direction.UP, colors_[Direction.UP]);
-		cam.drawRectOnHud(Direction.RIGHT, colors_[Direction.RIGHT]);
-		cam.drawRectOnHud(Direction.DOWN, colors_[Direction.DOWN]);
+		cam.drawControlOnHud(Direction.LEFT, colors_[Direction.LEFT]);
+		cam.drawControlOnHud(Direction.UP, colors_[Direction.UP]);
+		cam.drawControlOnHud(Direction.RIGHT, colors_[Direction.RIGHT]);
+		cam.drawControlOnHud(Direction.DOWN, colors_[Direction.DOWN]);
 	}
 
 }

@@ -34,6 +34,20 @@ public abstract class Loop {
 		onLeaveLoop();
 		MasterLoop.getInstance().setLoop(loop);
 	}
+	
+	/**
+	 * Do the load of the resources of the loop.
+	 * Useful for delaying load after construction.
+	 * @see LivesMenuLoop.update
+	 */
+	protected void load() {}
+	
+	/**
+	 * Do the start of the resources of the loop.
+	 * Useful for delaying start after construction and load.
+	 * @see LivesMenuLoop.update
+	 */
+	protected void start() {}
 
 	/**
 	 * Called when the loop is left for another loop

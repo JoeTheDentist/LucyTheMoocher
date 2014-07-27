@@ -70,7 +70,7 @@ public class LucyTheMoocherActivity extends Activity {
     }
     
     private void closure() {
-    	Globals.getInstance().stop();
+    	Globals.getInstance().stopGame();
     	gameThread_.setRunning(false);
     	try {
 			gameThread_.join();

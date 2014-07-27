@@ -31,6 +31,15 @@ public class Timer {
 	}
 	
 	/**
+	 * Reset timer
+	 */
+	public void reset() {
+		currentTime_ = 0;
+		previousSystemTime_ = System.currentTimeMillis();
+		initTime_ = currentTime_;
+	}
+	
+	/**
 	 * Update dt and the current time with the system clock.
 	 * Don't call it if you also use addDt().
 	 */

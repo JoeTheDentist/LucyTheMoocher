@@ -1,29 +1,29 @@
 package com.lucythemoocher.graphics;
 
 import java.io.InputStream;
-import java.util.HashMap;
 
 import com.lucythemoocher.Globals.Globals;
 
 import android.graphics.drawable.BitmapDrawable;
+import android.util.SparseArray;
 
 public class PictureContainer {
-	private HashMap<Integer, BitmapDrawable> images_;
+	private SparseArray<BitmapDrawable> images_;
 	
 	public PictureContainer() {
-		images_ = new HashMap<Integer, BitmapDrawable>();
+		images_ = new SparseArray<BitmapDrawable>();
 	}
 	
 	BitmapDrawable getImage(int image) {
-		if ( images_.containsKey(image) ) {
-			return images_.get(image);
+		BitmapDrawable img = images_.get(image);
+		if ( img != null ) {
+			return img;
 		} else {
-			//Faire comme ca... sinon pas la bonne taille
+			// Only way to get good size...
 			InputStream is = Globals.getInstance().getCamera().getResources().openRawResource(image);
 			BitmapDrawable bd = new BitmapDrawable(is);
+			images_.put(image, bd);
 			return bd;
 		}
 	}
-	
-	
 }

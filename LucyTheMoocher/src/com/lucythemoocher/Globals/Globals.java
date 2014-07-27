@@ -1,13 +1,7 @@
-/**
- * 
- */
 package com.lucythemoocher.Globals;
 
-
-import com.lucythemoocher.R;
 import com.lucythemoocher.game.Game;
 import com.lucythemoocher.graphics.Camera;
-import com.lucythemoocher.sounds.SoundManager;
 import com.lucythemoocher.util.Resources;
 import com.lucythemoocher.util.Timer;
 
@@ -21,7 +15,6 @@ public class Globals {
 	
 	private Camera camera_;
 	private Timer timer_;
-	private SoundManager sounds_;
 	private Game game_;
 	
 	/**
@@ -45,7 +38,6 @@ public class Globals {
     public void update() {
     	camera_.update();
     	timer_.update();
-    	sounds_.update();
     }
 
     public Camera getCamera() {
@@ -56,10 +48,6 @@ public class Globals {
     	return timer_;
     }
     
-    public SoundManager getSounds() {
-    	return sounds_;
-    }
-    
     public Game getGame()
     {
     	return game_;
@@ -68,15 +56,16 @@ public class Globals {
 	private Globals() {
 		camera_ = new Camera();
 		timer_ = new Timer(0f);
-		sounds_ = new SoundManager();
 		game_ = new Game();
 	}
 	
 	/**
-	 * Stop everything
+	 * Stop game
 	 */
-	public void stop() {
-		sounds_.stop();
+	public void stopGame() {
+		if (game_.isStarted()) {
+			game_.stop();
+		}
 	}
 	
 	public void leave() {

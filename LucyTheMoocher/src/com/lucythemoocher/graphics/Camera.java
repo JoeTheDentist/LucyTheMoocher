@@ -10,8 +10,9 @@ import com.lucythemoocher.util.Resources;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.PointF;
+import android.graphics.Paint.Align;
 import android.graphics.RectF;
+import android.graphics.Typeface;
 import android.util.SparseArray;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -223,11 +224,34 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 	public float physicalW() {
 		return screen_.getW();
 	}
+	
+	/**
+	 * Draw the full screen with color
+	 * @param color
+	 */
+	public void drawFullColor(int color) {
+		canvas_.drawColor(color);
+	}
+	
+	/**
+	 * Draw text in the middle of the screen
+	 * @param text
+	 * @param color
+	 */
+	public void drawCenterText(String text, int color) {
+		Paint textPaint = new Paint();
+		textPaint.setColor(color);
+		textPaint.setTextAlign(Align.CENTER);
+		textPaint.setTextSize(60);
+		textPaint.setTypeface(Typeface.create("Arial",Typeface.BOLD));
+		canvas_.scale(1/scale_, 1/scale_);
+		canvas_.drawText(text, 200, physicalH()/2, textPaint);
+		canvas_.scale(scale_, scale_);
+	}
 
 	/**
 	 * Draw the image at the position x y
 	 * Screen must be locked
-	 * 
 	 * @param x x position in dp pixels
 	 * @param y y position in dp pixels
 	 * @param image
@@ -269,8 +293,7 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 	 * @param dir
 	 * @param c
 	 */
-	public void drawRectOnHud(int dir, int c) {
-		
+	public void drawControlOnHud(int dir, int c) {
 		int start_radix = 0;
 		int radix_range = 90;
 		int big_radix = 90;

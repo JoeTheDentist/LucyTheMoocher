@@ -18,13 +18,9 @@ public class InitMenuLoop extends Loop implements MenuButtonListener {
 	MenuButton buttonLeave_;
 	
 	private final static int NEWGAMEINDEX = 1;
-	private final static int SOUNDINDEX = 2;
-	private final static int MUSICINDEX = 3;
-	private final static int LEAVEINDEX = 4;
+	private final static int LEAVEINDEX = 2;
 	
 	private final static float NEWGAMEPERCENT_Y = 20;
-	private final static float SOUNDPERCENT_Y = 40;
-	private final static float MUSICPERCENT_Y = 60;
 	private final static float LEAVEPERCENT_Y = 80;
 	
 	
@@ -64,7 +60,8 @@ public class InitMenuLoop extends Loop implements MenuButtonListener {
 	public void onButtonClicked(int buttonIndex) {
 		switch (buttonIndex) {
 		case NEWGAMEINDEX:
-			changeCurrentLoop(new LoopGame(1)); // start at level 1
+			// TODO variable for lives (instead of 3)
+			changeCurrentLoop(new LivesMenuLoop(3, 1000, new LoopGame(1)));
 			break;
 		case LEAVEINDEX:
 			Globals.getInstance().leave();
