@@ -57,7 +57,7 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 		
 		hudPaints_ = new SparseArray<Paint>();
 		initHudColors(new int[] {Color.GRAY, Color.BLACK});
-		hudOval_ = new RectF(-100, -100, w + 100, h + 100);
+		hudOval_ = new RectF(0, 0, w, h);
 		
 		getHolder().addCallback(this);
 		setFocusable(true);
@@ -289,7 +289,7 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 	}
 	
 	/**
-	 * Draw the HUD rect, insensitive to scale
+	 * Draw the HUD ellipsis, insensitive to scale
 	 * @param dir
 	 * @param c
 	 */
