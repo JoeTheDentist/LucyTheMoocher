@@ -42,6 +42,11 @@ public class StateFalling extends State {
 	}
 	
 	@Override
+	public void moveStop() {
+		pos_.moveStop();
+	}
+	
+	@Override
 	public void moveFastLeft() {
 		if ( pos_.hasLeftCollision() ) {
 			pc_.changeState(new StateWallSliding(pc_, pos_, anim_, dir_));
