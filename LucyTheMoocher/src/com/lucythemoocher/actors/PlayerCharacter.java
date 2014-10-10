@@ -107,7 +107,7 @@ public class PlayerCharacter extends Actor implements Controllable {
 				if (state_.isAttacking()) {
 					monster.setToRemove();
 				} else {
-					// game over?
+					Globals.getInstance().lose();
 				}
 			}
 		}

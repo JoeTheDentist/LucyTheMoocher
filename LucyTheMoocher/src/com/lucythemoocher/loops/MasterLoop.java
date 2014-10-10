@@ -52,6 +52,14 @@ public class MasterLoop {
 		}
 	}
 	
+	public void mainMenu() {
+		setLoop(new InitMenuLoop());
+	}
+	
+	public void newLevel() {
+		setLoop(new LivesMenuLoop(Globals.getInstance().getLives(), 1000, new LoopGame(Globals.getInstance().getLevel())));
+	}
+	
 	/**
 	 * Private constructor for singleton pattern
 	 */

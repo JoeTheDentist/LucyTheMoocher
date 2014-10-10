@@ -66,7 +66,7 @@ public class InitMenuLoop extends Loop implements MenuButtonListener {
 		switch (buttonIndex) {
 		case NEWGAMEINDEX:
 			// TODO variable for lives (instead of 3)
-			changeCurrentLoop(new LivesMenuLoop(3, 1000, new LoopGame(1)));
+			changeCurrentLoop(new LivesMenuLoop(Globals.getInstance().getLives(), 1000, new LoopGame(1)));
 			break;
 		case LEAVEINDEX:
 			Globals.getInstance().leave();

@@ -47,10 +47,7 @@ public class LoopGame extends Loop implements KeysListener {
 		Globals.getInstance().getGame().start();
 	}
 	
-	/**
-	 * Called each frame if this is the current loop
-	 * Implement here every computation
-	 */	
+	@Override
 	public void update() {
 		Globals.getInstance().getGame().update();
 	}
