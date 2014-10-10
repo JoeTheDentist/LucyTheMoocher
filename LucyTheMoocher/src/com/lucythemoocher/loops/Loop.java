@@ -52,7 +52,15 @@ public abstract class Loop {
 	/**
 	 * Called when the loop is left for another loop
 	 */
-	public void onLeaveLoop() {
-		
+	public void onLeaveLoop() {}
+	
+	/**
+	 * If need to draw
+	 * @return
+	 */
+	public boolean doRender() {
+		return true;
 	}
+	
+	protected boolean drawn_ = false;
 }

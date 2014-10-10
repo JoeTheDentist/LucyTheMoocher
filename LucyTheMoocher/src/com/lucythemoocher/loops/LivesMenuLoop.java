@@ -9,7 +9,6 @@ public class LivesMenuLoop extends Loop {
 	private int lives_;
 	private float currMs_;
 	private Loop next_;
-	private boolean drawn_ = false;
 	private boolean init_ = false;
 	
 	/**
@@ -31,8 +30,7 @@ public class LivesMenuLoop extends Loop {
 		if (currMs_ <= 0 && init_) {
 			changeCurrentLoop(next_);
 			next_.start();
-		}
-		if (drawn_ && !init_) {
+		} else if (drawn_ && !init_) {
 			next_.load();
 			// advice garbage collection here, since we are in a load screen
 			System.gc();
@@ -42,11 +40,14 @@ public class LivesMenuLoop extends Loop {
 
 	@Override
 	public void render() {
-		if (!drawn_) {
-			Globals.getInstance().getCamera().drawFullColor(0xFF00FFCC);
-			Globals.getInstance().getCamera().drawCenterText("LIVES x"+lives_, Color.WHITE);
-			drawn_ = true;
-		}
+		Globals.getInstance().getCamera().drawFullColor(0xFF00FFCC);
+		Globals.getInstance().getCamera().drawCenterText("LIVES x"+lives_, Color.WHITE);
+		drawn_ = true;
+	}
+	
+	@Override
+	public boolean doRender() {
+		return !drawn_;
 	}
 
 }

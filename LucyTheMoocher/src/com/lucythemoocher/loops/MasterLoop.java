@@ -17,20 +17,15 @@ public class MasterLoop {
 	 * Get the instance of the singleton
 	 * @return Instance
 	 */
-	public final static MasterLoop getInstance() {
-        if (MasterLoop.instance_ == null) {
-           synchronized(MasterLoop.class) {
-             if (MasterLoop.instance_ == null) {
-            	 MasterLoop.instance_ = new MasterLoop();
-             }
-           }
-        }
+	synchronized public final static MasterLoop getInstance() {
+		if (MasterLoop.instance_ == null) {
+			MasterLoop.instance_ = new MasterLoop();
+		}
         return MasterLoop.instance_;
 	}
 	
 	/**
 	 * Change the loop (state pattern)
-	 * 
 	 * @param loop The new state
 	 */
 	public void setLoop(Loop loop) {
@@ -50,14 +45,11 @@ public class MasterLoop {
 	 */
 	public void render() {
 		Camera cam = Globals.getInstance().getCamera();
-		if (cam.canDraw()) {
-			if (cam.lockScreen()) {
-				cam.prepare();
-				loop_.render();
-				cam.unlockScreen();
-			}
+		if (loop_.doRender() && cam.canDraw() && cam.lockScreen()) {
+			cam.prepare();
+			loop_.render();
+			cam.unlockScreen();
 		}
-		
 	}
 	
 	/**
