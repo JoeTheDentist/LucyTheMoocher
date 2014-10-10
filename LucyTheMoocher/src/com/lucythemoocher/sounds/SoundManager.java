@@ -46,6 +46,8 @@ public class SoundManager {
 		// Calculate the sample duration
 		MediaPlayer mp = MediaPlayer.create(Resources.getActivity(), R.raw.theme1);
 		sampleDuration_ = mp.getDuration();
+		mp.reset();
+		mp.release();
 
 		// Allocation
 		for ( int i = 0; i<soundsBackground_.capacity(); i++) {
@@ -59,15 +61,6 @@ public class SoundManager {
 		soundsBackground_.get(BACKGROUND_LVL3).add(R.raw.lvl1_1);
 		soundsBackground_.get(BACKGROUND_LVL3).add(R.raw.lvl2_1);
 		soundsBackground_.get(BACKGROUND_LVL3).add(R.raw.lvl3_1);
-
-		// Sounds load
-		for ( ArrayList<Integer> l : soundsBackground_ ) {
-			for ( int i : l ) {
-				addSound(i);
-			}
-		}
-		
-		state_ = new StateNormal(this, SoundsState.MTL_NORMAL);
 	}
 
 	/**
@@ -82,12 +75,25 @@ public class SoundManager {
 			}
 		}
 	}
+	
+	/**
+	 * Load sound resources
+	 */
+	public void load() {
+		// Sounds load
+		for ( ArrayList<Integer> l : soundsBackground_ ) {
+			for ( int i : l ) {
+				addSound(i);
+			}
+		}
+	}
 
 	/**
 	 * Start playing
 	 */
 	public void start() {
 		lastPlay_ = -sampleDuration_;
+		state_ = new StateNormal(this, SoundsState.MTL_NORMAL);
 		started_ = true;
 	}
 	

@@ -30,12 +30,19 @@ public class Game {
 	private SoundManager sounds_;
 	private boolean started_ = false;
 	
+	public Game() {
+		Log.d("Game", "Create Game class");
+		fx_ = new FXManager();
+		projectiles_ = new ProjectilesManager();
+		sounds_ = new SoundManager();
+	}
+	
 	/**
 	 * Load the game with the given level
 	 * @param level to load
 	 */
 	public void load(int lvl) {
-		Log.d("Game", "launchGame");
+		Log.d("Game", "Loading level "+lvl);
 		timer_ = new Timer(0);
 		switch (lvl) {
 		case 1:
@@ -50,13 +57,11 @@ public class Game {
 		}
 		hud_ = new HUD(new ActionController());
 		Globals.getInstance().getCamera().moveTo(character_.getX(), character_.getY());
-		
-		fx_ = new FXManager();
-		projectiles_ = new ProjectilesManager();
 
 		event_ = new EventNormal();
 		background_ = new Background();
-		sounds_ = new SoundManager();
+		
+		sounds_.load();
 	}
 	
 	/**
@@ -73,6 +78,8 @@ public class Game {
 	 */
 	public void stop() {
 		sounds_.stop();
+		fx_.clear();
+		projectiles_.clear();
 		started_ = false;
 	}
 	

@@ -35,4 +35,11 @@ public class ProjectilesManager {
 			}
 		}
 	}
+	
+	/**
+	 * Remove all projectiles
+	 */
+	public void clear() {
+		proj_.clear();
+	}
 }

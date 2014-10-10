@@ -37,4 +37,11 @@ public class FXManager {
 			f.draw();
 		}
 	}
+	
+	/**
+	 * Remove all FXs
+	 */
+	public void clear() {
+		fx_.clear();
+	}
 }
