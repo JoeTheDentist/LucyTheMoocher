@@ -61,7 +61,7 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 		
 		getHolder().addCallback(this);
 		setFocusable(true);
-		scale_ = screen_.getW() / 1000f;
+		scale_ = screen_.getW() / 1200f;
 		setSpeed(1.0f / 30.0f);
 		this.requestFocus();
 		this.setFocusableInTouchMode(true);
@@ -283,9 +283,9 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 	 * @see #lockScreen()
 	 */
 	public void drawImageOnHud(float x, float y, Image image, boolean scale) {
-		if (scale) canvas_.scale(1/scale_, 1/scale_);
-		canvas_.drawBitmap(image.getBitmap().getBitmap(), x, y, image.getBitmap().getPaint());
 		if (scale) canvas_.scale(scale_, scale_);
+		canvas_.drawBitmap(image.getBitmap().getBitmap(), x, y, image.getBitmap().getPaint());
+		if (scale) canvas_.scale(1/scale_, 1/scale_);
 	}
 	
 	/**
