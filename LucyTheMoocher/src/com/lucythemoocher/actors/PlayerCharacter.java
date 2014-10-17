@@ -103,11 +103,13 @@ public class PlayerCharacter extends Actor implements Controllable {
 		Iterator<Monster> it = Globals.getInstance().getGame().getMonstersManager().getIterator();
 		while (it.hasNext()) {
 			Monster monster = it.next();
-			if (collidesWith(monster)) {
+			if (collidesWith(monster, 1)) {
 				if (state_.isAttacking()) {
 					monster.setToRemove();
 				} else {
-					Globals.getInstance().lose();
+					if (collidesWith(monster, 0.75f)) {
+						Globals.getInstance().lose();
+					}
 				}
 			}
 		}

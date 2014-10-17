@@ -199,11 +199,21 @@ public class Cinematic {
 	 * Getter
 	 * @param c 
 	 * @return True if and only if the cinematic collides with c
+	 * @see collidesWith(Cinematic c, float ratio)
 	 */
 	public boolean collidesWith(Cinematic c) {
+		return collidesWith(c, 1);
+	}
+	
+	/**
+	 * Getter
+	 * @param c 
+	 * @return True if and only if the cinematic collides with c
+	 */
+	public boolean collidesWith(Cinematic c, float ratio) {
 		for (Box b1: this.boundingBoxes()) {
 			for (Box b2: c.boundingBoxes()) {
-				if (b1.collideWith(b2)) {
+				if (b1.collideWith(b2, ratio)) {
 					return true;
 				}
 			}

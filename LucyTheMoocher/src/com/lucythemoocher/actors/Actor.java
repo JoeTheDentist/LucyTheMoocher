@@ -183,8 +183,8 @@ public abstract class Actor implements Drawable {
 	 * @param actor
 	 * @return True if actors are alive and if their bounding boxes collide
 	 */
-	public boolean collidesWith(Actor actor) {
-		return !isToRemove() && !actor.isToRemove() && getCinematic().collidesWith(actor.getCinematic());
+	public boolean collidesWith(Actor actor, float ratio) {
+		return !isToRemove() && !actor.isToRemove() && getCinematic().collidesWith(actor.getCinematic(), ratio);
 	}
 	
 	// temporary

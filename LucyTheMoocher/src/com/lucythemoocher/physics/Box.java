@@ -72,47 +72,30 @@ public class Box {
 	public void setW(float w_) {
 		this.w_ = w_;
 	}
-
-	public boolean isIn(float x, float y) {
-		if ( x < getX() || x > getX()+getW() ) {
-			return false;
-		}
-		if ( y < getY() || y > getY()+getH() ) {
-			return false;
-		}
-		return true;
+	
+	public boolean collideWith(Box b, float ratio) {
+		return (getX() + (1-ratio)*getW() < b.getX() + ratio*b.getW() &&
+				getX() + ratio*getW() > b.getX() + (1-ratio)*b.getW() &&
+				getY() + (1-ratio)*getH() < b.getY() + ratio*b.getH() &&
+				getY() + ratio*getH() > b.getY() + (1-ratio)*b.getH());
 	}
 	
-	public boolean collideWith(Box b) {
-		boolean in = isIn(b.getX(),b.getY()) ||
-			isIn(b.getX()+b.getW(),b.getY()) ||
-			isIn(b.getX(),b.getY()+b.getH()) ||
-			isIn(b.getX()+b.getW(),b.getY()+b.getH());
-		
-		in |= b.isIn(getX(),getY()) ||
-			b.isIn(getX()+getW(),getY()) ||
-			b.isIn(getX(),getY()+getH()) ||
-			b.isIn(getX()+getW(),getY()+getH());
-		
-		return in;
+	public static boolean collideWith(Box a, Box b, float ratio) {
+		return a.collideWith(b, ratio);
 	}
 	
-	public static boolean collideWith(Box a, Box b) {
-		return a.collideWith(b);
-	}
-	
-	public boolean collideWith(ArrayList<Box> boxes) {
+	public boolean collideWith(ArrayList<Box> boxes, float ratio) {
 		for ( Box b : boxes ) {
-			if ( collideWith(b) ) {
+			if ( collideWith(b, ratio) ) {
 				return true;
 			}
 		}
 		return false;
 	}
 	
-	public static boolean collideWith(ArrayList<Box> boxes1, ArrayList<Box> boxes2) {
+	public static boolean collideWith(ArrayList<Box> boxes1, ArrayList<Box> boxes2, float ratio) {
 		for ( Box box : boxes1 ) {
-			if ( box.collideWith(boxes2) ) {
+			if ( box.collideWith(boxes2, ratio) ) {
 				return true;
 			}
 		}
