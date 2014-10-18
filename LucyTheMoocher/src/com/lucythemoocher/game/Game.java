@@ -44,6 +44,7 @@ public class Game {
 	public void load(int lvl) {
 		Log.d("Game", "Loading level "+lvl);
 		timer_ = new Timer(0);
+		projectiles_.clear();
 		switch (lvl) {
 		case 1:
 			LevelLoader ll = new LevelLoader(R.raw.lvl1);

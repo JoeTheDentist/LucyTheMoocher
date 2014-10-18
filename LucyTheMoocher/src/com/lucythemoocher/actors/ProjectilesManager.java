@@ -36,6 +36,10 @@ public class ProjectilesManager {
 		}
 	}
 	
+	public Iterator<Projectile> getIterator() {
+		return proj_.iterator();
+	}
+	
 	/**
 	 * Remove all projectiles
 	 */

@@ -2,6 +2,8 @@ package com.lucythemoocher.actors;
 
 import java.util.Iterator;
 
+import android.util.Log;
+
 import com.lucythemoocher.Globals.Globals;
 import com.lucythemoocher.actors.maincharacter.state.*;
 
@@ -38,7 +40,7 @@ public class PlayerCharacter extends Actor implements Controllable {
 		super.update();
 		controller_.update();
 		state_.update();
-		checkMonstersCollisions();
+		checkCollisions();
 	}
 	
 	/**
@@ -116,8 +118,20 @@ public class PlayerCharacter extends Actor implements Controllable {
 	}
 	
 	// temporary
+	private void checkProjectilesCollisions() {
+		Iterator<Projectile> it = Globals.getInstance().getGame().getProjectilesManager().getIterator();
+		while (it.hasNext()) {
+			Projectile proj = it.next();
+			if (collidesWith(proj, 1)) {
+				Globals.getInstance().lose();
+			}
+		}
+	}
+	
+	// temporary
 	public void checkCollisions() {
 		checkMonstersCollisions();
+		checkProjectilesCollisions();
 	}
 	
 	public int getDir() {
