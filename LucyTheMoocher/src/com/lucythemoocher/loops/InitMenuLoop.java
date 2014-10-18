@@ -47,7 +47,7 @@ public class InitMenuLoop extends Loop implements MenuButtonListener {
 
 	@Override
 	public void render() {
-		Globals.getInstance().getCamera().drawImageOnHud(0,  0, menuBackground_, true);
+		Globals.getInstance().getCamera().drawImageOnHud(0,  0, menuBackground_);
 		buttonNewGame_.draw();
 		buttonLeave_.draw();
 		drawn_ = true;

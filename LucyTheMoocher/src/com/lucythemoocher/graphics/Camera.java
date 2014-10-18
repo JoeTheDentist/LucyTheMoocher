@@ -271,21 +271,7 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 	 * @see #lockScreen()
 	 */
 	public void drawImageOnHud(float x, float y, Image image) {
-		drawImageOnHud(x, y, image, false);
-	}
-	
-	/**
-	 * Draw the image without using the scrolling
-	 * @param  x position in dp pixels
-	 * @param y y position in dp pixels
-	 * @param image
-	 * @param scale does the image need to be scaled or not
-	 * @see #lockScreen()
-	 */
-	public void drawImageOnHud(float x, float y, Image image, boolean scale) {
-		if (scale) canvas_.scale(scale_, scale_);
 		canvas_.drawBitmap(image.getBitmap().getBitmap(), x, y, image.getBitmap().getPaint());
-		if (scale) canvas_.scale(1/scale_, 1/scale_);
 	}
 	
 	/**

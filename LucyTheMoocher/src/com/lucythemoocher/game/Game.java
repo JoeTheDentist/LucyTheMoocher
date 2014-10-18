@@ -45,17 +45,19 @@ public class Game {
 		Log.d("Game", "Loading level "+lvl);
 		timer_ = new Timer(0);
 		projectiles_.clear();
+		LevelLoader ll = null;
 		switch (lvl) {
 		case 1:
-			LevelLoader ll = new LevelLoader(R.raw.lvl1);
-			character_ = ll.getCharacter();
-			monsters_ = ll.getMonsters();
-			map_ = new Map(ll);
+			ll = new LevelLoader(R.raw.lvl1);
 			break;
 		default:
 			Log.e("Game", "Can't find this level, game may crash");
 			break;
 		}
+		character_ = ll.getCharacter();
+		monsters_ = ll.getMonsters();
+		map_ = new Map(ll);
+		
 		hud_ = new HUD(new ActionController());
 		Globals.getInstance().getCamera().moveTo(character_.getX(), character_.getY());
 
