@@ -55,13 +55,14 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 		currY_ = 1;
 		screen_ = new Box(currX_,currY_,h,w);
 		
-		hudPaints_ = new SparseArray<Paint>();
-		initHudColors(new int[] {Color.GRAY, Color.BLACK}, w);
-		hudOval_ = new RectF(-w/10, -w/10, w+w/10, h+w/10);
-		
 		getHolder().addCallback(this);
 		setFocusable(true);
 		scale_ = screen_.getW() / 1200f;
+		
+		hudPaints_ = new SparseArray<Paint>();
+		initHudColors(new int[] {Color.GRAY, Color.BLACK}, h);
+		hudOval_ = new RectF(-w/10, -w/10, w+w/10, h+w/10);
+		
 		setSpeed(1.0f / 30.0f);
 		this.requestFocus();
 		this.setFocusableInTouchMode(true);
@@ -83,10 +84,10 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 	 * Initialize the HUD colors
 	 * @param colorArray colors to initialize
 	 */
-	private void initHudColors(int colorArray[], float screenWidth) {
+	private void initHudColors(int colorArray[], float h) {
 		for (int color : colorArray) {
 			Paint currPaint = new Paint();
-			currPaint.setStrokeWidth(screenWidth/4);
+			currPaint.setStrokeWidth(h*0.40f);
 			currPaint.setStyle(Paint.Style.STROKE);
 			currPaint.setColor(color);
 			currPaint.setAlpha(50);
