@@ -56,8 +56,8 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 		screen_ = new Box(currX_,currY_,h,w);
 		
 		hudPaints_ = new SparseArray<Paint>();
-		initHudColors(new int[] {Color.GRAY, Color.BLACK});
-		hudOval_ = new RectF(0, 0, w, h);
+		initHudColors(new int[] {Color.GRAY, Color.BLACK}, w);
+		hudOval_ = new RectF(-w/10, -w/10, w+w/10, h+w/10);
 		
 		getHolder().addCallback(this);
 		setFocusable(true);
@@ -83,10 +83,10 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 	 * Initialize the HUD colors
 	 * @param colorArray colors to initialize
 	 */
-	private void initHudColors(int colorArray[]) {
+	private void initHudColors(int colorArray[], float screenWidth) {
 		for (int color : colorArray) {
 			Paint currPaint = new Paint();
-			currPaint.setStrokeWidth(250);
+			currPaint.setStrokeWidth(screenWidth/4);
 			currPaint.setStyle(Paint.Style.STROKE);
 			currPaint.setColor(color);
 			currPaint.setAlpha(50);
