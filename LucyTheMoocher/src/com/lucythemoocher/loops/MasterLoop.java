@@ -56,7 +56,11 @@ public class MasterLoop {
 		setLoop(new InitMenuLoop());
 	}
 	
-	public void newLevel() {
+	public void gameOver() {
+		setLoop(new GameOverLoop(3000));
+	}
+	
+	public void restartLevel() {
 		setLoop(new LivesMenuLoop(Globals.getInstance().getLives(), 1000, new LoopGame(Globals.getInstance().getLevel())));
 	}
 	

@@ -243,10 +243,10 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 		Paint textPaint = new Paint();
 		textPaint.setColor(color);
 		textPaint.setTextAlign(Align.CENTER);
-		textPaint.setTextSize(60);
+		textPaint.setTextSize(0.08f*physicalH());
 		textPaint.setTypeface(Typeface.create("Arial",Typeface.BOLD));
 		canvas_.scale(1/scale_, 1/scale_);
-		canvas_.drawText(text, 200, physicalH()/2, textPaint);
+		canvas_.drawText(text, physicalW()/5, physicalH()/2, textPaint);
 		canvas_.scale(scale_, scale_);
 	}
 

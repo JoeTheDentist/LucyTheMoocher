@@ -66,11 +66,11 @@ public class Globals {
     public void lose() {
     	lives_--;
     	if (lives_ > 0) {
-    		MasterLoop.getInstance().newLevel();
+    		MasterLoop.getInstance().restartLevel();
     	} else {
     		level_ = 1;
     		lives_ = 3;
-    		MasterLoop.getInstance().mainMenu();
+    		MasterLoop.getInstance().gameOver();
     	}
     }
     
