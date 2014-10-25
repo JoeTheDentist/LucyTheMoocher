@@ -48,6 +48,22 @@ public class LoopGame extends Loop implements KeysListener {
 	}
 	
 	@Override
+	protected void pause() {
+		Globals.getInstance().getGame().pause();
+	}
+	
+	@Override
+	protected void resume() {
+		registerKeys();
+		Globals.getInstance().getGame().resume();
+	}
+	
+	@Override
+	protected void stop() {
+		Globals.getInstance().getGame().stop();
+	}
+	
+	@Override
 	public void update() {
 		Globals.getInstance().getGame().update();
 	}
@@ -74,7 +90,7 @@ public class LoopGame extends Loop implements KeysListener {
 
 	public void onKeyDown(int KeyCode, KeyEvent event) {
 		if (KeyCode == KeyEvent.KEYCODE_BACK && lifeTime_.timeFromCreation() > 100 &&  event.getRepeatCount() == 0) {
-			changeCurrentLoop(new LoopPause());
+			changeCurrentLoop(new LoopPause(this));
 		}
 	}
 

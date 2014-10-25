@@ -14,6 +14,7 @@ public class LoopPause extends Loop implements MenuButtonListener, KeysListener 
 	private MenuButton buttonResume_;
 	private MenuButton buttonLeaveGame_;
 	private Timer lifeTime_;
+	private LoopGame game_;
 	
 	private final static int RESUMEINDEX = 1;
 	private final static int LEAVEGAMEINDEX = 4;
@@ -22,13 +23,15 @@ public class LoopPause extends Loop implements MenuButtonListener, KeysListener 
 	private final static float LEAVEGAMEPERCENT_Y = 40;
 
 	
-	public LoopPause() {
+	public LoopPause(LoopGame game) {
 		buttonResume_ = new MenuButton(30, 30, RESUMEINDEX, R.drawable.mainmenu_button_newgame_normal, 
 				R.drawable.mainmenu_button_newgame_focussed, R.drawable.mainmenu_button_newgame_clicked, this);
 		buttonLeaveGame_ = new MenuButton(30, 30, LEAVEGAMEINDEX, R.drawable.mainmenu_button_leave_normal, 
 				R.drawable.mainmenu_button_leave_focussed, R.drawable.mainmenu_button_leave_clicked, this);
 		registerKeys();
 		lifeTime_ = new Timer(0);
+		game_ = game;
+		game_.pause();
 	}
 	
 	public void update() {
@@ -49,7 +52,8 @@ public class LoopPause extends Loop implements MenuButtonListener, KeysListener 
 	public void onButtonClicked(int buttonIndex) {
 		switch (buttonIndex) {
 		case RESUMEINDEX:
-			changeCurrentLoop(new LoopGame());
+			game_.resume();
+			changeCurrentLoop(game_);
 			break;
 		case LEAVEGAMEINDEX:
 			Globals.getInstance().stopGame();
@@ -75,7 +79,8 @@ public class LoopPause extends Loop implements MenuButtonListener, KeysListener 
 
 	public void onKeyDown(int KeyCode, KeyEvent event) {
 		if (KeyCode == KeyEvent.KEYCODE_BACK && lifeTime_.timeFromCreation() > 100 &&  event.getRepeatCount() == 0) {
-			changeCurrentLoop(new LoopGame());
+			game_.resume();
+			changeCurrentLoop(game_);
 		}
 	}
 

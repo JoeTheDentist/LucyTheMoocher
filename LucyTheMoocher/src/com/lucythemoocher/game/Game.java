@@ -87,6 +87,22 @@ public class Game {
 	}
 	
 	/**
+	 * Pause
+	 */
+	public void pause()
+	{
+		sounds_.pause();
+	}
+	
+	/**
+	 * Resume
+	 */
+	public void resume()
+	{
+		sounds_.resume();
+	}
+	
+	/**
 	 * Getter
 	 * @return whether the game is started or not
 	 */

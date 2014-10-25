@@ -1,5 +1,6 @@
 package com.lucythemoocher.sounds;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Vector;
@@ -35,81 +36,50 @@ public class SoundManager {
 	private float lastPlay_;
 	private boolean started_;
 	private SoundsState state_;
+	private MediaPlayer player_;
 	
 	public SoundManager() {
-		sounds_ = new SoundPool(10, AudioManager.STREAM_MUSIC, 100);
-		loaded_ = new HashMap<Integer, Integer>();
-		playing_ = new HashMap<Integer, Integer>();
-		soundsBackground_ = new Vector<ArrayList<Integer>>(4);
-		started_ = false;
-
-		// Calculate the sample duration
-		MediaPlayer mp = MediaPlayer.create(Resources.getActivity(), R.raw.theme1);
-		sampleDuration_ = mp.getDuration();
-		mp.reset();
-		mp.release();
-
-		// Allocation
-		for ( int i = 0; i<soundsBackground_.capacity(); i++) {
-			ArrayList<Integer> l = new ArrayList<Integer>();
-			soundsBackground_.add(i, l);
-		}
-
-		// Sounds referencing
-		soundsBackground_.get(BACKGROUND_THEME).add(R.raw.theme1);
-		soundsBackground_.get(BACKGROUND_THEME).add(R.raw.theme2);
-		soundsBackground_.get(BACKGROUND_LVL3).add(R.raw.lvl1_1);
-		soundsBackground_.get(BACKGROUND_LVL3).add(R.raw.lvl2_1);
-		soundsBackground_.get(BACKGROUND_LVL3).add(R.raw.lvl3_1);
+		player_ = MediaPlayer.create(Resources.getActivity(), R.raw.theme_loop);
 	}
 
 	/**
 	 * Update
 	 */
-	public void update() {
-		state_.increaseNormal();
-		if ( started_ ) {
-			if ( Globals.getInstance().getTimer().getTime()-lastPlay_ > sampleDuration_- 50 ) {
-				lastPlay_ = Globals.getInstance().getTimer().getTime();
-				state_.changeMesure();
-			}
-		}
-	}
+	public void update() {}
 	
 	/**
 	 * Load sound resources
 	 */
-	public void load() {
-		// Sounds load
-		for ( ArrayList<Integer> l : soundsBackground_ ) {
-			for ( int i : l ) {
-				addSound(i);
-			}
-		}
-	}
+	public void load() {}
 
 	/**
 	 * Start playing
 	 */
 	public void start() {
-		lastPlay_ = -sampleDuration_;
-		state_ = new StateNormal(this, SoundsState.MTL_NORMAL);
-		started_ = true;
+		player_.start();
+		player_.setLooping(true);
 	}
 	
 	/**
-	 * Stop all
+	 * Stop playing and rewind
 	 */
 	public void stop() {
-		sounds_.release();
+		player_.pause();
+		player_.seekTo(0);
 	}
-
+	
 	/**
-	 * Load the sound in memory from resource id
-	 * @param resource
+	 * Pause
 	 */
-	private void addSound(int resource) {
-		loaded_.put(resource, sounds_.load(Resources.getActivity(), resource, 1));
+	public void pause() {
+		player_.pause();
+	}
+	
+	/**
+	 * Resume
+	 */
+	public void resume() {
+		player_.start();
 	}
 
 	/**

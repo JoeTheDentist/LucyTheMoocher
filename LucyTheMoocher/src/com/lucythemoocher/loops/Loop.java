@@ -48,6 +48,24 @@ public abstract class Loop {
 	 * @see LivesMenuLoop.update
 	 */
 	protected void start() {}
+	
+	/**
+	 * Pause
+	 * @see LivesMenuLoop.update
+	 */
+	protected void pause() {}
+	
+	/**
+	 * Pause
+	 * @see LivesMenuLoop.update
+	 */
+	protected void resume() {}
+	
+	/**
+	 * Stop, makes sure to clean up resources for the loop.
+	 * @see LivesMenuLoop.update
+	 */
+	protected void stop() {}
 
 	/**
 	 * Called when the loop is left for another loop
