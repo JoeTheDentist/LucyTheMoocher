@@ -172,7 +172,7 @@ public class Cinematic {
 	 * @return
 	 */
 	public float getTargetX() {
-		return posx_ + 200 * speedx_;
+		return posx_ + 500 * speedx_;
 	}
 	
 	/**
