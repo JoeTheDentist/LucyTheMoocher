@@ -1,4 +1,4 @@
-package com.lucythemoocher;
+		package com.lucythemoocher;
 
 import com.lucythemoocher.game.GameThread;
 import com.lucythemoocher.util.Resources;
@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.WindowManager.LayoutParams;
 
 public class LucyTheMoocherActivity extends Activity {
 	private static final String TAG = LucyTheMoocherActivity.class.getSimpleName();
@@ -20,9 +21,9 @@ public class LucyTheMoocherActivity extends Activity {
         super.onCreate(savedInstanceState);
         
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(	WindowManager.LayoutParams.FLAG_FULLSCREEN,
-        						WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        
+        getWindow().setFlags(LayoutParams.FLAG_FULLSCREEN,
+        					 LayoutParams.FLAG_FULLSCREEN);
+        getWindow().addFlags(LayoutParams.FLAG_KEEP_SCREEN_ON);
         Resources.setActivity(this);
         Globals.getInstance(); // call it once here to be sure the instance is created
         setContentView(Globals.getInstance().getCamera());
