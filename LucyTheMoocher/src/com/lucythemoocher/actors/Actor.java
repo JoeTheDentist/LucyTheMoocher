@@ -2,6 +2,7 @@ package com.lucythemoocher.actors;
 
 import java.util.ArrayList;
 
+import com.lucythemoocher.controls.Controllable;
 import com.lucythemoocher.graphics.Drawable;
 import com.lucythemoocher.graphics.ActorDrawer;
 
@@ -12,7 +13,7 @@ import com.lucythemoocher.physics.Cinematic;
  * A Drawable and physical entity interacting with the other
  * in a game
  */
-public abstract class Actor implements Drawable {
+public abstract class Actor implements Drawable, Controllable {
 	protected Cinematic pos_;
 	private boolean isToRemove_ = false;
 	private int id_ = -1;
@@ -105,6 +106,12 @@ public abstract class Actor implements Drawable {
 	public void moveUp() {
 		pos_.moveUp();
 	}
+	
+	public void moveFastLeft() {}
+
+	public void moveFastRight() {}
+
+	public void moveDown() {}
 	
 	/**
 	 * Called when the actor should attack 

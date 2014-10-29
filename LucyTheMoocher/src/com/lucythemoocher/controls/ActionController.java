@@ -13,7 +13,7 @@ import android.view.MotionEvent;
 /**
  * Control a game actions
  */
-public class ActionController extends TouchListener {
+public class ActionController extends TouchListener implements Controller {
 	private static final float DOUBLE_TOUCH_SENSIBILITY = 200;
 
 	private float[] lastTouch_;

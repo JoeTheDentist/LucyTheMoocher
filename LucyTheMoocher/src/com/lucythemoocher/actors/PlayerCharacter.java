@@ -2,8 +2,6 @@ package com.lucythemoocher.actors;
 
 import java.util.Iterator;
 
-import android.util.Log;
-
 import com.lucythemoocher.Globals.Globals;
 import com.lucythemoocher.actors.maincharacter.state.*;
 

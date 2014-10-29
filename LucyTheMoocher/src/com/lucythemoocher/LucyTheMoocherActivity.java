@@ -8,7 +8,6 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Window;
-import android.view.WindowManager;
 import android.view.WindowManager.LayoutParams;
 
 public class LucyTheMoocherActivity extends Activity {
@@ -35,11 +34,6 @@ public class LucyTheMoocherActivity extends Activity {
     public void onConfigurationChanged(Configuration newConfig) {
     	  super.onConfigurationChanged(newConfig);
     	  Log.d(TAG, "!!! Config changed...");
-    }
-
-    public void onBackPressed() {
-    	//TODO must be treated (with menus for instance)
-    	return;
     }
     
     protected void onStart() {

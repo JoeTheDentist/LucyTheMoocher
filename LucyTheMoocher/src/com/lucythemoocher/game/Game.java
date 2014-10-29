@@ -7,6 +7,8 @@ import com.lucythemoocher.Globals.Globals;
 import com.lucythemoocher.actors.MonstersManager;
 import com.lucythemoocher.actors.PlayerCharacter;
 import com.lucythemoocher.actors.ProjectilesManager;
+import com.lucythemoocher.actors.TargetCharacter;
+import com.lucythemoocher.controls.AIController;
 import com.lucythemoocher.controls.ActionController;
 import com.lucythemoocher.events.*;
 import com.lucythemoocher.graphics.Background;
@@ -18,6 +20,7 @@ import com.lucythemoocher.R;
 
 public class Game {
 	private PlayerCharacter character_;
+	private TargetCharacter target_;
 	private Map map_;
 	private int nbUpdates = 0;
 	private Event event_;
@@ -57,6 +60,8 @@ public class Game {
 		character_ = ll.getCharacter();
 		monsters_ = ll.getMonsters();
 		map_ = new Map(ll);
+		// temp
+		target_ = new TargetCharacter(new AIController(), 200, 200);
 		
 		hud_ = new HUD(new ActionController());
 		Globals.getInstance().getCamera().moveTo(character_.getX(), character_.getY());
@@ -182,7 +187,8 @@ public class Game {
 	public void update() {
 		nbUpdates++;
 		timer_.addDt(Globals.getInstance().getTimer().getDt());
-		getCharacter().update();
+		character_.update();
+		target_.update();
 		Globals.getInstance().getCamera().update();
 		monsters_.update();
 		fx_.update();
@@ -196,7 +202,8 @@ public class Game {
 		getMap().draw();
 		projectiles_.render();
 		monsters_.render();
-		getCharacter().draw();
+		target_.draw();
+		character_.draw();
 		fx_.render();
 		hud_.draw();
 	}
