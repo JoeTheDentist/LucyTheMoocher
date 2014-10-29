@@ -10,6 +10,8 @@ import com.lucythemoocher.R;
 import com.lucythemoocher.actors.MonstersManager;
 import com.lucythemoocher.actors.PlayerCharacter;
 import com.lucythemoocher.actors.Tank;
+import com.lucythemoocher.actors.TargetCharacter;
+import com.lucythemoocher.controls.AIController;
 import com.lucythemoocher.controls.ActionController;
 import com.lucythemoocher.graphics.Grid;
 import com.lucythemoocher.util.Direction;
@@ -63,6 +65,9 @@ public class LevelLoader {
 					switch (curChar) {
 					case 'L':
 						character_ = new PlayerCharacter(new ActionController(), j * grid.boxW(), i * grid.boxH());
+						break;
+					case 'F':
+						target_ = new TargetCharacter(new AIController(), j * grid.boxW(), i * grid.boxH());
 						break;
 					case 'T':
 						monsters_.addMonster(new Tank(j * grid.boxW(), i * grid.boxH(), Direction.LEFT));
@@ -186,6 +191,10 @@ public class LevelLoader {
 		return character_;
 	}
 	
+	public TargetCharacter getTarget() {
+		return target_;
+	}
+	
 	public MonstersManager getMonsters() {
 		return monsters_;
 	}
@@ -194,5 +203,6 @@ public class LevelLoader {
 	private int w_;
 	private int[][] map_;
 	private PlayerCharacter character_;
+	private TargetCharacter target_;
 	private MonstersManager monsters_;
 }

@@ -58,10 +58,9 @@ public class Game {
 			break;
 		}
 		character_ = ll.getCharacter();
+		target_ = ll.getTarget();
 		monsters_ = ll.getMonsters();
 		map_ = new Map(ll);
-		// temp
-		target_ = new TargetCharacter(new AIController(), 200, 200);
 		
 		hud_ = new HUD(new ActionController());
 		Globals.getInstance().getCamera().moveTo(character_.getX(), character_.getY());
