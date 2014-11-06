@@ -57,11 +57,18 @@ public class MasterLoop {
 	}
 	
 	public void gameOver() {
+		loop_.unregisterKeys();
 		setLoop(new GameOverLoop(3000));
 	}
 	
+	public void credits() {
+		loop_.unregisterKeys();
+		setLoop(new CreditsLoop());
+	}
+	
 	public void restartLevel() {
-		setLoop(new LivesMenuLoop(Globals.getInstance().getLives(), 1000, new LoopGame(Globals.getInstance().getLevel())));
+		loop_.unregisterKeys();
+		setLoop(new LivesMenuLoop(1000, new LoopGame(Globals.getInstance().getLevel())));
 	}
 	
 	/**

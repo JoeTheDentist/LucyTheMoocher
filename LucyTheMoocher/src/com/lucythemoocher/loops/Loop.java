@@ -72,6 +72,8 @@ public abstract class Loop {
 	 */
 	public void onLeaveLoop() {}
 	
+	void unregisterKeys() {}
+	
 	/**
 	 * If need to draw
 	 * @return

@@ -17,6 +17,7 @@ public class GameOverLoop extends Loop {
 	public GameOverLoop(float msToLive) {
 		super();
 		currMs_ = msToLive;
+		Globals.getInstance().getGame().stop();
 	}
 	
 	@Override

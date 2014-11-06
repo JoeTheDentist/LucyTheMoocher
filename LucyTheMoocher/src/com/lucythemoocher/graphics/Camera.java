@@ -7,6 +7,7 @@ import com.lucythemoocher.physics.Box;
 import com.lucythemoocher.util.Direction;
 import com.lucythemoocher.util.Resources;
 
+import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -47,8 +48,8 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 	/**
 	 * Constructor
 	 */
-	public Camera() {
-		super(Resources.getActivity());
+	public Camera(Context c) {
+		super(c);
 		float h = Resources.getActivity().getWindowManager().getDefaultDisplay().getHeight();
 		float w = Resources.getActivity().getWindowManager().getDefaultDisplay().getWidth();
 		currX_ = 1;
@@ -247,6 +248,23 @@ public class Camera extends SurfaceView implements SurfaceHolder.Callback {
 		textPaint.setTypeface(Typeface.create("Arial",Typeface.BOLD));
 		canvas_.scale(1/scale_, 1/scale_);
 		canvas_.drawText(text, physicalW()/5, physicalH()/2, textPaint);
+		canvas_.scale(scale_, scale_);
+	}
+	
+	/**
+	 * Draw text
+	 * @param text
+	 * @param color
+	 * @param pos where to print text
+	 */
+	public void drawText(String text, int color, float pos) {
+		Paint textPaint = new Paint();
+		textPaint.setColor(color);
+		textPaint.setTextAlign(Align.LEFT);
+		textPaint.setTextSize(0.08f*physicalH());
+		textPaint.setTypeface(Typeface.create("Arial",Typeface.BOLD));
+		canvas_.scale(1/scale_, 1/scale_);
+		canvas_.drawText(text, physicalW()/5, pos, textPaint);
 		canvas_.scale(scale_, scale_);
 	}
 

@@ -2,7 +2,6 @@ package com.lucythemoocher.controls;
 
 import java.util.ArrayList;
 
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 
@@ -88,11 +87,4 @@ public class GlobalController {
 			touchListenners_.get(i).motion(event);
 		}
 	}
-	
-	private void alertButton(MotionEvent event) {
-		for ( ButtonListener l : buttonListenners_ ) {
-			l.button(event);
-		}
-	}
-	
 }

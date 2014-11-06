@@ -1,8 +1,5 @@
 package com.lucythemoocher.loops;
 
-import android.R.bool;
-import android.util.Log;
-
 import com.lucythemoocher.Globals.Globals;
 import com.lucythemoocher.graphics.Image;
 import com.lucythemoocher.gui.MenuButton;
@@ -16,8 +13,6 @@ public class InitMenuLoop extends Loop implements MenuButtonListener {
 
 	private Image menuBackground_;
 	private MenuButton buttonNewGame_;
-	private MenuButton buttonSound_;
-	private MenuButton buttonMusic_;
 	private MenuButton buttonLeave_;
 	
 	private final static int NEWGAMEINDEX = 1;
@@ -65,8 +60,7 @@ public class InitMenuLoop extends Loop implements MenuButtonListener {
 		drawn_ = false;
 		switch (buttonIndex) {
 		case NEWGAMEINDEX:
-			// TODO variable for lives (instead of 3)
-			changeCurrentLoop(new LivesMenuLoop(Globals.getInstance().getLives(), 1000, new LoopGame(1)));
+			changeCurrentLoop(new LivesMenuLoop(1000, new LoopGame(Globals.getInstance().getLevel())));
 			break;
 		case LEAVEINDEX:
 			Globals.getInstance().leave();

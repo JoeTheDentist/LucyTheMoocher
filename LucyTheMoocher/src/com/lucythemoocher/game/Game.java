@@ -8,7 +8,6 @@ import com.lucythemoocher.actors.MonstersManager;
 import com.lucythemoocher.actors.PlayerCharacter;
 import com.lucythemoocher.actors.ProjectilesManager;
 import com.lucythemoocher.actors.TargetCharacter;
-import com.lucythemoocher.controls.AIController;
 import com.lucythemoocher.controls.ActionController;
 import com.lucythemoocher.events.*;
 import com.lucythemoocher.graphics.Background;
@@ -19,6 +18,11 @@ import com.lucythemoocher.util.Timer;
 import com.lucythemoocher.R;
 
 public class Game {
+	public static final int FIRST_LEVEL = 1;
+	public static final int MAX_LEVELS = 2;
+	
+	public static final int  START_LIVES = 3;
+	
 	private PlayerCharacter character_;
 	private TargetCharacter target_;
 	private Map map_;
@@ -51,6 +55,9 @@ public class Game {
 		LevelLoader ll = null;
 		switch (lvl) {
 		case 1:
+			ll = new LevelLoader(R.raw.lvl1);
+			break;
+		case 2:
 			ll = new LevelLoader(R.raw.lvl1);
 			break;
 		default:

@@ -17,9 +17,9 @@ public class LivesMenuLoop extends Loop {
 	 * @param msToLive
 	 * @param next
 	 */
-	public LivesMenuLoop(int lives, float msToLive, Loop next) {
+	public LivesMenuLoop(float msToLive, Loop next) {
 		super();
-		lives_ = lives;
+		lives_ = Globals.getInstance().getLives();
 		currMs_ = msToLive;
 		next_ = next;
 	}

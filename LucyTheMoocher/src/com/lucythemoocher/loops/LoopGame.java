@@ -84,6 +84,7 @@ public class LoopGame extends Loop implements KeysListener {
 		GlobalController.getInstance().registerKey(this);
 	}
 
+	@Override
 	public void unregisterKeys() {
 		GlobalController.getInstance().unregisterKey(this);
 	}

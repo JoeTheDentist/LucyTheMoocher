@@ -132,7 +132,7 @@ public class PlayerCharacter extends Actor implements Controllable {
 	private void checkTargetCollision() {
 		TargetCharacter target = Globals.getInstance().getGame().getTarget();
 		if (collidesWith(target, 1f)) {
-			// TODO victory
+			Globals.getInstance().win();
 		}
 	}
 	

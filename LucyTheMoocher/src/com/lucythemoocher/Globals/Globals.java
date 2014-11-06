@@ -17,8 +17,8 @@ public class Globals {
 	private Camera camera_;
 	private Timer timer_;
 	private Game game_;
-	private int lives_ = 3;
-	private int level_ = 1;
+	private int lives_ = Game.START_LIVES;
+	private int level_ = Game.FIRST_LEVEL;
 	
 	/**
 	 * Instance getter
@@ -68,14 +68,24 @@ public class Globals {
     	if (lives_ > 0) {
     		MasterLoop.getInstance().restartLevel();
     	} else {
-    		level_ = 1;
-    		lives_ = 3;
+    		level_ = Game.FIRST_LEVEL;
+    		lives_ = Game.START_LIVES;
     		MasterLoop.getInstance().gameOver();
     	}
     }
     
+    public void win() {
+    	level_++;
+    	if (level_ <= Game.MAX_LEVELS) {
+    		MasterLoop.getInstance().restartLevel();
+    	} else {
+    		level_ = Game.FIRST_LEVEL;
+    		MasterLoop.getInstance().credits();
+    	}
+    }
+    
 	private Globals() {
-		camera_ = new Camera();
+		camera_ = new Camera(Resources.getActivity());
 		timer_ = new Timer(0f);
 		game_ = new Game();
 	}

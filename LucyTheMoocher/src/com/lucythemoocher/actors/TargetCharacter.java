@@ -1,9 +1,7 @@
 package com.lucythemoocher.actors;
 
 import com.lucythemoocher.R;
-import com.lucythemoocher.actors.maincharacter.state.StateNone;
 import com.lucythemoocher.controls.AIController;
-import com.lucythemoocher.controls.ActionController;
 import com.lucythemoocher.physics.Cinematic;
 import com.lucythemoocher.util.Direction;
 

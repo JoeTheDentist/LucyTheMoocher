@@ -2,8 +2,6 @@ package com.lucythemoocher.physics;
 
 import java.util.ArrayList;
 
-import android.util.Log;
-
 import com.lucythemoocher.Globals.Globals;
 import com.lucythemoocher.util.MathUtil;
 
