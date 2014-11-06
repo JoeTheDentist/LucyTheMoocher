@@ -127,9 +127,18 @@ public class PlayerCharacter extends Actor implements Controllable {
 	}
 	
 	// temporary
+	private void checkTargetCollision() {
+		TargetCharacter target = Globals.getInstance().getGame().getTarget();
+		if (collidesWith(target, 1f)) {
+			// TODO victory
+		}
+	}
+	
+	// TODO temporary, all should be moved in game
 	public void checkCollisions() {
 		checkMonstersCollisions();
 		checkProjectilesCollisions();
+		checkTargetCollision();
 	}
 	
 	public int getDir() {

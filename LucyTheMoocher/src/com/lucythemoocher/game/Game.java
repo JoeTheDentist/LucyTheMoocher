@@ -142,10 +142,18 @@ public class Game {
 	
 	/**
 	 * Getter
-	 * @return The main character
+	 * @return main character
 	 */
 	public PlayerCharacter getCharacter() {
 		return character_;
+	}
+	
+	/**
+	 * Getter
+	 * @return target
+	 */
+	public TargetCharacter getTarget() {
+		return target_;
 	}
 	
 	/**
