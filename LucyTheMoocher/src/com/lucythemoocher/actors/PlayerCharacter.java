@@ -106,10 +106,8 @@ public class PlayerCharacter extends Actor implements Controllable {
 			if (collidesWith(monster, 1)) {
 				if (state_.isAttacking()) {
 					monster.setToRemove();
-				} else {
-					if (collidesWith(monster, 0.75f)) {
-						Globals.getInstance().lose();
-					}
+				} else if (collidesWith(monster, 0.75f)) {
+					Globals.getInstance().lose();
 				}
 			}
 		}
@@ -120,8 +118,12 @@ public class PlayerCharacter extends Actor implements Controllable {
 		Iterator<Projectile> it = Globals.getInstance().getGame().getProjectilesManager().getIterator();
 		while (it.hasNext()) {
 			Projectile proj = it.next();
-			if (collidesWith(proj, 1)) {
-				Globals.getInstance().lose();
+			if (collidesWith(proj, 1.25f)) {
+				if (state_.isAttacking()) {
+					proj.setToRemove();
+				} else if (collidesWith(proj, 1)) {
+					Globals.getInstance().lose();
+				}
 			}
 		}
 	}
