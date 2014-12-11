@@ -29,7 +29,7 @@ public class CreditsLoop extends Loop {
 				"",
 				"~~Special thanks to~~",
 				"",
-				"Super Gloupsy",
+				"Super Daddy Gloupsy",
 				"JunioR",
 				"Mister Popop",
 				"My",
