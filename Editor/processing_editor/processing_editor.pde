@@ -19,7 +19,9 @@ void draw() {
   colorMode(RGB, 100);
   
   if (clicked) {
-    map[mouseY/ratio][mouseX/ratio] = lastFill;
+    try {
+      map[mouseY/ratio][mouseX/ratio] = lastFill;
+    } catch (ArrayIndexOutOfBoundsException e) { /* cursor out of window */ } 
   }
   
   for (int i=0; i<h; ++i) {

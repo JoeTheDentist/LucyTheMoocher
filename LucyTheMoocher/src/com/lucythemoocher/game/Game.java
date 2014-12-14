@@ -38,7 +38,6 @@ public class Game {
 	private boolean started_ = false;
 	
 	public Game() {
-		Log.d("Game", "Create Game class");
 		fx_ = new FXManager();
 		projectiles_ = new ProjectilesManager();
 		sounds_ = new SoundManager();
@@ -58,7 +57,7 @@ public class Game {
 			ll = new LevelLoader(R.raw.lvl1);
 			break;
 		case 2:
-			ll = new LevelLoader(R.raw.lvl1);
+			ll = new LevelLoader(R.raw.lvl2);
 			break;
 		default:
 			Log.e("Game", "Can't find this level, game may crash");
